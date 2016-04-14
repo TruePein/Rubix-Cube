@@ -1,0 +1,7 @@
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\bin\Debug\Rubix Cube Test.dll
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\bin\Debug\Rubix Cube Test.pdb
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\bin\Debug\Rubix Cube.exe
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\bin\Debug\Rubix Cube.pdb
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\obj\Debug\Rubix Cube Test.csprojResolveAssemblyReference.cache
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\obj\Debug\Rubix Cube Test.dll
+C:\Users\stone\documents\visual studio 2015\Projects\Rubix Cube\Rubix Cube Test\obj\Debug\Rubix Cube Test.pdb
