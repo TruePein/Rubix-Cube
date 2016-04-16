@@ -15,10 +15,10 @@ namespace Rubix_Cube
 
         public Cube()
         {
-            pieces = new Piece[SIZE, SIZE, SIZE];
-            movesMade = 0;
+            pieces = new Piece[SIZE, SIZE, SIZE];//created left to right, top to bottom, front to back; [0,1,2] on a 3x3 is the left, far, middle piece
+			movesMade = 0;
             CreateRubixCube();
-            target = new TargetPiece();
+			target = PieceFactory.GetPiece() as TargetPiece;
         }
 
         public Cube(Cube c) //copy constructor
@@ -31,11 +31,11 @@ namespace Rubix_Cube
                 {
                     for (int k = 0; k < SIZE; k++)
                     {
-                        pieces[i, j, k] = c.pieces[i, j, k];//replace with copy constructor
+						pieces[i, j, k] = PieceFactory.GetPiece(c.pieces[i, j, k]);
                     }
                 }
             }
-            target = c.target;//replace with copy constructor
+            target = PieceFactory.GetPiece(c.target) as TargetPiece;
         }
 
         private void CreateRubixCube()
@@ -47,44 +47,7 @@ namespace Rubix_Cube
                 {
                     for (int k = 0; k < SIZE; k++)
                     {
-                        if((SIZE % 2 == 1) && (((i == 0 || i == SIZE - 1) && (j == SIZE / 2) && (k == SIZE / 2))
-                            ||((i == SIZE / 2) && (j == 0 || j == SIZE - 1) && (k == SIZE / 2))
-                            ||((i == SIZE / 2) && (j == SIZE / 2) && (k == 0 || k == SIZE - 1))))
-                        {
-                            pieces[i, j, k] = new MiddlePiece();
-                            continue;
-                        }
-
-                        if (((i == 0 || i == SIZE - 1) && (j != 0 && j != SIZE - 1) && (k != 0 && k != SIZE - 1)) 
-                            || ((i != 0 && i != SIZE - 1) && (j == 0 || j == SIZE - 1) && (k != 0 && k != SIZE - 1)) 
-                            || ((i != 0 && i != SIZE - 1) && (j != 0 && j != SIZE - 1) && (k == 0 || k == SIZE - 1)))
-                        {
-                            Side.Color color = Side.Color.White;
-                            if (i == 0) color = Side.Color.White;
-                            if (i == SIZE - 1) color = Side.Color.Yellow;
-                            if (j == 0) color = Side.Color.Blue;
-                            if (j == SIZE - 1) color = Side.Color.Green;
-                            if (k == 0) color = Side.Color.Red;
-                            if (k == SIZE - 1) color = Side.Color.Orange;
-                            pieces[i, j, k] = new InnerPiece(color);
-                            continue;
-                        }
-
-                        if (((i == 0 || i == SIZE - 1) && (j == 0 || j == SIZE - 1) && (k != 0 && k != SIZE - 1))
-                            || ((i != 0 && i != SIZE - 1) && (j == 0 || j == SIZE - 1) && (k == 0 || k == SIZE - 1))
-                            || ((i == 0 || i == SIZE - 1) && (j != 0 && j != SIZE - 1) && (k == 0 || k == SIZE - 1)))
-                        {
-                            pieces[i, j, k] = new EdgePiece();
-                            continue;
-                        }
-
-                        if ((i == 0 || i == SIZE - 1) && (k == 0 || k == SIZE - 1) && (k == 0 || k == SIZE - 1))
-                        {
-                            pieces[i, j, k] = new CornerPiece();
-                            continue;
-                        }
-
-                        pieces[i, j, k] = new UnseenPiece();
+						pieces[i, j, k] = PieceFactory.GetPiece(i, j, k, SIZE);
                     }
                 }
             }
@@ -113,25 +76,66 @@ namespace Rubix_Cube
             return movesMade + getDistanceFromSolved();
         }
 
-        private void makeMove(int axis, int layer, int direction)
+        private void makeMove(int axis, int layer, bool clockwise)
         {
-            for (int i= 0; i < SIZE/2; i++)
+			if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, clockwise);
+			Piece temp;
+            for (int i = 0; i < SIZE/2; i++)
             {
                 for (int j = 0; j < SIZE - (i + 1); j++)
                 {
                     switch (axis)
                     {
-                        case 0:
-                            {
-                                break;
+                        case 0://x remains constant to the layer 
+							{
+								temp = pieces[layer, i, j];
+								if (clockwise)
+								{
+									pieces[layer, i, j] = pieces[layer, SIZE - (j + 1), i];
+									pieces[layer, SIZE - (j + 1), i] = pieces[layer, SIZE - (i + 1), SIZE - (j + 1)];
+									pieces[layer, SIZE - (i + 1), SIZE - (j + 1)] = pieces[layer, j, SIZE - (i + 1)];
+									pieces[layer, j, SIZE - (i + 1)] = temp;
+									break;
+								}
+								pieces[layer, i, j] = pieces[layer, j, SIZE - (i + 1)];
+								pieces[layer, j, SIZE - (i + 1)] = pieces[layer, SIZE - (i + 1), SIZE - (j + 1)];
+								pieces[layer, SIZE - (i + 1), SIZE - (j + 1)] = pieces[layer, SIZE - (j + 1), i];
+								pieces[layer, SIZE - (j + 1), i] = temp;
+								break;
                             }
-                        case 1:
+                        case 1://y remains constant to the layer
                             {
-                                break;
+								temp = pieces[i, layer, j];
+								if (clockwise)
+								{
+									pieces[i, layer, j] = pieces[SIZE - (j + 1), layer, i];
+									pieces[SIZE - (j + 1), layer, i] = pieces[SIZE - (i + 1), layer, SIZE - (j + 1)];
+									pieces[SIZE - (i + 1), layer, SIZE - (j + 1)] = pieces[j, layer, SIZE - (i + 1)];
+									pieces[j, layer, SIZE - (i + 1)] = temp;
+									break;
+								}
+								pieces[i, layer, j] = pieces[j, layer, SIZE - (i + 1)];
+								pieces[j, layer, SIZE - (i + 1)] = pieces[SIZE - (i + 1), layer, SIZE - (j + 1)];
+								pieces[SIZE - (i + 1), layer, SIZE - (j + 1)] = pieces[SIZE - (j + 1), layer, i];
+								pieces[SIZE - (j + 1), layer, i] = temp;
+								break;
                             }
-                        case 2:
+                        case 2://z remains constant to the layer
                             {
-                                break;
+								temp = pieces[i, j, layer];
+								if (clockwise)
+								{
+									pieces[i, j, layer] = pieces[SIZE - (j + 1), i, layer];
+									pieces[SIZE - (j + 1), i, layer] = pieces[SIZE - (i + 1), SIZE - (j + 1), layer];
+									pieces[SIZE - (i + 1), SIZE - (j + 1), layer] = pieces[j, SIZE - (i + 1), layer];
+									pieces[j, SIZE - (i + 1), layer] = temp;
+									break;
+								}
+								pieces[i, j, layer] = pieces[j, SIZE - (i + 1), layer];
+								pieces[j, SIZE - (i + 1), layer] = pieces[SIZE - (i + 1), SIZE - (j + 1), layer];
+								pieces[SIZE - (i + 1), SIZE - (j + 1), layer] = pieces[SIZE - (j + 1), i, layer];
+								pieces[SIZE - (j + 1), i, layer] = temp;
+								break;
                             }
                     }
                 }

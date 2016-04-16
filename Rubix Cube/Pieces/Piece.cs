@@ -10,7 +10,7 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// What kind of piece it is.
 		/// </summary>
-        protected Type type;
+        public Type type { get; protected set; }
 
 		/// <summary>
 		/// A piece always has 6 sides.
@@ -87,7 +87,7 @@ namespace Rubix_Cube.Pieces
         {
             switch (axis)
             {
-                case 2://top, left, bottom, right;0, 5, 3, 2
+                case 2://z
                     changePositions(new Side.Position[]
                     {
                         Side.Position.Top,
@@ -96,7 +96,7 @@ namespace Rubix_Cube.Pieces
                         clockwise?Side.Position.Left:Side.Position.Right
                     });
                     break;
-                case 0://top, front, bottom, back;0, 1, 3, 4
+                case 0://x
                     changePositions(new Side.Position[]
                     {
                         Side.Position.Top,
@@ -105,13 +105,13 @@ namespace Rubix_Cube.Pieces
                         clockwise?Side.Position.Front:Side.Position.Back
                     });
                     break;
-                case 1://front, left, back, right;1, 5, 4, 2
+                case 1://y
                     changePositions(new Side.Position[]
                     {
                         Side.Position.Front,
-                        clockwise?Side.Position.Right:Side.Position.Left,
+                        clockwise?Side.Position.Left:Side.Position.Right,
                         Side.Position.Back,
-                        clockwise?Side.Position.Left:Side.Position.Right
+                        clockwise?Side.Position.Right:Side.Position.Left
                     });
                     break;
                 default: //do nothing
