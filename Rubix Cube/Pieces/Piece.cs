@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Rubix_Cube.Pieces
 {
@@ -10,11 +6,10 @@ namespace Rubix_Cube.Pieces
     {
         protected Type type;
 
-        private const int SIDES = 6;
+        protected const int SIDES = 6;
 
-        protected enum Type
+        public enum Type
         {
-            AbsoluteCenter,
             Unseen,
             Middle,
             Inner,
@@ -23,137 +18,93 @@ namespace Rubix_Cube.Pieces
             Target
         }
 
-        protected enum Color
-        {
-            White, Red, Blue, Yellow, Orange, Green
-        }
-
-        private enum Side
-        {
-            Top, Front, Left, Bottom, Back, Right
-        }
-
-        private List<Color> colors;
-
-        private readonly List<Color> targetColors;
+        public readonly List<Side> colors;
         
         public Piece()
         {
-            colors = new List<Color>();
-            colors.Add(Color.White);
-            colors.Add(Color.Red);
-            colors.Add(Color.Blue);
-            colors.Add(Color.Yellow);
-            colors.Add(Color.Orange);
-            colors.Add(Color.Green);
-            targetColors = new List<Color>();
-            targetColors.Add(Color.White);
-            targetColors.Add(Color.Red);
-            targetColors.Add(Color.Blue);
-            targetColors.Add(Color.Yellow);
-            targetColors.Add(Color.Orange);
-            targetColors.Add(Color.Green);
+            colors = new List<Side>();
+            for(int i = 0; i < SIDES; i++)
+            {
+                colors.Add(new Side(i));
+            }
         }
 
         public Piece(Piece p)
         {
-            colors = new List<Color>();
+            colors = new List<Side>();
             for (int i = 0; i < 6; i++)
             {
-                colors.Add(p.colors[i]);
+                colors.Add(new Side(p.colors[i]));
             }
         }
 
-        public abstract int calculateDistance(TargetPiece piece)
-        {//need to rework algorithm to use the target piece
-            bool threeTurns = true;
-            if (type == Type.AbsoluteCenter || type == Type.Middle) return 0;//center piece, do nothing
-            int distance = 0;
-            for(int i = 0; i < SIDES; i++)
-            {
-                Side side = (Side)i;
-                Color targetColor = targetColors[(int)side];
-                Side actualSide = Side.Top;
-                for(int j = 0; j < SIDES; j++)
-                {
-                    if(targetColor != colors[j]) continue;
-                    actualSide = (Side)j;
-                    break;
-                }
-                int result = Math.Abs((int)side - (int)actualSide); //0-5
-                if (result == 0)
-                {
-                    threeTurns = false;
-                    continue;
-                }
-                distance += 1;
-                if (result == 3) distance += 1;
-            }
-            if (distance == 0)
-                return distance;//piece is oriented correctly, only hapens if it is in the right place
-            if (distance == 4)
-                return 1;//piece requires one turn before it is oriented correctly
-            if (distance == 8 && !threeTurns)
-                return 2;//piece requires two turns before it is oriented correctly
-            return 3;//piece requires three turns before it is oriented correctly
-        }
-
-        public void turnCube(int axis, bool clockwise)
+        public abstract int calculateDistance(TargetPiece piece);
+        
+        public void turnPiece(int axis, bool clockwise)
         {
-            Color temp;
             switch (axis)
             {
-                case 0://top, left, bottom, right
-                    if (clockwise)
+                case 2://top, left, bottom, right;0, 5, 3, 2
+                    changePositions(new Side.Position[]
                     {
-                        temp = colors[(int)Side.Top];
-                        colors[(int)Side.Top] = colors[(int)Side.Left];
-                        colors[(int)Side.Left] = colors[(int)Side.Bottom];
-                        colors[(int)Side.Bottom] = colors[(int)Side.Right];
-                        colors[(int)Side.Right] = temp;
-                        break;
-                    }
-                    temp = colors[(int)Side.Top];
-                    colors[(int)Side.Top] = colors[(int)Side.Right];
-                    colors[(int)Side.Right] = colors[(int)Side.Bottom];
-                    colors[(int)Side.Bottom] = colors[(int)Side.Left];
-                    colors[(int)Side.Left] = temp;
+                        Side.Position.Top,
+                        clockwise?Side.Position.Right:Side.Position.Left,
+                        Side.Position.Bottom,
+                        clockwise?Side.Position.Left:Side.Position.Right
+                    });
                     break;
-                case 1://top, front, bottom, back
-                    if (clockwise)
+                case 0://top, front, bottom, back;0, 1, 3, 4
+                    changePositions(new Side.Position[]
                     {
-                        temp = colors[(int)Side.Top];
-                        colors[(int)Side.Top] = colors[(int)Side.Front];
-                        colors[(int)Side.Front] = colors[(int)Side.Bottom];
-                        colors[(int)Side.Bottom] = colors[(int)Side.Back];
-                        colors[(int)Side.Back] = temp;
-                        break;
-                    }
-                    temp = colors[(int)Side.Top];
-                    colors[(int)Side.Top] = colors[(int)Side.Back];
-                    colors[(int)Side.Back] = colors[(int)Side.Bottom];
-                    colors[(int)Side.Bottom] = colors[(int)Side.Front];
-                    colors[(int)Side.Front] = temp;
+                        Side.Position.Top,
+                        clockwise?Side.Position.Back:Side.Position.Front,
+                        Side.Position.Bottom,
+                        clockwise?Side.Position.Front:Side.Position.Back
+                    });
                     break;
-                case 2://front, left, back, right
-                    if (clockwise)
+                case 1://front, left, back, right;1, 5, 4, 2
+                    changePositions(new Side.Position[]
                     {
-                        temp = colors[(int)Side.Front];
-                        colors[(int)Side.Front] = colors[(int)Side.Right];
-                        colors[(int)Side.Right] = colors[(int)Side.Back];
-                        colors[(int)Side.Back] = colors[(int)Side.Left];
-                        colors[(int)Side.Left] = temp;
-                        break;
-                    }
-                    temp = colors[(int)Side.Top];
-                    colors[(int)Side.Front] = colors[(int)Side.Left];
-                    colors[(int)Side.Left] = colors[(int)Side.Back];
-                    colors[(int)Side.Back] = colors[(int)Side.Right];
-                    colors[(int)Side.Right] = temp;
+                        Side.Position.Front,
+                        clockwise?Side.Position.Right:Side.Position.Left,
+                        Side.Position.Back,
+                        clockwise?Side.Position.Left:Side.Position.Right
+                    });
                     break;
-                default:
+                default: //do nothing
                     break;
             }
+        }
+
+        private void changePositions(Side.Position[] positions)
+        {
+            Side sideTo = getSideByPosition(positions[0]);
+            Side.Position temp = sideTo.SidePosition;
+            for(int i = 0; i < 3; i++)
+            {
+                Side sideFrom = getSideByPosition(positions[i + 1]);
+                sideTo.SidePosition = sideFrom.SidePosition;
+                sideTo = sideFrom;
+            }
+            sideTo.SidePosition = temp;
+        }
+
+        public Side getSideByColor(Side.Color color)
+        {
+            foreach (Side side in colors)
+            {
+                if (side.SideColor == color) return side;
+            }
+            throw new System.Exception();
+        }
+
+        public Side getSideByPosition(Side.Position position)
+        {
+            foreach (Side side in colors)
+            {
+                if (side.SidePosition == position) return side;
+            }
+            throw new System.Exception();
         }
     }
 }

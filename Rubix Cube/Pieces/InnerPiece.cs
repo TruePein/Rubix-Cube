@@ -1,41 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rubix_Cube.Pieces
 {
     public class InnerPiece : Piece
     {
-        private Color color;
+        private Side.Color color;
 
-        public InnerPiece(string color) : base()
+        public InnerPiece(Side.Color color) : base()
         {
             type = Type.Inner;
-            this.color = getColor(color);
-        }
-
-        private Color getColor(string color)
-        {
-            switch (color.ToLower())
-            {
-                case "white": return Color.White;
-                case "red": return Color.Red;
-                case "blue": return Color.Blue;
-                case "green": return Color.Green;
-                case "orange": return Color.Orange;
-                default: return Color.Yellow;
-            }
+            this.color = color;
         }
 
         public override int calculateDistance(TargetPiece piece)
         {
-            var distance = 0;
+            var targetPosition = piece.getSideByColor(color).SidePosition;
+            var actualPosition = getSideByColor(color).SidePosition;
+            int result = Math.Abs(targetPosition - actualPosition);
 
-            var targetSide = 
-
-            return distance;
+            if (result == 0 || result == 2) return result;
+            return 1;
         }
     }
 }

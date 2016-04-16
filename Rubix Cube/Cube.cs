@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rubix_Cube.Pieces;
 
 namespace Rubix_Cube
@@ -51,12 +47,6 @@ namespace Rubix_Cube
                 {
                     for (int k = 0; k < SIZE; k++)
                     {
-                        if((SIZE % 2 == 1) && (i == SIZE / 2) && (j == SIZE / 2) && (k == SIZE / 2))
-                        {
-                            pieces[i, j, k] = new AbsoluteCenterPiece();
-                            continue;
-                        }
-
                         if((SIZE % 2 == 1) && (((i == 0 || i == SIZE - 1) && (j == SIZE / 2) && (k == SIZE / 2))
                             ||((i == SIZE / 2) && (j == 0 || j == SIZE - 1) && (k == SIZE / 2))
                             ||((i == SIZE / 2) && (j == SIZE / 2) && (k == 0 || k == SIZE - 1))))
@@ -69,13 +59,13 @@ namespace Rubix_Cube
                             || ((i != 0 && i != SIZE - 1) && (j == 0 || j == SIZE - 1) && (k != 0 && k != SIZE - 1)) 
                             || ((i != 0 && i != SIZE - 1) && (j != 0 && j != SIZE - 1) && (k == 0 || k == SIZE - 1)))
                         {
-                            string color = "";
-                            if (i == 0) color = "white";
-                            if (i == SIZE - 1) color = "yellow";
-                            if (j == 0) color = "blue";
-                            if (j == SIZE - 1) color = "green";
-                            if (k == 0) color = "red";
-                            if (k == SIZE - 1) color = "orange";
+                            Side.Color color = Side.Color.White;
+                            if (i == 0) color = Side.Color.White;
+                            if (i == SIZE - 1) color = Side.Color.Yellow;
+                            if (j == 0) color = Side.Color.Blue;
+                            if (j == SIZE - 1) color = Side.Color.Green;
+                            if (k == 0) color = Side.Color.Red;
+                            if (k == SIZE - 1) color = Side.Color.Orange;
                             pieces[i, j, k] = new InnerPiece(color);
                             continue;
                         }
@@ -87,7 +77,14 @@ namespace Rubix_Cube
                             pieces[i, j, k] = new SidePiece();
                             continue;
                         }
-                        pieces[i, j, k] = new CornerPiece();
+
+                        if ((i == 0 || i == SIZE - 1) && (k == 0 || k == SIZE - 1) && (k == 0 || k == SIZE - 1))
+                        {
+                            pieces[i, j, k] = new CornerPiece();
+                            continue;
+                        }
+
+                        pieces[i, j, k] = new UnseenPiece();
                     }
                 }
             }
@@ -118,6 +115,27 @@ namespace Rubix_Cube
 
         private void makeMove(int axis, int layer, int direction)
         {
+            for (int i= 0; i < SIZE/2; i++)
+            {
+                for (int j = 0; j < SIZE - (i + 1); j++)
+                {
+                    switch (axis)
+                    {
+                        case 0:
+                            {
+                                break;
+                            }
+                        case 1:
+                            {
+                                break;
+                            }
+                        case 2:
+                            {
+                                break;
+                            }
+                    }
+                }
+            }
             //get all pieces on the provided axis and layer
 
             //swap the corner pieces in the provided direction
