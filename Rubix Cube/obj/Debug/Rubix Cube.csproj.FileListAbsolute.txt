@@ -10,3 +10,9 @@ C:\Users\stone\OneDrive\Documents\GitHub\Rubix-Cube\Rubix Cube\obj\Debug\Rubix C
 C:\Users\stone\OneDrive\Documents\GitHub\Rubix-Cube\Rubix Cube\obj\Debug\Rubix Cube.csprojResolveAssemblyReference.cache
 C:\Users\stone\OneDrive\Documents\GitHub\Rubix-Cube\Rubix Cube\bin\Debug\Rubix Cube.exe
 C:\Users\stone\OneDrive\Documents\GitHub\Rubix-Cube\Rubix Cube\bin\Debug\Rubix Cube.pdb
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\bin\Debug\Rubix Cube.exe.config
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\obj\Debug\Rubix Cube.exe
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\obj\Debug\Rubix Cube.pdb
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\bin\Debug\Rubix Cube.exe
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\bin\Debug\Rubix Cube.pdb
+C:\Users\stone\Documents\GitHub\Rubix-Cube\Rubix Cube\obj\Debug\Rubix Cube.csprojResolveAssemblyReference.cache

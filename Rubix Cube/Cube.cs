@@ -74,7 +74,7 @@ namespace Rubix_Cube
                             || ((i != 0 && i != SIZE - 1) && (j == 0 || j == SIZE - 1) && (k == 0 || k == SIZE - 1))
                             || ((i == 0 || i == SIZE - 1) && (j != 0 && j != SIZE - 1) && (k == 0 || k == SIZE - 1)))
                         {
-                            pieces[i, j, k] = new SidePiece();
+                            pieces[i, j, k] = new EdgePiece();
                             continue;
                         }
 

@@ -50,7 +50,7 @@
     <Compile Include="Pieces\Piece.cs" />
     <Compile Include="Pieces\PieceFactory.cs" />
     <Compile Include="Pieces\Side.cs" />
-    <Compile Include="Pieces\SidePiece.cs" />
+    <Compile Include="Pieces\EdgePiece.cs" />
     <Compile Include="Pieces\TargetPiece.cs" />
     <Compile Include="Pieces\UnseenPiece.cs" />
     <Compile Include="Program.cs" />
