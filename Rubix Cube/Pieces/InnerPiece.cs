@@ -21,7 +21,7 @@ namespace Rubix_Cube.Pieces
 		/// Sets the Color to the given color.
 		/// </summary>
 		/// <param name="color">The color of the side of the piece that is showing.</param>
-		public InnerPiece(Colors.Color color) : base()
+		public InnerPiece(int x, int y, int z, Colors.Color color) : base(x, y, z)
         {
             type = PieceTypes.PieceType.Inner;
             this.color = color;
@@ -44,11 +44,11 @@ namespace Rubix_Cube.Pieces
 		/// Calculates how many moves the Piece will have to make in order to match the Target Piece.
 		/// Since only one Side is showing, the Positions of the other Sides aren't taken into consideration.
 		/// </summary>
-		/// <param name="piece">The piece that this piece is comparing itself to.</param>
+		/// <param name="target">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
-		public override int calculateDistance(TargetPiece piece)
+		public override int calculateDistance(TargetPiece target)
         {
-            var targetPosition = piece.getSideByColor(color).Position;
+            var targetPosition = target.getSideByColor(color).Position;
             var actualPosition = getSideByColor(color).Position;
             int result = Math.Abs(targetPosition - actualPosition);
 

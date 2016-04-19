@@ -12,7 +12,7 @@ namespace Rubix_Cube_Test.Piece_Tests
         [TestInitialize]
         public void CreateCube()
         {
-            piece = new CornerPiece();
+            piece = new CornerPiece(0,0,0);
         }
 
         [TestMethod]

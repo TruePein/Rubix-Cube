@@ -12,7 +12,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestInitialize]
 		public void CreateAndCopyPiece()
 		{
-			original = new UnseenPiece();
+			original = new UnseenPiece(0,0,0);
 			copy = new UnseenPiece(original);
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
+using System.Collections.Generic;
 
 namespace Rubix_Cube
 {
@@ -8,15 +9,15 @@ namespace Rubix_Cube
     {
         private const int SIZE = 3;
 
-        private int movesMade;
+        public int movesMade { get; set; }
 
-        private Piece[,,] _pieces;
+        private List<IPiece> _pieces;
 
         private TargetPiece target;
 
         public Cube()
         {
-            _pieces = new Piece[SIZE, SIZE, SIZE];//created left to right, top to bottom, front to back; [0,1,2] on a 3x3 is the left, far, middle piece
+            _pieces = new List<IPiece>();
 			movesMade = 0;
             CreateRubixCube();
 			target = PieceFactory.GetPiece() as TargetPiece;
@@ -25,32 +26,24 @@ namespace Rubix_Cube
         public Cube(Cube c) //copy constructor
         {
             movesMade = c.movesMade;
-            _pieces = new Piece[SIZE, SIZE, SIZE];
-            for (int i = 0; i < SIZE; i++)
+            _pieces = new List<IPiece>();
+            foreach (IPiece piece in c._pieces)
             {
-                for (int j = 0; j < SIZE; j++)
-                {
-                    for (int k = 0; k < SIZE; k++)
-                    {
-						_pieces[i, j, k] = PieceFactory.GetPiece(c._pieces[i, j, k]);
-                    }
-                }
+                _pieces.Add(PieceFactory.GetPiece(piece));
             }
+                    
             target = PieceFactory.GetPiece(c.target) as TargetPiece;
         }
 
         private void CreateRubixCube()
         {
             //create (SIZE)^3 pieces
-            for(int i = 0; i < SIZE; i++)
+            for(int i = 0; i < Math.Pow(SIZE, 3); i++)
             {
-                for (int j = 0; j < SIZE; j++)
-                {
-                    for (int k = 0; k < SIZE; k++)
-                    {
-						_pieces[i, j, k] = PieceFactory.GetPiece(i, j, k, SIZE);
-                    }
-                }
+                var x = i / (int)Math.Pow(SIZE, 2);
+                var y = (i % SIZE) / SIZE;
+                var z = i % SIZE;
+				_pieces.Add(PieceFactory.GetPiece(x, y, z, SIZE));
             }
         }
 
@@ -58,15 +51,9 @@ namespace Rubix_Cube
         {
             var distance = 0;
 
-            for(var i = 0; i < SIZE; i++)
+            foreach (var piece in _pieces)
             {
-                for (var j = 0; j < SIZE; j++)
-                {
-                    for (var k = 0; k < SIZE; k++)
-                    {
-                        distance += _pieces[i, j, k].calculateDistance(target);
-                    }
-                }
+                distance += piece.calculateDistance(target);
             }
 
             return distance / 8;
@@ -77,77 +64,36 @@ namespace Rubix_Cube
             return movesMade + getDistanceFromSolved();
         }
 
-        private void makeMove(Axes.Axis axis, int layer, Directions.Direction clockwise)
+        private void makeMove(Axes.Axis axis, int layer, Directions.Direction direction)
         {
-			if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, clockwise);
-			Piece temp;
-            for (int i = 0; i < SIZE/2; i++)
-            {
-                for (int j = 0; j < SIZE - (i + 1); j++)
-                {
-                    switch (axis)
-                    {
-                        case Axes.Axis.X://x remains constant to the layer 
-							{
-								temp = _pieces[layer, i, j];
-								if (clockwise == Directions.Direction.Clockwise)
-								{
-									_pieces[layer, i, j] = _pieces[layer, SIZE - (j + 1), i];
-									_pieces[layer, SIZE - (j + 1), i] = _pieces[layer, SIZE - (i + 1), SIZE - (j + 1)];
-									_pieces[layer, SIZE - (i + 1), SIZE - (j + 1)] = _pieces[layer, j, SIZE - (i + 1)];
-									_pieces[layer, j, SIZE - (i + 1)] = temp;
-									break;
-								}
-								_pieces[layer, i, j] = _pieces[layer, j, SIZE - (i + 1)];
-								_pieces[layer, j, SIZE - (i + 1)] = _pieces[layer, SIZE - (i + 1), SIZE - (j + 1)];
-								_pieces[layer, SIZE - (i + 1), SIZE - (j + 1)] = _pieces[layer, SIZE - (j + 1), i];
-								_pieces[layer, SIZE - (j + 1), i] = temp;
-								break;
-                            }
-                        case Axes.Axis.Y://y remains constant to the layer
-                            {
-								temp = _pieces[i, layer, j];
-								if (clockwise == Directions.Direction.Clockwise)
-								{
-									_pieces[i, layer, j] = _pieces[SIZE - (j + 1), layer, i];
-									_pieces[SIZE - (j + 1), layer, i] = _pieces[SIZE - (i + 1), layer, SIZE - (j + 1)];
-									_pieces[SIZE - (i + 1), layer, SIZE - (j + 1)] = _pieces[j, layer, SIZE - (i + 1)];
-									_pieces[j, layer, SIZE - (i + 1)] = temp;
-									break;
-								}
-								_pieces[i, layer, j] = _pieces[j, layer, SIZE - (i + 1)];
-								_pieces[j, layer, SIZE - (i + 1)] = _pieces[SIZE - (i + 1), layer, SIZE - (j + 1)];
-								_pieces[SIZE - (i + 1), layer, SIZE - (j + 1)] = _pieces[SIZE - (j + 1), layer, i];
-								_pieces[SIZE - (j + 1), layer, i] = temp;
-								break;
-                            }
-                        case Axes.Axis.Z://z remains constant to the layer
-                            {
-								temp = _pieces[i, j, layer];
-								if (clockwise == Directions.Direction.Clockwise)
-								{
-									_pieces[i, j, layer] = _pieces[SIZE - (j + 1), i, layer];
-									_pieces[SIZE - (j + 1), i, layer] = _pieces[SIZE - (i + 1), SIZE - (j + 1), layer];
-									_pieces[SIZE - (i + 1), SIZE - (j + 1), layer] = _pieces[j, SIZE - (i + 1), layer];
-									_pieces[j, SIZE - (i + 1), layer] = temp;
-									break;
-								}
-								_pieces[i, j, layer] = _pieces[j, SIZE - (i + 1), layer];
-								_pieces[j, SIZE - (i + 1), layer] = _pieces[SIZE - (i + 1), SIZE - (j + 1), layer];
-								_pieces[SIZE - (i + 1), SIZE - (j + 1), layer] = _pieces[SIZE - (j + 1), i, layer];
-								_pieces[SIZE - (j + 1), i, layer] = temp;
-								break;
-                            }
-                    }
-                }
-            }
-            //get all pieces on the provided axis and layer
+            LastMove.Axis = axis;
+            LastMove.Layer = layer;
+            LastMove.Direction = direction;
+			if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, direction);
 
-            //swap the corner pieces in the provided direction
-            //swap the side pieces in the provided direction
-            //rotate all of the pieces on the provided axis and layer in the given direction
+            List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
+            foreach(IPiece piece in pieces)
+            {
+                piece.MoveToNextCoordinates(axis, layer, direction, SIZE);
+            }
 
             movesMade++;
+        }
+
+        private void undoLastMove()
+        {
+            var axis = LastMove.Axis;
+            var layer = LastMove.Layer;
+            var direction = LastMove.Direction == Directions.Direction.Clockwise?LastMove.Direction:Directions.Direction.CounterClockwise;
+            if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, direction);
+
+            List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
+            foreach (IPiece piece in pieces)
+            {
+                piece.MoveToNextCoordinates(axis, layer, direction, SIZE);
+            }
+
+            movesMade--;
         }
 
         public int CompareTo(Cube other)
@@ -160,6 +106,38 @@ namespace Rubix_Cube
             if (thisScore < otherScore) return -1;
             if (thisScore == otherScore) return 0;
             return 1;
+        }
+
+        private List<IPiece> getAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
+        {
+            List<IPiece> pieces = new List<IPiece>();
+            if (layer >= SIZE) return pieces;
+            foreach(IPiece piece in pieces)
+            {
+                if (!pieceIsInLayerOnAxis(piece, layer, axis)) continue;
+                pieces.Add(piece);
+            }
+            return pieces;
+        }
+
+        private bool pieceIsInLayerOnAxis(IPiece piece, int layer, Axes.Axis axis)
+        {
+            switch (axis)
+            {
+                case Axes.Axis.X:
+                    {
+                        return piece.Coordinates.Item1 == layer;
+                    }
+                case Axes.Axis.Y:
+                    {
+                        return piece.Coordinates.Item2 == layer;
+                    }
+                case Axes.Axis.Z:
+                    {
+                        return piece.Coordinates.Item3 == layer;
+                    }
+            }
+            return false;
         }
     }
 }

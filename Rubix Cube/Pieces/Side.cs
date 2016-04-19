@@ -41,5 +41,90 @@ namespace Rubix_Cube.Pieces
             Position = side.Position;
             Color = side.Color;
         }
+
+        public void MoveToNextPosition(Axes.Axis axis, Directions.Direction direction)
+        {
+            switch (axis)
+            {
+                case Axes.Axis.X:
+                    {
+                        Position = GetNextPositionX(direction);
+                        break;
+                    }
+                case Axes.Axis.Y:
+                    {
+                        Position = GetNextPositionY(direction);
+                        break;
+                    }
+                case Axes.Axis.Z:
+                    {
+                        Position = GetNextPositionZ(direction);
+                        break;
+                    }
+            }
+        }
+
+        private SidePositions.Position GetNextPositionX(Directions.Direction direction)
+        {
+            if (Position == SidePositions.Position.Top)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
+            }
+            if (Position == SidePositions.Position.Back)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Bottom : SidePositions.Position.Top;
+            }
+            if (Position == SidePositions.Position.Bottom)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
+            }
+            if (Position == SidePositions.Position.Front)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Top : SidePositions.Position.Bottom;
+            }
+            return Position;
+        }
+
+        private SidePositions.Position GetNextPositionY(Directions.Direction direction)
+        {
+            if (Position == SidePositions.Position.Front)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
+            }
+            if (Position == SidePositions.Position.Left)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
+            }
+            if (Position == SidePositions.Position.Back)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
+            }
+            if (Position == SidePositions.Position.Right)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
+            }
+            return Position;
+        }
+
+        private SidePositions.Position GetNextPositionZ(Directions.Direction direction)
+        {
+            if (Position == SidePositions.Position.Top)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
+            }
+            if (Position == SidePositions.Position.Right)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Bottom : SidePositions.Position.Top;
+            }
+            if (Position == SidePositions.Position.Bottom)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
+            }
+            if (Position == SidePositions.Position.Left)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Top : SidePositions.Position.Bottom;
+            }
+            return Position;
+        }
     }
 }

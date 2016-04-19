@@ -12,7 +12,7 @@ namespace Rubix_Cube.Pieces
 		/// Default constructor for the Corner Piece.
 		/// Calls the default base constructor and then sets it's type to Corner in order to properly identify it.
 		/// </summary>
-		public CornerPiece() : base()
+		public CornerPiece(int x, int y, int z) : base(x, y, z)
 		{
 			type = PieceTypes.PieceType.Corner;
 		}
@@ -30,9 +30,9 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// Calculates how many moves the Piece will have to make in order to match the Target Piece.
 		/// </summary>
-		/// <param name="piece">The piece that this piece is comparing itself to.</param>
+		/// <param name="target">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
-		public override int calculateDistance(TargetPiece piece)
+		public override int calculateDistance(TargetPiece target)
         {
             var threeTurns = true;
 
@@ -40,8 +40,8 @@ namespace Rubix_Cube.Pieces
 
             for (int i = 0; i < SIDES; i++)
             {
-                var side = piece.sides[i].Position;
-                var targetColor = piece.sides[i].Color;
+                var side = target.sides[i].Position;
+                var targetColor = target.sides[i].Color;
                 var actualSide = side; // top
                 for (int j = 0; j < SIDES; j++)
                 {

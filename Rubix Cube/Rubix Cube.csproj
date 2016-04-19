@@ -48,6 +48,7 @@
     <Compile Include="Enums\Directions.cs" />
     <Compile Include="Enums\PieceTypes.cs" />
     <Compile Include="Enums\SidePositions.cs" />
+    <Compile Include="LastMove.cs" />
     <Compile Include="Pieces\CornerPiece.cs" />
     <Compile Include="Cube.cs" />
     <Compile Include="Pieces\InnerPiece.cs" />

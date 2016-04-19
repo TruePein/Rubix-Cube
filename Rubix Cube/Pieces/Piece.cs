@@ -45,13 +45,14 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// Constructor for a Piece. Each new Piece is created the same way.
 		/// </summary>
-        public Piece()
+        public Piece(int x, int y, int z)
         {
             sides = new List<Side>();
             for(int i = 0; i < SIDES; i++)
             {
                 sides.Add(new Side(i));
             }
+            _coordinates = new Tuple<int, int, int>(x, y, z);
         }
 
 		/// <summary>
@@ -65,6 +66,7 @@ namespace Rubix_Cube.Pieces
             {
                 sides.Add(new Side(p.sides[i]));
             }
+            _coordinates = new Tuple<int, int, int>(p._coordinates.Item1, p._coordinates.Item2, p._coordinates.Item3);
         }
 
 		/// <summary>
@@ -72,7 +74,7 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		/// <param name="piece">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
-        public abstract int calculateDistance(TargetPiece piece);
+        public abstract int calculateDistance(TargetPiece target);
 
 		/// <summary>
 		/// Turns a piece on an axis in a direction by 90 degrees.
@@ -84,57 +86,12 @@ namespace Rubix_Cube.Pieces
 		/// <param name="clockwise">Whether or not the ciece will turn clockwise.
 		/// true - will turn clockwise
 		/// false - won't turn clockwise</param>
-		public void turnPiece(Axes.Axis axis, Directions.Direction clockwise)
+		public void turnPiece(Axes.Axis axis, Directions.Direction direction)
         {
-            switch (axis)
+            foreach (var side in sides)
             {
-                case Axes.Axis.Z://z
-                    changePositions(new SidePositions.Position[]
-                    {
-                        SidePositions.Position.Top,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left,
-                        SidePositions.Position.Bottom,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right
-                    });
-                    break;
-                case Axes.Axis.X://x
-                    changePositions(new SidePositions.Position[]
-                    {
-                        SidePositions.Position.Top,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front,
-                        SidePositions.Position.Bottom,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back
-                    });
-                    break;
-                case Axes.Axis.Y://y
-                    changePositions(new SidePositions.Position[]
-                    {
-                        SidePositions.Position.Front,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right,
-                        SidePositions.Position.Back,
-                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left
-                    });
-                    break;
-                default: //do nothing
-                    break;
+                side.MoveToNextPosition(axis, direction);
             }
-        }
-
-		/// <summary>
-		/// Swaps four sides of a piece based on the positions and order of the positions that come in.
-		/// </summary>
-		/// <param name="positions">An array of positions that need to be swapped with each other.</param>
-        private void changePositions(SidePositions.Position[] positions)
-        {
-            Side sideTo = getSideByPosition(positions[0]);
-            SidePositions.Position temp = sideTo.Position;
-            for(int i = 0; i < 3; i++)
-            {
-                Side sideFrom = getSideByPosition(positions[i + 1]);
-                sideTo.Position = sideFrom.Position;
-                sideTo = sideFrom;
-            }
-            sideTo.Position = temp;
         }
 
 		/// <summary>

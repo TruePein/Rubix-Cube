@@ -10,7 +10,7 @@ namespace Rubix_Cube.Pieces
 		/// Default constructor for the Unseen Piece.
 		/// Calls the default base constructor and then sets it's type to Unseen in order to properly identify it.
 		/// </summary>
-		public UnseenPiece() : base()
+		public UnseenPiece(int x, int y, int z) : base(x, y, z)
         {
             type = PieceTypes.PieceType.Unseen;
         }
@@ -32,7 +32,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.
 		/// Always 0.</returns>
-		public override int calculateDistance(TargetPiece piece)
+		public override int calculateDistance(TargetPiece target)
         {
             return 0;
         }

@@ -12,7 +12,7 @@ namespace Rubix_Cube.Pieces
 		/// Calls the default base constructor.
 		/// Sets it's type to Middle in order to properly identify it.
 		/// </summary>
-		public MiddlePiece() : base()
+		public MiddlePiece(int x, int y, int z) : base(x, y, z)
         {
             type = PieceTypes.PieceType.Middle;
         }
@@ -23,7 +23,7 @@ namespace Rubix_Cube.Pieces
 		/// Sets it's type to Middle in order to properly identify it.
 		/// </summary>
 		/// <param name="piece"></param>
-		public MiddlePiece(MiddlePiece piece) : base()
+		public MiddlePiece(MiddlePiece piece) : base(piece)
 		{
 			type = PieceTypes.PieceType.Middle;
 		}
@@ -35,7 +35,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.
 		/// Always 0.</returns>
-		public override int calculateDistance(TargetPiece piece)
+		public override int calculateDistance(TargetPiece target)
         {
             return 0;
         }

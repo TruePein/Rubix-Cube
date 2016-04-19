@@ -20,7 +20,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestInitialize]
 		public void CreatePiece()
 		{
-			piece = new UnseenPiece();
+			piece = new UnseenPiece(0,0,0);
 		}
 
 		[TestMethod]
