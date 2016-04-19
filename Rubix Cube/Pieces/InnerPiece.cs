@@ -1,4 +1,5 @@
 ﻿using System;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
 {
@@ -11,7 +12,7 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// The Color that this Piece is showing. This value will never change.
 		/// </summary>
-        private Side.Color color;
+        private Colors.Color color;
 
 		/// <summary>
 		/// Constructor for the Inner Piece.
@@ -20,9 +21,9 @@ namespace Rubix_Cube.Pieces
 		/// Sets the Color to the given color.
 		/// </summary>
 		/// <param name="color">The color of the side of the piece that is showing.</param>
-		public InnerPiece(Side.Color color) : base()
+		public InnerPiece(Colors.Color color) : base()
         {
-            type = Type.Inner;
+            type = PieceTypes.PieceType.Inner;
             this.color = color;
         }
 
@@ -35,7 +36,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public InnerPiece(InnerPiece piece) : base(piece)
 		{
-			type = Type.Inner;
+			type = PieceTypes.PieceType.Inner;
 			color = piece.color;
 		}
 
@@ -47,8 +48,8 @@ namespace Rubix_Cube.Pieces
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
 		public override int calculateDistance(TargetPiece piece)
         {
-            var targetPosition = piece.getSideByColor(color).SidePosition;
-            var actualPosition = getSideByColor(color).SidePosition;
+            var targetPosition = piece.getSideByColor(color).Position;
+            var actualPosition = getSideByColor(color).Position;
             int result = Math.Abs(targetPosition - actualPosition);
 
             if (result == 0) return result;

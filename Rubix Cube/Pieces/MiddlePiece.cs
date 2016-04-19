@@ -1,4 +1,5 @@
-﻿namespace Rubix_Cube.Pieces
+﻿using Rubix_Cube.Enums;
+namespace Rubix_Cube.Pieces
 {
 	/// <summary>
 	/// Subclass of Piece representing a piece that appears in the Middle of a Cube.
@@ -13,7 +14,7 @@
 		/// </summary>
 		public MiddlePiece() : base()
         {
-            type = Type.Middle;
+            type = PieceTypes.PieceType.Middle;
         }
 
 		/// <summary>
@@ -24,7 +25,7 @@
 		/// <param name="piece"></param>
 		public MiddlePiece(MiddlePiece piece) : base()
 		{
-			type = Type.Middle;
+			type = PieceTypes.PieceType.Middle;
 		}
 
 		/// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
 {
@@ -13,7 +14,7 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		public CornerPiece() : base()
 		{
-			type = Type.Corner;
+			type = PieceTypes.PieceType.Corner;
 		}
 
 		/// <summary>
@@ -23,7 +24,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public CornerPiece(CornerPiece piece) : base(piece)
 		{
-			type = Type.Corner;
+			type = PieceTypes.PieceType.Corner;
 		}
 
 		/// <summary>
@@ -39,13 +40,13 @@ namespace Rubix_Cube.Pieces
 
             for (int i = 0; i < SIDES; i++)
             {
-                var side = piece.sides[i].SidePosition;
-                var targetColor = piece.sides[i].SideColor;
+                var side = piece.sides[i].Position;
+                var targetColor = piece.sides[i].Color;
                 var actualSide = side; // top
                 for (int j = 0; j < SIDES; j++)
                 {
-                    if (targetColor != sides[j].SideColor) continue;
-                    actualSide = sides[j].SidePosition;
+                    if (targetColor != sides[j].Color) continue;
+                    actualSide = sides[j].Position;
                     break;
                 }
                 int result = Math.Abs(side - actualSide); //0-5

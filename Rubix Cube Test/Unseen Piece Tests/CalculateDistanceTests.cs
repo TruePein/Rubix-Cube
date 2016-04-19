@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Unseen_Piece_Tests
 {
@@ -32,7 +33,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void ClockWiseXTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(0, true);
+			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -40,7 +41,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void CounterClockWiseXTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(0, false);
+			piece.turnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -48,7 +49,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void ClockWiseYTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(1, true);
+			piece.turnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -56,7 +57,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void CounterClockWiseYTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(1, false);
+			piece.turnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -64,7 +65,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void ClockWiseZTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(2, true);
+			piece.turnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -72,7 +73,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void CounterClockWiseZTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(2, false);
+			piece.turnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
@@ -80,8 +81,8 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void TwoClockWiseXTurnsHasADistanceOfZero()
 		{
-			piece.turnPiece(0, true);
-			piece.turnPiece(0, true);
+			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
 			var actual = piece.calculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}

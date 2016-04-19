@@ -1,4 +1,5 @@
-﻿namespace Rubix_Cube.Pieces
+﻿using Rubix_Cube.Enums;
+namespace Rubix_Cube.Pieces
 {
 	/// <summary>
 	/// Class representing a Side of a Piece.
@@ -6,39 +7,18 @@
     public class Side
     {
 		/// <summary>
-		/// The possible Positions that a side can be on a Piece.
-		///		Top is on the top of a Piece.
-		///		Front is on the front of a Piece.
-		///		Right is on the right of a Piece.
-		///		Bottom is on the bottom of a Piece.
-		///		Back is on the back of a Piece.
-		///		Left is on the left of a Piece.
-		/// </summary>
-		public enum Position
-        {
-            Top, Front, Right, Bottom, Back, Left
-        }
-
-		/// <summary>
 		/// The current Position of the Side.
 		/// No other Sides of the Piece will have the same Position.
 		/// </summary>
-        public Position SidePosition { get; set; }
+        public SidePositions.Position Position { get; set; }
 
-		/// <summary>
-		/// The possible Colors the a Side can be on a Piece.
-		/// </summary>
-        public enum Color
-        {
-            White, Red, Blue, Yellow, Orange, Green
-        }
 		
 		/// <summary>
 		/// The color of the Side.
 		/// Once it is set, it cannot be changed.
 		/// No other Sides on the Piece will have the same color.
 		/// </summary>
-		public Color SideColor { get; private set; }
+		public Colors.Color Color { get; private set; }
 
 		/// <summary>
 		/// Constructor for the Side.
@@ -47,8 +27,8 @@
 		/// <param name="i">An integer that matches a Position and Side together at the same time.</param>
 		public Side(int i)
         {
-            SidePosition = (Position)i;
-            SideColor = (Color)i;
+            Position = (SidePositions.Position)i;
+            Color = (Colors.Color)i;
         }
 
 		/// <summary>
@@ -58,8 +38,8 @@
 		/// <param name="side">The Side that is being copied.</param>
 		public Side(Side side)
         {
-            SidePosition = side.SidePosition;
-            SideColor = side.SideColor;
+            Position = side.Position;
+            Color = side.Color;
         }
     }
 }

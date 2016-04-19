@@ -1,4 +1,5 @@
-﻿namespace Rubix_Cube.Pieces
+﻿using Rubix_Cube.Enums;
+namespace Rubix_Cube.Pieces
 {
 	/// <summary>
 	/// Subclass of Piece representing the pieces that can't be seen.
@@ -11,7 +12,7 @@
 		/// </summary>
 		public UnseenPiece() : base()
         {
-            type = Type.Unseen;
+            type = PieceTypes.PieceType.Unseen;
         }
 
 		/// <summary>
@@ -21,7 +22,7 @@
 		/// <param name="piece">The piece that is being copied.</param>
 		public UnseenPiece(UnseenPiece piece) : base(piece)
         {
-            type = Type.Unseen;
+            type = PieceTypes.PieceType.Unseen;
         }
 
 		/// <summary>

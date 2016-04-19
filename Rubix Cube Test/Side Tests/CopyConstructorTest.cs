@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Side_Tests
 {
@@ -19,25 +20,25 @@ namespace Rubix_Cube_Test.Side_Tests
 		[TestMethod]
 		public void NoChangesAndSidesAreTheSame()
 		{
-			Assert.AreEqual(originalSide.SidePosition, copySide.SidePosition);
+			Assert.AreEqual(originalSide.Position, copySide.Position);
 		}
 
 		[TestMethod]
 		public void ChangeOriginalAndSidesAreDifferent()
 		{
 			Side refSide = originalSide;
-			originalSide.SidePosition = Side.Position.Back;
-			Assert.AreNotEqual(originalSide.SidePosition, copySide.SidePosition);
-			Assert.AreEqual(originalSide.SidePosition, refSide.SidePosition);
+			originalSide.Position = SidePositions.Position.Back;
+			Assert.AreNotEqual(originalSide.Position, copySide.Position);
+			Assert.AreEqual(originalSide.Position, refSide.Position);
 		}
 
 		[TestMethod]
 		public void ChangeCopyAndSidesAreDifferent()
 		{
 			Side refSide = originalSide;
-			copySide.SidePosition = Side.Position.Back;
-			Assert.AreNotEqual(originalSide.SidePosition, copySide.SidePosition);
-			Assert.AreEqual(originalSide.SidePosition, refSide.SidePosition);
+			copySide.Position = SidePositions.Position.Back;
+			Assert.AreNotEqual(originalSide.Position, copySide.Position);
+			Assert.AreEqual(originalSide.Position, refSide.Position);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿namespace Rubix_Cube.Pieces
+﻿using Rubix_Cube.Enums;
+namespace Rubix_Cube.Pieces
 {
 	/// <summary>
 	/// Subclass of Piece representing the piece the Pieces of the Cube are comparing themselves to.
@@ -10,7 +11,7 @@
 		/// Calls the default base constructor and then sets it's type to Target in order to properly identify it.
 		/// </summary>
 		public TargetPiece() : base(){
-            type = Type.Target;
+            type = PieceTypes.PieceType.Target;
         }
 
 		/// <summary>
@@ -20,7 +21,7 @@
 		/// <param name="piece">The piece that is being copied.</param>
 		public TargetPiece(TargetPiece piece) : base(piece)
 		{
-			type = Type.Target;
+			type = PieceTypes.PieceType.Target;
 		}
 
 		/// <summary>

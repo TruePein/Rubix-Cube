@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Side_Tests
 {
@@ -10,10 +11,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInZeroCreatesATopWhiteSide()
         {
             var side = new Side(0);
-            var expectedPosition = Side.Position.Top;
-            var expectedColor = Side.Color.White;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Top;
+            var expectedColor = Colors.Color.White;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -22,10 +23,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInOneCreatesAFrontRedSide()
         {
             var side = new Side(1);
-            var expectedPosition = Side.Position.Front;
-            var expectedColor = Side.Color.Red;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Front;
+            var expectedColor = Colors.Color.Red;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -34,10 +35,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInTwoCreatesALeftBlueSide()
         {
             var side = new Side(2);
-            var expectedPosition = Side.Position.Right;
-            var expectedColor = Side.Color.Blue;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Right;
+            var expectedColor = Colors.Color.Blue;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -46,10 +47,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInThreeCreatesABottomYellowSide()
         {
             var side = new Side(3);
-            var expectedPosition = Side.Position.Bottom;
-            var expectedColor = Side.Color.Yellow;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Bottom;
+            var expectedColor = Colors.Color.Yellow;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -58,10 +59,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInFourCreatesABackOrangePiece()
         {
             var side = new Side(4);
-            var expectedPosition = Side.Position.Back;
-            var expectedColor = Side.Color.Orange;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Back;
+            var expectedColor = Colors.Color.Orange;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -70,10 +71,10 @@ namespace Rubix_Cube_Test.Side_Tests
         public void PassingInFiveCreatesALeftGreenPiece()
         {
             var side = new Side(5);
-            var expectedPosition = Side.Position.Left;
-            var expectedColor = Side.Color.Green;
-            var actualPosition = side.SidePosition;
-            var actualColor = side.SideColor;
+            var expectedPosition = SidePositions.Position.Left;
+            var expectedColor = Colors.Color.Green;
+            var actualPosition = side.Position;
+            var actualColor = side.Color;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }

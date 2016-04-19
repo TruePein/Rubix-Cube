@@ -1,44 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
 {
 	/// <summary>
 	/// The base class for all of the pieces of a Rubix Cube.
 	/// </summary>
-    public abstract class Piece
+    public abstract class Piece : IPiece
     {
-		/// <summary>
-		/// What kind of piece it is.
-		/// </summary>
-        public Type type { get; protected set; }
 
-		/// <summary>
-		/// A piece always has 6 sides.
-		/// </summary>
-        protected const int SIDES = 6;
-
-		/// <summary>
-		/// The different types of pieces.
-		///		Unseen appear in Cubes of SIZE > 2.
-		///		Middle appear in Cubes with an odd size.
-		///		Inner appear in Cubes of SIZE > 3.
-		///		Side appear in Cubes of SIZE > 2.
-		///		Corner appear in every Cube.
-		///		Target appear with every Cube.
-		/// </summary>
-        public enum Type
+        public Tuple<int,int,int> Coordinates
         {
-            Unseen,
-            Middle,
-            Inner,
-            Edge,
-            Corner,
-            Target
+            get
+            {
+                return _coordinates;
+            }
+            set
+            {
+                _coordinates = value;
+            }
         }
 
 		/// <summary>
-		/// A list of the side of a piece. The order doesn't matter, although it will never change. No two side will share a Color or Position.
+		/// What kind of piece it is.
 		/// </summary>
+        public PieceTypes.PieceType type { get; protected set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Tuple<int, int, int> _coordinates;
+
+        /// <summary>
+        /// A piece always has 6 sides.
+        /// </summary>
+        protected const int SIDES = 6;
+
+        /// <summary>
+        /// A list of the side of a piece. The order doesn't matter, although it will never change. No two side will share a Color or Position.
+        /// </summary>
         public readonly List<Side> sides;
         
 		/// <summary>
@@ -83,35 +84,35 @@ namespace Rubix_Cube.Pieces
 		/// <param name="clockwise">Whether or not the ciece will turn clockwise.
 		/// true - will turn clockwise
 		/// false - won't turn clockwise</param>
-		public void turnPiece(int axis, bool clockwise)
+		public void turnPiece(Axes.Axis axis, Directions.Direction clockwise)
         {
             switch (axis)
             {
-                case 2://z
-                    changePositions(new Side.Position[]
+                case Axes.Axis.Z://z
+                    changePositions(new SidePositions.Position[]
                     {
-                        Side.Position.Top,
-                        clockwise?Side.Position.Right:Side.Position.Left,
-                        Side.Position.Bottom,
-                        clockwise?Side.Position.Left:Side.Position.Right
+                        SidePositions.Position.Top,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left,
+                        SidePositions.Position.Bottom,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right
                     });
                     break;
-                case 0://x
-                    changePositions(new Side.Position[]
+                case Axes.Axis.X://x
+                    changePositions(new SidePositions.Position[]
                     {
-                        Side.Position.Top,
-                        clockwise?Side.Position.Back:Side.Position.Front,
-                        Side.Position.Bottom,
-                        clockwise?Side.Position.Front:Side.Position.Back
+                        SidePositions.Position.Top,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front,
+                        SidePositions.Position.Bottom,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back
                     });
                     break;
-                case 1://y
-                    changePositions(new Side.Position[]
+                case Axes.Axis.Y://y
+                    changePositions(new SidePositions.Position[]
                     {
-                        Side.Position.Front,
-                        clockwise?Side.Position.Left:Side.Position.Right,
-                        Side.Position.Back,
-                        clockwise?Side.Position.Right:Side.Position.Left
+                        SidePositions.Position.Front,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right,
+                        SidePositions.Position.Back,
+                        clockwise == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left
                     });
                     break;
                 default: //do nothing
@@ -123,17 +124,17 @@ namespace Rubix_Cube.Pieces
 		/// Swaps four sides of a piece based on the positions and order of the positions that come in.
 		/// </summary>
 		/// <param name="positions">An array of positions that need to be swapped with each other.</param>
-        private void changePositions(Side.Position[] positions)
+        private void changePositions(SidePositions.Position[] positions)
         {
             Side sideTo = getSideByPosition(positions[0]);
-            Side.Position temp = sideTo.SidePosition;
+            SidePositions.Position temp = sideTo.Position;
             for(int i = 0; i < 3; i++)
             {
                 Side sideFrom = getSideByPosition(positions[i + 1]);
-                sideTo.SidePosition = sideFrom.SidePosition;
+                sideTo.Position = sideFrom.Position;
                 sideTo = sideFrom;
             }
-            sideTo.SidePosition = temp;
+            sideTo.Position = temp;
         }
 
 		/// <summary>
@@ -141,22 +142,22 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		/// <param name="color">The color of the side bein searched for.</param>
 		/// <returns>Side - The side with the color provided.</returns>
-        public Side getSideByColor(Side.Color color)
+        public Side getSideByColor(Colors.Color color)
         {
 			var foundSide = new Side(0);
 			var found = false;
             foreach (Side side in sides)
             {
-				if (side.SideColor != color) continue;
-				if (found) throw new System.Exception();
-				foundSide = side;
+				if (side.Color != color) continue;
+				if (found) throw new InvalidOperationException(string.Format("Error: Multiple pieces of color {0} were found.", color));
+                foundSide = side;
 				found = true;
             }
 			if (found)
 			{
 				return foundSide;
 			}
-            throw new System.Exception();
+            throw new InvalidOperationException(string.Format("Error: No piece of color {0} was found.", color));
         }
 
 		/// <summary>
@@ -164,22 +165,57 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		/// <param name="position">The position of the side bein searched for.</param>
 		/// <returns>Side - The side with the position provided.</returns>
-		public Side getSideByPosition(Side.Position position)
+		public Side getSideByPosition(SidePositions.Position position)
         {
 			var foundSide = new Side(0);
 			var found = false;
 			foreach (Side side in sides)
             {
-				if (side.SidePosition != position) continue;
-				if (found) throw new System.Exception();
-				foundSide = side;
+				if (side.Position != position) continue;
+				if (found) throw new InvalidOperationException(string.Format("Error: Multiple pieces of position {0} were found.", position));
+                foundSide = side;
 				found = true;
 			}
 			if (found)
 			{
 				return foundSide;
 			}
-			throw new System.Exception();
+			throw new InvalidOperationException(string.Format("Error: No piece of position {0} was found.", position));
+        }
+
+        public void MoveToNextCoordinates(Axes.Axis axis, int layer, Directions.Direction clockwise, int SizeOfCube)
+        {
+            switch (axis)
+            {
+                case Axes.Axis.X: //x value remains the same
+                    {
+                        var oldY = _coordinates.Item2;
+                        var oldZ = _coordinates.Item3;
+                        var newY = clockwise == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
+                        var newZ = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
+                        _coordinates = new Tuple<int, int, int>(layer, newY, newZ);
+                        break;
+                    }
+                case Axes.Axis.Y: //y value remains the same
+                    {
+                        var oldX = _coordinates.Item1;
+                        var oldZ = _coordinates.Item3;
+                        var newX = clockwise == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
+                        var newZ = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldX + 1) : oldX;
+                        _coordinates = new Tuple<int, int, int>(newX, layer, newZ);
+                        break;
+                    }
+                case Axes.Axis.Z: //z value remains the same
+                    {
+                        var oldX = _coordinates.Item1;
+                        var oldY = _coordinates.Item2;
+                        var newX = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
+                        var newY = clockwise == Directions.Direction.Clockwise ? oldX : SizeOfCube - (oldX + 1);
+                        _coordinates = new Tuple<int, int, int>(newX, newY, layer);
+                        break;
+                    }
+            }
+            turnPiece(axis, clockwise);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Corner_Piece_Tests
 {
@@ -34,7 +35,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceClockwiseOnXAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(0, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -43,7 +44,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceCounterClockwiseOnXAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(0, false);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -52,7 +53,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceClockwiseOnYAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(1, true);
+            piece.turnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -61,7 +62,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceCounterClockwiseOnYAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(1, false);
+            piece.turnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -70,7 +71,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceClockwiseOnZAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(2, true);
+            piece.turnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -79,7 +80,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceCounterClockwiseOnZAxisHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(2, false);
+            piece.turnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -88,8 +89,8 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceAndBackHasADistanceOfZero()
         {
             var expected = 0;
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, false);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -98,8 +99,8 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedOnceOnOneAxisAndOnceOnAnotherAxisHasADistanceOfTwo()
         {
             var expected = 2;
-            piece.turnPiece(0, true);
-            piece.turnPiece(1, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -108,8 +109,8 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedTwiceInTheSameDirectionHasADistanceOfTwo()
         {
             var expected = 2;
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -118,9 +119,9 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedThriceInTheSameDirectionHasADistanceOfOne()
         {
             var expected = 1;
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -129,9 +130,9 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedTwiceInTheSameDirectionAndOnceOnADifferentAxisHasADistanceOfThree()
         {
             var expected = 3;
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
-            piece.turnPiece(1, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }
@@ -140,10 +141,10 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         public void CornerPieceTurnedFourTimesInTheSameDirectionHasADistanceOfTwo()
         {
             var expected = 0;
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
-            piece.turnPiece(0, true);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+            piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
             var result = piece.calculateDistance(target);
             Assert.AreEqual(expected, result);
         }

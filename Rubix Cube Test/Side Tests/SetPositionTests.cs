@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
+using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Side_Tests
 {
@@ -17,133 +18,133 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void SettingToTopMakesThePositionTop()
         {
-            var expected = Side.Position.Top;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Top;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToTopMakesThePositionNothingElse()
         {
-            var position = Side.Position.Top;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Back, actual);
-            Assert.AreNotEqual(Side.Position.Bottom, actual);
-            Assert.AreNotEqual(Side.Position.Front, actual);
-            Assert.AreNotEqual(Side.Position.Left, actual);
-            Assert.AreNotEqual(Side.Position.Right, actual);
+            var position = SidePositions.Position.Top;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Back, actual);
+            Assert.AreNotEqual(SidePositions.Position.Bottom, actual);
+            Assert.AreNotEqual(SidePositions.Position.Front, actual);
+            Assert.AreNotEqual(SidePositions.Position.Left, actual);
+            Assert.AreNotEqual(SidePositions.Position.Right, actual);
         }
 
         [TestMethod]
         public void SettingToFrontMakesThePositionFront()
         {
-            var expected = Side.Position.Front;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Front;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToFrontMakesThePositionNothingElse()
         {
-            var position = Side.Position.Front;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Back, actual);
-            Assert.AreNotEqual(Side.Position.Bottom, actual);
-            Assert.AreNotEqual(Side.Position.Top, actual);
-            Assert.AreNotEqual(Side.Position.Left, actual);
-            Assert.AreNotEqual(Side.Position.Right, actual);
+            var position = SidePositions.Position.Front;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Back, actual);
+            Assert.AreNotEqual(SidePositions.Position.Bottom, actual);
+            Assert.AreNotEqual(SidePositions.Position.Top, actual);
+            Assert.AreNotEqual(SidePositions.Position.Left, actual);
+            Assert.AreNotEqual(SidePositions.Position.Right, actual);
         }
 
         [TestMethod]
         public void SettingToRightMakesThePositionRight()
         {
-            var expected = Side.Position.Right;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Right;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToRightMakesThePositionNothingElse()
         {
-            var position = Side.Position.Right;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Back, actual);
-            Assert.AreNotEqual(Side.Position.Bottom, actual);
-            Assert.AreNotEqual(Side.Position.Front, actual);
-            Assert.AreNotEqual(Side.Position.Left, actual);
-            Assert.AreNotEqual(Side.Position.Top, actual);
+            var position = SidePositions.Position.Right;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Back, actual);
+            Assert.AreNotEqual(SidePositions.Position.Bottom, actual);
+            Assert.AreNotEqual(SidePositions.Position.Front, actual);
+            Assert.AreNotEqual(SidePositions.Position.Left, actual);
+            Assert.AreNotEqual(SidePositions.Position.Top, actual);
         }
 
         [TestMethod]
         public void SettingToBottomMakesThePositionBottom()
         {
-            var expected = Side.Position.Bottom;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Bottom;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToBotomMakesThePositionNothingElse()
         {
-            var position = Side.Position.Bottom;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Back, actual);
-            Assert.AreNotEqual(Side.Position.Top, actual);
-            Assert.AreNotEqual(Side.Position.Front, actual);
-            Assert.AreNotEqual(Side.Position.Left, actual);
-            Assert.AreNotEqual(Side.Position.Right, actual);
+            var position = SidePositions.Position.Bottom;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Back, actual);
+            Assert.AreNotEqual(SidePositions.Position.Top, actual);
+            Assert.AreNotEqual(SidePositions.Position.Front, actual);
+            Assert.AreNotEqual(SidePositions.Position.Left, actual);
+            Assert.AreNotEqual(SidePositions.Position.Right, actual);
         }
 
         [TestMethod]
         public void SettingToBackMakesThePositionBack()
         {
-            var expected = Side.Position.Back;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Back;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToBackMakesThePositionNothingElse()
         {
-            var position = Side.Position.Back;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Top, actual);
-            Assert.AreNotEqual(Side.Position.Bottom, actual);
-            Assert.AreNotEqual(Side.Position.Front, actual);
-            Assert.AreNotEqual(Side.Position.Left, actual);
-            Assert.AreNotEqual(Side.Position.Right, actual);
+            var position = SidePositions.Position.Back;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Top, actual);
+            Assert.AreNotEqual(SidePositions.Position.Bottom, actual);
+            Assert.AreNotEqual(SidePositions.Position.Front, actual);
+            Assert.AreNotEqual(SidePositions.Position.Left, actual);
+            Assert.AreNotEqual(SidePositions.Position.Right, actual);
         }
 
         [TestMethod]
         public void SettingToLeftMakesThePositionLeft()
         {
-            var expected = Side.Position.Left;
-            side.SidePosition = expected;
-            var actual = side.SidePosition;
+            var expected = SidePositions.Position.Left;
+            side.Position = expected;
+            var actual = side.Position;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void SettingToLeftMakesThePositionNothingElse()
         {
-            var position = Side.Position.Left;
-            side.SidePosition = position;
-            var actual = side.SidePosition;
-            Assert.AreNotEqual(Side.Position.Back, actual);
-            Assert.AreNotEqual(Side.Position.Bottom, actual);
-            Assert.AreNotEqual(Side.Position.Front, actual);
-            Assert.AreNotEqual(Side.Position.Top, actual);
-            Assert.AreNotEqual(Side.Position.Right, actual);
+            var position = SidePositions.Position.Left;
+            side.Position = position;
+            var actual = side.Position;
+            Assert.AreNotEqual(SidePositions.Position.Back, actual);
+            Assert.AreNotEqual(SidePositions.Position.Bottom, actual);
+            Assert.AreNotEqual(SidePositions.Position.Front, actual);
+            Assert.AreNotEqual(SidePositions.Position.Top, actual);
+            Assert.AreNotEqual(SidePositions.Position.Right, actual);
         }
     }
 }

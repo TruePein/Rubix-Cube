@@ -43,9 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Axes.cs" />
+    <Compile Include="Enums\Colors.cs" />
+    <Compile Include="Enums\Directions.cs" />
+    <Compile Include="Enums\PieceTypes.cs" />
+    <Compile Include="Enums\SidePositions.cs" />
     <Compile Include="Pieces\CornerPiece.cs" />
     <Compile Include="Cube.cs" />
     <Compile Include="Pieces\InnerPiece.cs" />
+    <Compile Include="Pieces\IPiece.cs" />
     <Compile Include="Pieces\MiddlePiece.cs" />
     <Compile Include="Pieces\Piece.cs" />
     <Compile Include="Pieces\PieceFactory.cs" />
