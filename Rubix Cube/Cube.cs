@@ -129,18 +129,6 @@ namespace Rubix_Cube
             movesMade--;
         }
 
-        public int CompareTo(Cube other)
-        {
-            if (other == null) return -1;
-
-            var thisScore = getScore();
-            var otherScore = other.getScore();
-
-            if (thisScore < otherScore) return -1;
-            if (thisScore == otherScore) return 0;
-            return 1;
-        }
-
         private List<IPiece> getAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
             List<IPiece> pieces = new List<IPiece>();
@@ -171,6 +159,18 @@ namespace Rubix_Cube
                     }
             }
             return false;
+        }
+
+        public int CompareTo(Cube other)
+        {
+            if (other == null) return -1;
+
+            var thisScore = getScore();
+            var otherScore = other.getScore();
+
+            if (thisScore < otherScore) return -1;
+            if (thisScore == otherScore) return 0;
+            return 1;
         }
     }
 }

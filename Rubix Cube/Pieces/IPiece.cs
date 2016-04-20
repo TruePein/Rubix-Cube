@@ -11,14 +11,14 @@ namespace Rubix_Cube.Pieces
 
         int calculateDistance(TargetPiece target);
 
+        void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
+
+        void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
+
         void turnPiece(Axes.Axis axis, Directions.Direction direction);
 
         Side getSideByColor(Colors.Color color);
 
         Side getSideByPosition(SidePositions.Position position);
-
-        void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
-
-        void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
     }
 }

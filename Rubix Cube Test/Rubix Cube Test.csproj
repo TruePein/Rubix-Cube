@@ -54,6 +54,10 @@
   <ItemGroup>
     <Compile Include="Corner Piece Tests\CalculateDistanceTests.cs" />
     <Compile Include="Corner Piece Tests\ConstructorTests.cs" />
+    <Compile Include="Corner Piece Tests\CopyConstructorTests.cs" />
+    <Compile Include="Middle Piece Tests\CalculateDistanceTests.cs" />
+    <Compile Include="Middle Piece Tests\ConstructorTests.cs" />
+    <Compile Include="Middle Piece Tests\CopyConstructorTests.cs" />
     <Compile Include="Piece Tests\GetSideByColorTests.cs" />
     <Compile Include="Piece Tests\GetSideByPositionTests.cs" />
     <Compile Include="Piece Tests\TurnPieceTests.cs" />
@@ -76,7 +80,6 @@
     <Folder Include="Cube Tests\" />
     <Folder Include="Edge Piece Tests\" />
     <Folder Include="Inner Piece Tests\" />
-    <Folder Include="Middle Piece Tests\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
