@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Rubix_Cube
 {
-    public class Cube:IComparable<Cube>
+    public class Cube : IComparable<Cube>
     {
         private const int SIZE = 3;
 
@@ -18,9 +18,9 @@ namespace Rubix_Cube
         public Cube()
         {
             _pieces = new List<IPiece>();
-			movesMade = 0;
+            movesMade = 0;
             CreateRubixCube();
-			target = PieceFactory.GetPiece() as TargetPiece;
+            target = PieceFactory.GetPiece() as TargetPiece;
         }
 
         public Cube(Cube c) //copy constructor
@@ -31,20 +31,53 @@ namespace Rubix_Cube
             {
                 _pieces.Add(PieceFactory.GetPiece(piece));
             }
-                    
+
             target = PieceFactory.GetPiece(c.target) as TargetPiece;
         }
 
         private void CreateRubixCube()
         {
+            var numberOfPieces = getNumberOfPieces();
             //create (SIZE)^3 pieces
-            for(int i = 0; i < Math.Pow(SIZE, 3); i++)
+            for (int i = 0; i < numberOfPieces; i++)
             {
-                var x = i / (int)Math.Pow(SIZE, 2);
-                var y = (i % SIZE) / SIZE;
-                var z = i % SIZE;
-				_pieces.Add(PieceFactory.GetPiece(x, y, z, SIZE));
+                var x = getXPosition(i);
+                var y = getYPosition(i);
+                var z = getZPosition(i);
+                _pieces.Add(PieceFactory.GetPiece(x, y, z, SIZE));
             }
+        }
+
+        private int getXPosition(int i)
+        {
+            var pieceLimit = getNumberOfPieces();
+            checkRange(i, 0, pieceLimit);
+            return (int)(i / (Math.Pow(SIZE, 2)));
+        }
+
+        private int getYPosition(int i)
+        {
+            var pieceLimit = getNumberOfPieces();
+            checkRange(i, 0, pieceLimit);
+            return (i % (int)(Math.Pow(SIZE, 2))) / SIZE;
+        }
+
+        private int getZPosition(int i)
+        {
+            var pieceLimit = getNumberOfPieces();
+            checkRange(i, 0, pieceLimit);
+            return i % SIZE;
+        }
+
+        private void checkRange(int i, int min, int max)
+        {
+            if (i < min || i > max) throw new IndexOutOfRangeException(
+                string.Format("Error: {0} is outside the range of {1} to {2}", i, min, max));
+        }
+
+        private int getNumberOfPieces()
+        {
+            return (int)Math.Pow(SIZE, 3);
         }
 
         private int getDistanceFromSolved()
@@ -74,7 +107,7 @@ namespace Rubix_Cube
             List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
             foreach(IPiece piece in pieces)
             {
-                piece.MoveToNextCoordinates(axis, layer, direction, SIZE);
+                piece.Move(axis, direction, SIZE);
             }
 
             movesMade++;
@@ -90,7 +123,7 @@ namespace Rubix_Cube
             List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
             foreach (IPiece piece in pieces)
             {
-                piece.MoveToNextCoordinates(axis, layer, direction, SIZE);
+                piece.Move(axis, direction, SIZE);
             }
 
             movesMade--;

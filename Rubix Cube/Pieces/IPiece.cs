@@ -17,6 +17,8 @@ namespace Rubix_Cube.Pieces
 
         Side getSideByPosition(SidePositions.Position position);
 
-        void MoveToNextCoordinates(Axes.Axis axis, int layer, Directions.Direction direction, int sizeOfCube);
+        void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
+
+        void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
     }
 }

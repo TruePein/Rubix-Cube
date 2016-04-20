@@ -25,10 +25,10 @@ namespace Rubix_Cube.Pieces
 		/// Sets both Position and Color to an enumeration representation of the argument passed in.
 		/// </summary>
 		/// <param name="i">An integer that matches a Position and Side together at the same time.</param>
-		public Side(int i)
+		public Side(Colors.Color color, SidePositions.Position position)
         {
-            Position = (SidePositions.Position)i;
-            Color = (Colors.Color)i;
+            Position = position;
+            Color = color;
         }
 
 		/// <summary>

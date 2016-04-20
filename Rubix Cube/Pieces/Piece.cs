@@ -48,10 +48,12 @@ namespace Rubix_Cube.Pieces
         public Piece(int x, int y, int z)
         {
             sides = new List<Side>();
-            for(int i = 0; i < SIDES; i++)
-            {
-                sides.Add(new Side(i));
-            }
+            sides.Add(new Side(Colors.Color.White, SidePositions.Position.Top));
+            sides.Add(new Side(Colors.Color.Red, SidePositions.Position.Front));
+            sides.Add(new Side(Colors.Color.Blue, SidePositions.Position.Right));
+            sides.Add(new Side(Colors.Color.Yellow, SidePositions.Position.Bottom));
+            sides.Add(new Side(Colors.Color.Orange, SidePositions.Position.Back));
+            sides.Add(new Side(Colors.Color.Green, SidePositions.Position.Left));
             _coordinates = new Tuple<int, int, int>(x, y, z);
         }
 
@@ -95,84 +97,102 @@ namespace Rubix_Cube.Pieces
         }
 
 		/// <summary>
-		/// Gets the side for the list of sides based on what color is needed. If there is not exactly one side with the given color, an error is thrown.
+		/// Gets the side from the list of sides based on what color is needed. If there is not exactly one side with the given color, an error is thrown.
 		/// </summary>
 		/// <param name="color">The color of the side bein searched for.</param>
 		/// <returns>Side - The side with the color provided.</returns>
         public Side getSideByColor(Colors.Color color)
         {
-			var foundSide = new Side(0);
-			var found = false;
+			var foundSide = new Side(color, SidePositions.Position.Top);
+			var found = 0;
             foreach (Side side in sides)
             {
 				if (side.Color != color) continue;
-				if (found) throw new InvalidOperationException(string.Format("Error: Multiple pieces of color {0} were found.", color));
                 foundSide = side;
-				found = true;
+				found++;
             }
-			if (found)
+			if (found == 1)
 			{
 				return foundSide;
 			}
-            throw new InvalidOperationException(string.Format("Error: No piece of color {0} was found.", color));
+            throw new InvalidOperationException(string.Format("Error: {0} pieces of color {1} were found.", found, color));
         }
 
 		/// <summary>
-		/// Gets the side for the list of sides based on what position is needed. If there is not exactly one side with the given position, an error is thrown.
+		/// Gets the side from the list of sides based on what position is needed. If there is not exactly one side with the given position, an error is thrown.
 		/// </summary>
 		/// <param name="position">The position of the side bein searched for.</param>
 		/// <returns>Side - The side with the position provided.</returns>
 		public Side getSideByPosition(SidePositions.Position position)
         {
-			var foundSide = new Side(0);
-			var found = false;
+            var foundSide = new Side(Colors.Color.White, position);
+            var found = 0;
 			foreach (Side side in sides)
             {
 				if (side.Position != position) continue;
-				if (found) throw new InvalidOperationException(string.Format("Error: Multiple pieces of position {0} were found.", position));
                 foundSide = side;
-				found = true;
+				found++;
 			}
-			if (found)
+			if (found == 1)
 			{
 				return foundSide;
 			}
-			throw new InvalidOperationException(string.Format("Error: No piece of position {0} was found.", position));
+			throw new InvalidOperationException(string.Format("Error: {0} pieces of position {1} were found.", found, position));
         }
 
-        public void MoveToNextCoordinates(Axes.Axis axis, int layer, Directions.Direction clockwise, int SizeOfCube)
+        public void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int SizeOfCube)
         {
             switch (axis)
             {
                 case Axes.Axis.X: //x value remains the same
                     {
-                        var oldY = _coordinates.Item2;
-                        var oldZ = _coordinates.Item3;
-                        var newY = clockwise == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
-                        var newZ = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
-                        _coordinates = new Tuple<int, int, int>(layer, newY, newZ);
+                        moveToNextCoordinatesOnXAxis(direction, SizeOfCube);
                         break;
                     }
                 case Axes.Axis.Y: //y value remains the same
                     {
-                        var oldX = _coordinates.Item1;
-                        var oldZ = _coordinates.Item3;
-                        var newX = clockwise == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
-                        var newZ = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldX + 1) : oldX;
-                        _coordinates = new Tuple<int, int, int>(newX, layer, newZ);
+                        moveToNextCoordinatesOnYAxis(direction, SizeOfCube);
                         break;
                     }
                 case Axes.Axis.Z: //z value remains the same
                     {
-                        var oldX = _coordinates.Item1;
-                        var oldY = _coordinates.Item2;
-                        var newX = clockwise == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
-                        var newY = clockwise == Directions.Direction.Clockwise ? oldX : SizeOfCube - (oldX + 1);
-                        _coordinates = new Tuple<int, int, int>(newX, newY, layer);
+                        moveToNextCoordinatesOnZAxis(direction, SizeOfCube);
                         break;
                     }
             }
-            turnPiece(axis, clockwise);
+        }
+
+        private void moveToNextCoordinatesOnXAxis(Directions.Direction direction, int SizeOfCube)
+        {
+            var oldY = _coordinates.Item2;
+            var oldZ = _coordinates.Item3;
+            var newY = direction == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
+            var newZ = direction == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
+            _coordinates = new Tuple<int, int, int>(_coordinates.Item1, newY, newZ);
+        }
+
+        private void moveToNextCoordinatesOnYAxis(Directions.Direction direction, int SizeOfCube)
+        {
+            var oldX = _coordinates.Item1;
+            var oldZ = _coordinates.Item3;
+            var newX = direction == Directions.Direction.Clockwise ? oldZ : SizeOfCube - (oldZ + 1);
+            var newZ = direction == Directions.Direction.Clockwise ? SizeOfCube - (oldX + 1) : oldX;
+            _coordinates = new Tuple<int, int, int>(newX, _coordinates.Item2, newZ);
+        }
+
+        private void moveToNextCoordinatesOnZAxis(Directions.Direction direction, int SizeOfCube)
+        {
+            var oldX = _coordinates.Item1;
+            var oldY = _coordinates.Item2;
+            var newX = direction == Directions.Direction.Clockwise ? SizeOfCube - (oldY + 1) : oldY;
+            var newY = direction == Directions.Direction.Clockwise ? oldX : SizeOfCube - (oldX + 1);
+            _coordinates = new Tuple<int, int, int>(newX, newY, _coordinates.Item3);
+        }
+
+        public void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube)
+        {
+            MoveToNextCoordinates(axis, direction, sizeOfCube);
+            turnPiece(axis, direction);
         }
     }
 }

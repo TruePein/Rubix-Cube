@@ -53,12 +53,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Corner Piece Tests\CalculateDistanceTests.cs" />
+    <Compile Include="Corner Piece Tests\ConstructorTests.cs" />
     <Compile Include="Piece Tests\GetSideByColorTests.cs" />
     <Compile Include="Piece Tests\GetSideByPositionTests.cs" />
     <Compile Include="Piece Tests\TurnPieceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Side Tests\ConstructorTests.cs" />
     <Compile Include="Side Tests\CopyConstructorTest.cs" />
+    <Compile Include="Side Tests\MoveToNextPositionTests.cs" />
     <Compile Include="Side Tests\SetPositionTests.cs" />
     <Compile Include="Unseen Piece Tests\CalculateDistanceTests.cs" />
     <Compile Include="Unseen Piece Tests\ConstructorTests.cs" />

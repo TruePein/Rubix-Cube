@@ -13,7 +13,7 @@ namespace Rubix_Cube_Test.Side_Tests
 		[TestInitialize]
 		public void MakeSides()
 		{
-			originalSide = new Side(0);
+			originalSide = new Side(Colors.Color.White, SidePositions.Position.Top);
 			copySide = new Side(originalSide);
 		}
 

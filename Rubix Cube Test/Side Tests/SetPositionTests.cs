@@ -12,7 +12,7 @@ namespace Rubix_Cube_Test.Side_Tests
         [ClassInitialize]
         public static void MakeSide(TestContext context)
         {
-            side = new Side(0);
+            side = new Side(Colors.Color.White, SidePositions.Position.Top);
         }
 
         [TestMethod]
