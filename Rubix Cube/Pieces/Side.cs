@@ -18,7 +18,7 @@ namespace Rubix_Cube.Pieces
 		/// Once it is set, it cannot be changed.
 		/// No other NumOfSides on the Piece will have the same color.
 		/// </summary>
-		public Colors.Color Color { get; private set; }
+		public Colors.Color Color { get; }
 
 	    /// <summary>
 	    /// Constructor for the Side.

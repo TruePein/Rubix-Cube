@@ -2,7 +2,6 @@
 {
     public class CornerOrEdgePiece : Piece
     {
-
         public CornerOrEdgePiece(int x, int y, int z) : base(x, y, z) { }
 
         public CornerOrEdgePiece(Piece p) : base(p) { }

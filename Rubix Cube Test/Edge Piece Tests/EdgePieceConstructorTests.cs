@@ -5,20 +5,20 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Edge_Piece_Tests
 {
     [TestClass]
-    public class ConstructorTests
+    public class EdgePieceConstructorTests
     {
-        EdgePiece piece;
+        private EdgePiece _piece;
 
         [TestInitialize]
         public void CreatePiece()
         {
-            piece = new EdgePiece(1, 0, 0);
+            _piece = new EdgePiece(1, 0, 0);
         }
         [TestMethod]
-        public void newPieceIsEdge()
+        public void NewPieceIsEdge()
         {
             var expected = PieceTypes.PieceType.Edge;
-            var actual = piece.Type;
+            var actual = _piece.Type;
             Assert.AreEqual(expected, actual);
         }
     }

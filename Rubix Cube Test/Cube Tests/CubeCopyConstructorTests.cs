@@ -5,7 +5,7 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Cube_Tests
 {
     [TestClass]
-    public class CopyConstructorTests
+    public class CubeCopyConstructorTests
     {
         private Cube _original;
         private Cube _copy;

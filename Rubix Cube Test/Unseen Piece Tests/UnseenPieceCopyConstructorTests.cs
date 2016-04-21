@@ -4,22 +4,22 @@ using Rubix_Cube.Pieces;
 namespace Rubix_Cube_Test.Unseen_Piece_Tests
 {
 	[TestClass]
-	public class CopyConstructorTests
+	public class UnseenPieceCopyConstructorTests
 	{
-		UnseenPiece original;
-		UnseenPiece copy;
+	    private UnseenPiece _original;
+	    private UnseenPiece _copy;
 
 		[TestInitialize]
 		public void CreateAndCopyPiece()
 		{
-			original = new UnseenPiece(0,0,0);
-			copy = new UnseenPiece(original);
+			_original = new UnseenPiece(0,0,0);
+			_copy = new UnseenPiece(_original);
 		}
 
 		[TestMethod]
 		public void PiecesAreNotTheSame()
 		{
-			Assert.AreNotEqual(original, copy);
+			Assert.AreNotEqual(_original, _copy);
 		}
 	}
 }

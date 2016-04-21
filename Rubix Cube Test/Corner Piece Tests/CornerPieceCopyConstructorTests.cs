@@ -5,41 +5,41 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Corner_Piece_Tests
 {
     [TestClass]
-    public class CopyConstructorTests
+    public class CornerPieceCopyConstructorTests
     {
-        CornerPiece original;
-        CornerPiece copy;
+        private CornerPiece _original;
+        private CornerPiece _copy;
 
         [TestInitialize]
         public void CreateAndCopyPiece()
         {
-            original = new CornerPiece(0, 0, 0);
-            copy = new CornerPiece(original);
+            _original = new CornerPiece(0, 0, 0);
+            _copy = new CornerPiece(_original);
         }
 
         [TestMethod]
         public void PiecesAreDifferent()
         {
-            Assert.AreNotEqual(original, copy);
+            Assert.AreNotEqual(_original, _copy);
         }
 
         [TestMethod]
         public void PiecesHaveSameCoordinates()
         {
-            Assert.AreEqual(original.Coordinates, copy.Coordinates);
+            Assert.AreEqual(_original.Coordinates, _copy.Coordinates);
         }
 
         [TestMethod]
         public void PiecesHaveSameTypes()
         {
-            Assert.AreEqual(original.Type, copy.Type);
+            Assert.AreEqual(_original.Type, _copy.Type);
         }
 
         [TestMethod]
         public void ChangingCoordinatesOfCopyDoesNotChangeTheOriginal()
         {
-            copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            Assert.AreNotEqual(original.Coordinates, copy.Coordinates);
+            _copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            Assert.AreNotEqual(_original.Coordinates, _copy.Coordinates);
         }
     }
 }

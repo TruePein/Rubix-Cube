@@ -5,21 +5,21 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Unseen_Piece_Tests
 {
 	[TestClass]
-	public class ConstructorTests
+	public class UnseenPieceConstructorTests
 	{
-		private UnseenPiece piece;
+		private UnseenPiece _piece;
 
 		[TestInitialize]
 		public void CreatePiece()
 		{
-			piece = new UnseenPiece(0,0,0);
+			_piece = new UnseenPiece(0,0,0);
 		}
 
 		[TestMethod]
 		public void NewPiece()
 		{
 			var expected = PieceTypes.PieceType.Unseen;
-			var actual = piece.Type;
+			var actual = _piece.Type;
 			Assert.AreEqual(expected, actual);
 		}
 	}

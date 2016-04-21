@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 
 namespace Rubix_Cube_Test.Side_Tests
 {
     [TestClass]
-    public class MoveToNextPositionTests
+    public class SideMoveToNextPositionTests
     {
         [TestMethod]
         public void ClockwiseTurnOnXAxisMovesTopToBack()

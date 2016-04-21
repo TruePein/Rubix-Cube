@@ -17,20 +17,17 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
         public PieceTypes.PieceType Type { get; protected set; }
 
+        public List<Side> Sides { get; }
+
 	    /// <summary>
         /// A piece always has 6 sides.
         /// </summary>
         protected const int NumOfSides = 6;
 
-        /// <summary>
-        /// A list of the side of a piece. The order doesn't matter, although it will never change. No two side will share a Color or Position.
+	    /// <summary>
+        /// Constructor for a Piece. Each new Piece is created the same way.
         /// </summary>
-        internal readonly List<Side> Sides;
-        
-		/// <summary>
-		/// Constructor for a Piece. Each new Piece is created the same way.
-		/// </summary>
-		protected Piece(int x, int y, int z)
+        protected Piece(int x, int y, int z)
         {
 		    Sides = new List<Side>
 		    {
@@ -45,7 +42,8 @@ namespace Rubix_Cube.Pieces
         }
 
 		/// <summary>
-		/// A copy constructor for a piece. Since the NumOfSides may have changed, the NumOfSides are all copied as well.
+		/// A copy constructor for a piece. Since the NumOfSides may have changed,
+		/// the NumOfSides are all copied as well.
 		/// </summary>
 		/// <param name="p"></param>
 		protected Piece(Piece p)

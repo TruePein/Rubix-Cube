@@ -6,7 +6,7 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Piece_Tests
 {
     [TestClass]
-    public class MoveToNextCoordiantesTests
+    public class PieceMoveToNextCoordiantesTests
     {
         [TestMethod]
         public void XAxisClockwiseTurnOfCornerPieceWillMoveFrom000To002()

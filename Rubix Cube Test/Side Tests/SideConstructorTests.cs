@@ -5,7 +5,7 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Side_Tests
 {
     [TestClass]
-    public class ConstructorTests
+    public class SideConstructorTests
     {
         [TestMethod]
         public void PassingInZeroCreatesATopWhiteSide()

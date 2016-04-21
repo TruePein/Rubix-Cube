@@ -5,21 +5,21 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Inner_Piece_Tests
 {
     [TestClass]
-    public class ConstructorTests
+    public class InnerPieceConstructorTests
     {
-        InnerPiece piece;
+        private InnerPiece _piece;
 
         [TestInitialize]
         public void CreatePiece()
         {
-            piece = new InnerPiece(0, 0, 0, Colors.Color.White);
+            _piece = new InnerPiece(0, 0, 0, Colors.Color.White);
         }
 
         [TestMethod]
         public void NewPieceIsInner()
         {
             var expected = PieceTypes.PieceType.Inner;
-            var actual = piece.Type;
+            var actual = _piece.Type;
             Assert.AreEqual(expected, actual);
         }
 
@@ -27,7 +27,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         public void NewWhitePieceIsWhite()
         {
             var expected = Colors.Color.White;
-            var actual = piece.Color;
+            var actual = _piece.Color;
             Assert.AreEqual(expected, actual);
         }
     }

@@ -5,14 +5,14 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Inner_Piece_Tests
 {
     [TestClass]
-    public class CalculateDistanceTests
+    public class InnerPieceCalculateDistanceTests
     {
-        static TargetPiece target;
+        private static TargetPiece _target;
 
         [ClassInitialize()]
         public static void InitializeTests(TestContext context)
         {
-            target = new TargetPiece();
+            _target = new TargetPiece();
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         {
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 0;
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -30,7 +30,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -40,7 +40,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -50,7 +50,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -60,7 +60,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -70,7 +70,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -80,7 +80,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -90,7 +90,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -100,7 +100,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -110,7 +110,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -120,7 +120,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -130,7 +130,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -140,7 +140,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -150,7 +150,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -160,7 +160,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -170,7 +170,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -180,7 +180,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -190,7 +190,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -200,7 +200,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Blue);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -210,7 +210,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -220,7 +220,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -230,7 +230,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -240,7 +240,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -250,7 +250,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -260,7 +260,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -270,7 +270,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -280,7 +280,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -290,7 +290,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -300,7 +300,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -310,7 +310,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -320,7 +320,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -330,7 +330,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -340,7 +340,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 0;
             piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -350,7 +350,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -360,7 +360,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -370,7 +370,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
@@ -380,7 +380,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
             var piece = getInnerPiece(Colors.Color.Green);
             var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(target);
+            var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 

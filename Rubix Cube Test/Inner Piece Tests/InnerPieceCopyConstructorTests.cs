@@ -5,47 +5,47 @@ using Rubix_Cube.Enums;
 namespace Rubix_Cube_Test.Inner_Piece_Tests
 {
     [TestClass]
-    public class CopyConstructorTests
+    public class InnerPieceCopyConstructorTests
     {
-        InnerPiece original;
-        InnerPiece copy;
+        private InnerPiece _original;
+        private InnerPiece _copy;
 
         [TestInitialize]
         public void CreateAndCopyPiece()
         {
-            original = new InnerPiece(1, 1, 0, Colors.Color.White);
-            copy = new InnerPiece(original);
+            _original = new InnerPiece(1, 1, 0, Colors.Color.White);
+            _copy = new InnerPiece(_original);
         }
 
         [TestMethod]
         public void PiecesAreDifferent()
         {
-            Assert.AreNotEqual(original, copy);
+            Assert.AreNotEqual(_original, _copy);
         }
 
         [TestMethod]
         public void PiecesHaveSameCoordinates()
         {
-            Assert.AreEqual(original.Coordinates, copy.Coordinates);
+            Assert.AreEqual(_original.Coordinates, _copy.Coordinates);
         }
 
         [TestMethod]
         public void PiecesHaveSameTypes()
         {
-            Assert.AreEqual(original.Type, copy.Type);
+            Assert.AreEqual(_original.Type, _copy.Type);
         }
 
         [TestMethod]
         public void PiecesHaveSameColor()
         {
-            Assert.AreEqual(original.Color, copy.Color);
+            Assert.AreEqual(_original.Color, _copy.Color);
         }
 
         [TestMethod]
         public void ChangingCoordinatesOfCopyDoesNotChangeTheOriginal()
         {
-            copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            Assert.AreNotEqual(original.Coordinates, copy.Coordinates);
+            _copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            Assert.AreNotEqual(_original.Coordinates, _copy.Coordinates);
         }
     }
 }
