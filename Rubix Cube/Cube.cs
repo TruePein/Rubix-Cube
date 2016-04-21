@@ -2,146 +2,144 @@
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Rubix_Cube
 {
     public class Cube : IComparable<Cube>
     {
-        private const int SIZE = 3;
+        private readonly int _size;
 
-        public int movesMade { get; set; }
+        public int MovesMade { get; set; }
 
-        private List<IPiece> _pieces;
+        private readonly List<IPiece> _pieces;
 
-        private TargetPiece target;
+        private readonly TargetPiece _target;
 
-        public Cube()
+        public Cube(int size)
         {
+            _size = size;
             _pieces = new List<IPiece>();
-            movesMade = 0;
+            MovesMade = 0;
             CreateRubixCube();
-            target = PieceFactory.GetPiece() as TargetPiece;
+            _target = PieceFactory.GetPiece() as TargetPiece;
         }
 
         public Cube(Cube c) //copy constructor
         {
-            movesMade = c.movesMade;
+            _size = c._size;
+            MovesMade = c.MovesMade;
             _pieces = new List<IPiece>();
             foreach (IPiece piece in c._pieces)
             {
                 _pieces.Add(PieceFactory.GetPiece(piece));
             }
 
-            target = PieceFactory.GetPiece(c.target) as TargetPiece;
+            _target = PieceFactory.GetPiece(c._target) as TargetPiece;
         }
 
         private void CreateRubixCube()
         {
-            var numberOfPieces = getNumberOfPieces();
+            var numberOfPieces = GetNumberOfPieces();
             //create (SIZE)^3 pieces
             for (int i = 0; i < numberOfPieces; i++)
             {
-                var x = getXPosition(i);
-                var y = getYPosition(i);
-                var z = getZPosition(i);
-                _pieces.Add(PieceFactory.GetPiece(x, y, z, SIZE));
+                var x = GetXPosition(i);
+                var y = GetYPosition(i);
+                var z = GetZPosition(i);
+                _pieces.Add(PieceFactory.GetPiece(x, y, z, _size));
             }
         }
 
-        private int getXPosition(int i)
+        private int GetXPosition(int i)
         {
-            var pieceLimit = getNumberOfPieces();
-            checkRange(i, 0, pieceLimit);
-            return (int)(i / (Math.Pow(SIZE, 2)));
+            var pieceLimit = GetNumberOfPieces();
+            CheckRange(i, 0, pieceLimit);
+            return (int)(i / (Math.Pow(_size, 2)));
         }
 
-        private int getYPosition(int i)
+        private int GetYPosition(int i)
         {
-            var pieceLimit = getNumberOfPieces();
-            checkRange(i, 0, pieceLimit);
-            return (i % (int)(Math.Pow(SIZE, 2))) / SIZE;
+            var pieceLimit = GetNumberOfPieces();
+            CheckRange(i, 0, pieceLimit);
+            return (i % (int)(Math.Pow(_size, 2))) / _size;
         }
 
-        private int getZPosition(int i)
+        private int GetZPosition(int i)
         {
-            var pieceLimit = getNumberOfPieces();
-            checkRange(i, 0, pieceLimit);
-            return i % SIZE;
+            var pieceLimit = GetNumberOfPieces();
+            CheckRange(i, 0, pieceLimit);
+            return i % _size;
         }
 
-        private void checkRange(int i, int min, int max)
+        private static void CheckRange(int i, int min, int max)
         {
             if (i < min || i > max) throw new IndexOutOfRangeException(
                 string.Format("Error: {0} is outside the range of {1} to {2}", i, min, max));
         }
 
-        private int getNumberOfPieces()
+        private int GetNumberOfPieces()
         {
-            return (int)Math.Pow(SIZE, 3);
+            return (int)Math.Pow(_size, 3);
         }
 
-        private int getDistanceFromSolved()
+        private int GetDistanceFromSolved()
         {
-            var distance = 0;
-
-            foreach (var piece in _pieces)
-            {
-                distance += piece.calculateDistance(target);
-            }
+            var distance = _pieces.Sum(piece => piece.CalculateDistance(_target));
 
             return distance / 8;
         }
 
-        private int getScore()
+        private int GetScore()
         {
-            return movesMade + getDistanceFromSolved();
+            return MovesMade + GetDistanceFromSolved();
         }
 
-        private void makeMove(Axes.Axis axis, int layer, Directions.Direction direction)
+        public void MakeMove(Axes.Axis axis, int layer, Directions.Direction direction)
         {
             LastMove.Axis = axis;
             LastMove.Layer = layer;
             LastMove.Direction = direction;
-			if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, direction);
+			if (_size % 2 != 0 && layer == _size / 2) _target.TurnPiece(axis, direction);
 
-            List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
-            foreach(IPiece piece in pieces)
+            var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
+            foreach(var piece in pieces)
             {
-                piece.Move(axis, direction, SIZE);
+                piece.Move(axis, direction, _size);
             }
 
-            movesMade++;
+            MovesMade++;
         }
 
-        private void undoLastMove()
+        public void UndoLastMove()
         {
             var axis = LastMove.Axis;
             var layer = LastMove.Layer;
             var direction = LastMove.Direction == Directions.Direction.Clockwise?LastMove.Direction:Directions.Direction.CounterClockwise;
-            if (SIZE % 2 != 0 && layer == SIZE / 2) target.turnPiece(axis, direction);
+            if (_size % 2 == 1 && layer == _size / 2) _target.TurnPiece(axis, direction);
 
-            List<IPiece> pieces = getAllPiecesInALayerOnAnAxis(layer, axis);
-            foreach (IPiece piece in pieces)
+            var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
+            foreach (var piece in pieces)
             {
-                piece.Move(axis, direction, SIZE);
+                piece.Move(axis, direction, _size);
             }
 
-            movesMade--;
+            MovesMade--;
         }
 
-        private List<IPiece> getAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
+        private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
-            List<IPiece> pieces = new List<IPiece>();
-            if (layer >= SIZE) return pieces;
-            foreach(IPiece piece in pieces)
+            var pieces = new List<IPiece>();
+            if (layer >= _size) return pieces;
+            foreach(var piece in pieces)
             {
-                if (!pieceIsInLayerOnAxis(piece, layer, axis)) continue;
+                if (PieceIsInLayerOnAxis(piece, layer, axis))
                 pieces.Add(piece);
             }
             return pieces;
         }
 
-        private bool pieceIsInLayerOnAxis(IPiece piece, int layer, Axes.Axis axis)
+        private static bool PieceIsInLayerOnAxis(IPiece piece, int layer, Axes.Axis axis)
         {
             switch (axis)
             {
@@ -157,20 +155,20 @@ namespace Rubix_Cube
                     {
                         return piece.Coordinates.Item3 == layer;
                     }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
             }
-            return false;
         }
 
         public int CompareTo(Cube other)
         {
             if (other == null) return -1;
 
-            var thisScore = getScore();
-            var otherScore = other.getScore();
+            var thisScore = GetScore();
+            var otherScore = other.GetScore();
 
             if (thisScore < otherScore) return -1;
-            if (thisScore == otherScore) return 0;
-            return 1;
+            return thisScore == otherScore ? 0 : 1;
         }
     }
 }
