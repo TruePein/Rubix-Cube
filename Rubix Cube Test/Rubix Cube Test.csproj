@@ -55,6 +55,8 @@
     <Compile Include="Corner Piece Tests\CalculateDistanceTests.cs" />
     <Compile Include="Corner Piece Tests\ConstructorTests.cs" />
     <Compile Include="Corner Piece Tests\CopyConstructorTests.cs" />
+    <Compile Include="Cube Tests\ConstructorTests.cs" />
+    <Compile Include="Cube Tests\CopyConstructorTests.cs" />
     <Compile Include="Edge Piece Tests\CalculateDistanceTests.cs" />
     <Compile Include="Edge Piece Tests\ConstructorTests.cs" />
     <Compile Include="Edge Piece Tests\CopyconstructorTests.cs" />
@@ -83,9 +85,7 @@
       <Name>Rubix Cube</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cube Tests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

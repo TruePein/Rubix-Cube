@@ -7,18 +7,18 @@ namespace Rubix_Cube.Pieces
     {
         Tuple<int, int, int> Coordinates { get; set; }
 
-        PieceTypes.PieceType type { get; }
+        PieceTypes.PieceType Type { get; }
 
-        int calculateDistance(TargetPiece target);
+        int CalculateDistance(TargetPiece target);
 
         void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
 
         void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
 
-        void turnPiece(Axes.Axis axis, Directions.Direction direction);
+        void TurnPiece(Axes.Axis axis, Directions.Direction direction);
 
-        Side getSideByColor(Colors.Color color);
+        Side GetSideByColor(Colors.Color color);
 
-        Side getSideByPosition(SidePositions.Position position);
+        Side GetSideByPosition(SidePositions.Position position);
     }
 }

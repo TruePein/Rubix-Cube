@@ -19,7 +19,7 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		public void NewPiece()
 		{
 			var expected = PieceTypes.PieceType.Unseen;
-			var actual = piece.type;
+			var actual = piece.Type;
 			Assert.AreEqual(expected, actual);
 		}
 	}

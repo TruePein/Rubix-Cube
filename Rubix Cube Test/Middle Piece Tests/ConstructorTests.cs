@@ -19,7 +19,7 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         public void newPieceIsMiddle()
         {
             var expected = PieceTypes.PieceType.Middle;
-            var actual = piece.type;
+            var actual = piece.Type;
             Assert.AreEqual(expected, actual);
         }
     }

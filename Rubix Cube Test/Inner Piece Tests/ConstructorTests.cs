@@ -19,7 +19,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         public void NewPieceIsInner()
         {
             var expected = PieceTypes.PieceType.Inner;
-            var actual = piece.type;
+            var actual = piece.Type;
             Assert.AreEqual(expected, actual);
         }
 

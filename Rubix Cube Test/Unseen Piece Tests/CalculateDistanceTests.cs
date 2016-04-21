@@ -26,64 +26,64 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void NewUnseenPieceHasADistanceofZero()
 		{
-			var actual = piece.calculateDistance(target);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void ClockWiseXTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void CounterClockWiseXTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void ClockWiseYTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void CounterClockWiseYTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void ClockWiseZTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void CounterClockWiseZTurnHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void TwoClockWiseXTurnsHasADistanceOfZero()
 		{
-			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			piece.turnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = piece.calculateDistance(target);
+			piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+			piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
+			var actual = piece.CalculateDistance(target);
 			Assert.AreEqual(expected, actual);
 		}
 	}

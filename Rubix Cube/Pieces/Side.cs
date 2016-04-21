@@ -1,5 +1,4 @@
-﻿using System;
-using Rubix_Cube.Enums;
+﻿using Rubix_Cube.Enums;
 namespace Rubix_Cube.Pieces
 {
 	/// <summary>
@@ -9,7 +8,7 @@ namespace Rubix_Cube.Pieces
     {
 		/// <summary>
 		/// The current Position of the Side.
-		/// No other Sides of the Piece will have the same Position.
+		/// No other NumOfSides of the Piece will have the same Position.
 		/// </summary>
         public SidePositions.Position Position { get; set; }
 
@@ -17,16 +16,17 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// The color of the Side.
 		/// Once it is set, it cannot be changed.
-		/// No other Sides on the Piece will have the same color.
+		/// No other NumOfSides on the Piece will have the same color.
 		/// </summary>
 		public Colors.Color Color { get; private set; }
 
-		/// <summary>
-		/// Constructor for the Side.
-		/// Sets both Position and Color to an enumeration representation of the argument passed in.
-		/// </summary>
-		/// <param name="i">An integer that matches a Position and Side together at the same time.</param>
-		public Side(Colors.Color color, SidePositions.Position position)
+	    /// <summary>
+	    /// Constructor for the Side.
+	    /// Sets both Position and Color to an enumeration representation of the argument passed in.
+	    /// </summary>
+	    /// <param name="color"></param>
+	    /// <param name="position"></param>
+	    public Side(Colors.Color color, SidePositions.Position position)
         {
             Position = position;
             Color = color;
@@ -65,7 +65,7 @@ namespace Rubix_Cube.Pieces
             }
         }
 
-        public int getDistanceFrom(SidePositions.Position actualPosition)
+        public int GetDistanceFrom(SidePositions.Position actualPosition)
         {
             switch (actualPosition)
             {

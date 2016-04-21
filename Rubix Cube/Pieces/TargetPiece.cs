@@ -11,7 +11,7 @@ namespace Rubix_Cube.Pieces
 		/// Calls the default base constructor and then sets it's type to Target in order to properly identify it.
 		/// </summary>
 		public TargetPiece() : base(0, 0, 0){
-            type = PieceTypes.PieceType.Target;
+            Type = PieceTypes.PieceType.Target;
         }
 
 		/// <summary>
@@ -21,7 +21,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public TargetPiece(TargetPiece piece) : base(piece)
 		{
-			type = PieceTypes.PieceType.Target;
+			Type = PieceTypes.PieceType.Target;
 		}
     }
 }

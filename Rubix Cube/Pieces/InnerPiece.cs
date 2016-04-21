@@ -1,5 +1,4 @@
-﻿using System;
-using Rubix_Cube.Enums;
+﻿using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
 {
@@ -23,7 +22,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="color">The color of the side of the piece that is showing.</param>
 		public InnerPiece(int x, int y, int z, Colors.Color color) : base(x, y, z)
         {
-            type = PieceTypes.PieceType.Inner;
+            Type = PieceTypes.PieceType.Inner;
             Color = color;
         }
 
@@ -36,21 +35,21 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public InnerPiece(InnerPiece piece) : base(piece)
 		{
-			type = PieceTypes.PieceType.Inner;
+			Type = PieceTypes.PieceType.Inner;
 			Color = piece.Color;
 		}
 
 		/// <summary>
 		/// Calculates how many moves the Piece will have to make in order to match the Target Piece.
-		/// Since only one Side is showing, the Positions of the other Sides aren't taken into consideration.
+		/// Since only one Side is showing, the Positions of the other NumOfSides aren't taken into consideration.
 		/// </summary>
 		/// <param name="target">The piece that this piece is comparing itself to.</param>
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
-		public override int calculateDistance(TargetPiece target)
+		public override int CalculateDistance(TargetPiece target)
         {
-            var targetSide = target.getSideByColor(Color);
-            var actualPosition = getSideByColor(Color).Position;
-            return targetSide.getDistanceFrom(actualPosition);
+            var targetSide = target.GetSideByColor(Color);
+            var actualPosition = GetSideByColor(Color).Position;
+            return targetSide.GetDistanceFrom(actualPosition);
         }
     }
 }

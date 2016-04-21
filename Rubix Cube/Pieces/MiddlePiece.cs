@@ -14,7 +14,7 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		public MiddlePiece(int x, int y, int z) : base(x, y, z)
         {
-            type = PieceTypes.PieceType.Middle;
+            Type = PieceTypes.PieceType.Middle;
         }
 
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece"></param>
 		public MiddlePiece(MiddlePiece piece) : base(piece)
 		{
-			type = PieceTypes.PieceType.Middle;
+			Type = PieceTypes.PieceType.Middle;
 		}
     }
 }

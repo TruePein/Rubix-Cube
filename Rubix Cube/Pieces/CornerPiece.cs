@@ -1,5 +1,4 @@
-﻿using System;
-using Rubix_Cube.Enums;
+﻿using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
 {
@@ -14,7 +13,7 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		public CornerPiece(int x, int y, int z) : base(x, y, z)
 		{
-			type = PieceTypes.PieceType.Corner;
+			Type = PieceTypes.PieceType.Corner;
 		}
 
 		/// <summary>
@@ -24,7 +23,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public CornerPiece(CornerPiece piece) : base(piece)
 		{
-			type = PieceTypes.PieceType.Corner;
+			Type = PieceTypes.PieceType.Corner;
 		}
     }
 }

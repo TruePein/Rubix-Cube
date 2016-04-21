@@ -12,7 +12,7 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		public UnseenPiece(int x, int y, int z) : base(x, y, z)
         {
-            type = PieceTypes.PieceType.Unseen;
+            Type = PieceTypes.PieceType.Unseen;
         }
 
 		/// <summary>
@@ -22,7 +22,7 @@ namespace Rubix_Cube.Pieces
 		/// <param name="piece">The piece that is being copied.</param>
 		public UnseenPiece(UnseenPiece piece) : base(piece)
         {
-            type = PieceTypes.PieceType.Unseen;
+            Type = PieceTypes.PieceType.Unseen;
         }
     }
 }

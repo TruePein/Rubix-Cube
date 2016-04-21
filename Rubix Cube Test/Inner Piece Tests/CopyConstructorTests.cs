@@ -32,7 +32,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         [TestMethod]
         public void PiecesHaveSameTypes()
         {
-            Assert.AreEqual(original.type, copy.type);
+            Assert.AreEqual(original.Type, copy.Type);
         }
 
         [TestMethod]
