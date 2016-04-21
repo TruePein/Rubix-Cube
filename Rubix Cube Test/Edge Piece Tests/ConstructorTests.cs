@@ -2,23 +2,22 @@
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 
-namespace Rubix_Cube_Test.Middle_Piece_Tests
+namespace Rubix_Cube_Test.Edge_Piece_Tests
 {
     [TestClass]
     public class ConstructorTests
     {
-        MiddlePiece piece;
+        EdgePiece piece;
 
         [TestInitialize]
         public void CreatePiece()
         {
-            piece = new MiddlePiece(0, 0, 0);
+            piece = new EdgePiece(1, 0, 0);
         }
-
         [TestMethod]
-        public void newPieceIsMiddle()
+        public void newPieceIsEdge()
         {
-            var expected = PieceTypes.PieceType.Middle;
+            var expected = PieceTypes.PieceType.Edge;
             var actual = piece.type;
             Assert.AreEqual(expected, actual);
         }

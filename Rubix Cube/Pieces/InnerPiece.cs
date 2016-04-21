@@ -12,7 +12,7 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// The Color that this Piece is showing. This value will never change.
 		/// </summary>
-        private Colors.Color color;
+        public Colors.Color Color { get; private set; }
 
 		/// <summary>
 		/// Constructor for the Inner Piece.
@@ -24,7 +24,7 @@ namespace Rubix_Cube.Pieces
 		public InnerPiece(int x, int y, int z, Colors.Color color) : base(x, y, z)
         {
             type = PieceTypes.PieceType.Inner;
-            this.color = color;
+            Color = color;
         }
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Rubix_Cube.Pieces
 		public InnerPiece(InnerPiece piece) : base(piece)
 		{
 			type = PieceTypes.PieceType.Inner;
-			color = piece.color;
+			Color = piece.Color;
 		}
 
 		/// <summary>
@@ -48,13 +48,9 @@ namespace Rubix_Cube.Pieces
 		/// <returns>int - How many moves are neccessary to match the target piece.</returns>
 		public override int calculateDistance(TargetPiece target)
         {
-            var targetPosition = target.getSideByColor(color).Position;
-            var actualPosition = getSideByColor(color).Position;
-            int result = Math.Abs(targetPosition - actualPosition);
-
-            if (result == 0) return result;
-			if (result == 3) return 2;
-            return 1;
+            var targetSide = target.getSideByColor(Color);
+            var actualPosition = getSideByColor(Color).Position;
+            return targetSide.getDistanceFrom(actualPosition);
         }
     }
 }

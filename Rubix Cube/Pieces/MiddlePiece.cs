@@ -5,7 +5,7 @@ namespace Rubix_Cube.Pieces
 	/// Subclass of Piece representing a piece that appears in the Middle of a Cube.
 	/// Only one Color is ever showing.
 	/// </summary>
-	public class MiddlePiece : Piece
+	public class MiddlePiece : MiddleOrUnseenOrTargetPiece
     {
 		/// <summary>
 		/// Constructor for the Middle Piece.
@@ -27,17 +27,5 @@ namespace Rubix_Cube.Pieces
 		{
 			type = PieceTypes.PieceType.Middle;
 		}
-
-		/// <summary>
-		/// Calculates how many moves the Piece will have to make in order to match the Target Piece.
-		/// Since the Piece is in the Middle, its showing side is always lined up with the Target Piece.
-		/// </summary>
-		/// <param name="piece">The piece that this piece is comparing itself to.</param>
-		/// <returns>int - How many moves are neccessary to match the target piece.
-		/// Always 0.</returns>
-		public override int calculateDistance(TargetPiece target)
-        {
-            return 0;
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Rubix_Cube.Enums;
+﻿using System;
+using Rubix_Cube.Enums;
 namespace Rubix_Cube.Pieces
 {
 	/// <summary>
@@ -60,6 +61,53 @@ namespace Rubix_Cube.Pieces
                     {
                         Position = GetNextPositionZ(direction);
                         break;
+                    }
+            }
+        }
+
+        public int getDistanceFrom(SidePositions.Position actualPosition)
+        {
+            switch (actualPosition)
+            {
+                case SidePositions.Position.Top:
+                    {
+                        if (Position == SidePositions.Position.Top) return 0;
+                        if (Position == SidePositions.Position.Bottom) return 2;
+                        return 1;
+                    }
+                case SidePositions.Position.Front:
+                    {
+                        if (Position == SidePositions.Position.Front) return 0;
+                        if (Position == SidePositions.Position.Back) return 2;
+                        return 1;
+                    }
+                case SidePositions.Position.Right:
+                    {
+                        if (Position == SidePositions.Position.Right) return 0;
+                        if (Position == SidePositions.Position.Left) return 2;
+                        return 1;
+                    }
+                case SidePositions.Position.Bottom:
+                    {
+                        if (Position == SidePositions.Position.Bottom) return 0;
+                        if (Position == SidePositions.Position.Top) return 2;
+                        return 1;
+                    }
+                case SidePositions.Position.Back:
+                    {
+                        if (Position == SidePositions.Position.Back) return 0;
+                        if (Position == SidePositions.Position.Front) return 2;
+                        return 1;
+                    }
+                case SidePositions.Position.Left:
+                    {
+                        if (Position == SidePositions.Position.Left) return 0;
+                        if (Position == SidePositions.Position.Right) return 2;
+                        return 1;
+                    }
+                default:
+                    {
+                        return 0;
                     }
             }
         }
