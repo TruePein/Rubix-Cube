@@ -17,18 +17,16 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
         public PieceTypes.PieceType Type { get; protected set; }
 
-        public List<Side> Sides { get; }
+	    public int NumberOfSides { get; }
 
-	    /// <summary>
-        /// A piece always has 6 sides.
-        /// </summary>
-        protected const int NumOfSides = 6;
+	    public List<Side> Sides { get; }
 
 	    /// <summary>
         /// Constructor for a Piece. Each new Piece is created the same way.
         /// </summary>
         protected Piece(int x, int y, int z)
-        {
+	    {
+	        NumberOfSides = 6;
 		    Sides = new List<Side>
 		    {
 		        new Side(Colors.Color.White, SidePositions.Position.Top),
@@ -46,13 +44,13 @@ namespace Rubix_Cube.Pieces
 		/// the NumOfSides are all copied as well.
 		/// </summary>
 		/// <param name="p"></param>
-		protected Piece(Piece p)
+		protected Piece(IPiece p)
         {
             Sides = new List<Side>();
-            for (var i = 0; i < 6; i++)
-            {
-                Sides.Add(new Side(p.Sides[i]));
-            }
+		    foreach (var side in p.Sides)
+		    {
+		        Sides.Add(side);
+		    }
             Coordinates = new Tuple<int, int, int>(p.Coordinates.Item1, p.Coordinates.Item2, p.Coordinates.Item3);
         }
 
@@ -68,8 +66,8 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		/// <param name="axis">The axis of the turn.
 		/// 0 is the x-axis, leaving the sides on the left and right untouched.
-		/// 1 is the y-axis, leaving the sides on the top and bottom untouched.
-		/// 2 is the z-axis, leaving the sides on the fromt and back untouched.</param>
+		/// 1 is the y-axis, leaving the sides on the front and back untouched.
+		/// 2 is the z-axis, leaving the sides on the top and bottom untouched.</param>
 		/// <param name="direction">Whether or not the ciece will turn clockwise.
 		/// true - will turn clockwise
 		/// false - won't turn clockwise</param>
@@ -90,7 +88,7 @@ namespace Rubix_Cube.Pieces
         {
 			var foundSide = new Side(color, SidePositions.Position.Top);
 			var found = 0;
-            foreach (Side side in Sides)
+            foreach (var side in Sides)
             {
 				if (side.Color != color) continue;
                 foundSide = side;

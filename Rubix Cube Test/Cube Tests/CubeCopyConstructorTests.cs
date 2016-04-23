@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube;
 using Rubix_Cube.Enums;
+using Rubix_Cube.IEqualityComparers;
 
 namespace Rubix_Cube_Test.Cube_Tests
 {
@@ -24,29 +25,27 @@ namespace Rubix_Cube_Test.Cube_Tests
         }
 
         [TestMethod]
-        public void CopyAnOriginalHaveSameMovesIfBothAreNew()
+        public void CopyAndOriginalAreIdentical()
         {
             _copy = new Cube(_original);
-            var expected = _original.MovesMade;
-            var actual = _copy.MovesMade;
-            Assert.AreEqual(expected, actual);
+            var cubeComparer = new CubeFullEqualityComparer();
+            Assert.IsTrue(cubeComparer.Equals(_original, _copy));
         }
 
         [TestMethod]
-        public void CopyAnOriginalHaveSameMovesIfOriginalIsMovedBeforeTheCopyIsMade()
-        {
-            _original.MakeMove(Axes.Axis.X, 0, Directions.Direction.Clockwise);
-            _copy = new Cube(_original);
-            var expected = _original.MovesMade;
-            var actual = _copy.MovesMade;
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void CopyAnOriginalHaveDifferentMovesIfCopyIsMovedAndOriginalIsNot()
+        public void CopyAndOriginalAreDifferentIfCopyIsMovedAndOriginalIsNot()
         {
             _copy = new Cube(_original);
             _copy.MakeMove(Axes.Axis.X, 0, Directions.Direction.Clockwise);
+            var cubeComparer = new CubeFullEqualityComparer();
+            Assert.IsFalse(cubeComparer.Equals(_original, _copy));
+        }
+
+        [TestMethod]
+        public void CopyAndOriginalHaveDifferentMovesIfOriginalIsMovedAndCopyIsNot()
+        {
+            _copy = new Cube(_original);
+            _original.MakeMove(Axes.Axis.X, 0, Directions.Direction.Clockwise);
             var expected = _original.MovesMade;
             var actual = _copy.MovesMade;
             Assert.AreNotEqual(expected, actual);

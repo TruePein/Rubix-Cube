@@ -51,33 +51,9 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void ClockwiseYAxisTurnMakesTheTopSideWhite()
+        public void ClockwiseZAxisTurnMakesTheTopSideWhite()
         {
             var expectedColor = Colors.Color.White;
-            var expectedPosition = SidePositions.Position.Top;
-            _piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
-            var actualPosition = _piece.GetSideByColor(expectedColor).Position;
-            Assert.AreEqual(expectedColor, actualColor);
-            Assert.AreEqual(expectedPosition, actualPosition);
-        }
-
-        [TestMethod]
-        public void CounterClockwiseYAxisTurnMakesTheTopSideWhite()
-        {
-            var expectedColor = Colors.Color.White;
-            var expectedPosition = SidePositions.Position.Top;
-            _piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
-            var actualPosition = _piece.GetSideByColor(expectedColor).Position;
-            Assert.AreEqual(expectedColor, actualColor);
-            Assert.AreEqual(expectedPosition, actualPosition);
-        }
-
-        [TestMethod]
-        public void ClockwiseZAxisTurnMakesTheTopSideGreen()
-        {
-            var expectedColor = Colors.Color.Green;
             var expectedPosition = SidePositions.Position.Top;
             _piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
@@ -87,11 +63,35 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void CounterClockwiseZAxisTurnMakesTheTopSideBlue()
+        public void CounterClockwiseZAxisTurnMakesTheTopSideWhite()
+        {
+            var expectedColor = Colors.Color.White;
+            var expectedPosition = SidePositions.Position.Top;
+            _piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
+            var actualPosition = _piece.GetSideByColor(expectedColor).Position;
+            Assert.AreEqual(expectedColor, actualColor);
+            Assert.AreEqual(expectedPosition, actualPosition);
+        }
+
+        [TestMethod]
+        public void ClockwiseYAxisTurnMakesTheTopSideGreen()
+        {
+            var expectedColor = Colors.Color.Green;
+            var expectedPosition = SidePositions.Position.Top;
+            _piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
+            var actualPosition = _piece.GetSideByColor(expectedColor).Position;
+            Assert.AreEqual(expectedColor, actualColor);
+            Assert.AreEqual(expectedPosition, actualPosition);
+        }
+
+        [TestMethod]
+        public void CounterClockwiseYAxisTurnMakesTheTopSideBlue()
         {
             var expectedColor = Colors.Color.Blue;
             var expectedPosition = SidePositions.Position.Top;
-            _piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            _piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
             var actualPosition = _piece.GetSideByColor(expectedColor).Position;
             Assert.AreEqual(expectedColor, actualColor);
@@ -104,7 +104,7 @@ namespace Rubix_Cube_Test.Piece_Tests
             var expectedColor = Colors.Color.Red;
             var expectedPosition = SidePositions.Position.Top;
             _piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-            _piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            _piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actualColor = _piece.GetSideByPosition(expectedPosition).Color;
             var actualPosition = _piece.GetSideByColor(expectedColor).Position;
             Assert.AreEqual(expectedColor, actualColor);

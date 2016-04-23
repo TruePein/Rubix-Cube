@@ -48,6 +48,9 @@
     <Compile Include="Enums\Directions.cs" />
     <Compile Include="Enums\PieceTypes.cs" />
     <Compile Include="Enums\SidePositions.cs" />
+    <Compile Include="IEqualityComparers\CubeFullEqualityComparer.cs" />
+    <Compile Include="IEqualityComparers\PieceEqualityComparer.cs" />
+    <Compile Include="IEqualityComparers\SideEqualityComparer.cs" />
     <Compile Include="LastMove.cs" />
     <Compile Include="Pieces\CornerOrEdgePiece.cs" />
     <Compile Include="Pieces\CornerPiece.cs" />

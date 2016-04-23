@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
+using Rubix_Cube.IEqualityComparers;
 
 namespace Rubix_Cube_Test.Middle_Piece_Tests
 {
@@ -24,22 +25,27 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         }
 
         [TestMethod]
-        public void PiecesHaveSameCoordinates()
+        public void PiecesAreEquivelent()
         {
-            Assert.AreEqual(_original.Coordinates, _copy.Coordinates);
+            var pieceComparer = new PieceEqualityComparer();
+            Assert.IsTrue(pieceComparer.Equals(_original, _copy));
         }
 
         [TestMethod]
-        public void PiecesHaveSameTypes()
-        {
-            Assert.AreEqual(_original.Type, _copy.Type);
-        }
-
-        [TestMethod]
-        public void ChangingCoordinatesOfCopyDoesNotChangeTheOriginal()
+        public void MovingCopyMakesThePiecesDifferent()
         {
             _copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            Assert.AreNotEqual(_original.Coordinates, _copy.Coordinates);
+            var pieceComparer = new PieceEqualityComparer();
+            Assert.IsTrue(!pieceComparer.Equals(_original, _copy));
+        }
+
+
+        [TestMethod]
+        public void MovingOriginalMakesThePiecesDifferent()
+        {
+            _original.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            var pieceComparer = new PieceEqualityComparer();
+            Assert.IsTrue(!pieceComparer.Equals(_original, _copy));
         }
     }
 }

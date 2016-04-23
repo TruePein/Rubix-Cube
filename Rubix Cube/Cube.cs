@@ -8,18 +8,20 @@ namespace Rubix_Cube
 {
     public class Cube : IComparable<Cube>
     {
-        private readonly int _size;
+        public readonly int Size;
 
-        public int MovesMade { get; set; }
+        public int MovesMade { get; private set; }
 
-        private readonly List<IPiece> _pieces;
+        public Dictionary<int,IPiece> Pieces { get; }
+
+        public int Score => GetScore();
 
         private readonly TargetPiece _target;
 
         public Cube(int size)
         {
-            _size = size;
-            _pieces = new List<IPiece>();
+            Size = size;
+            Pieces = new Dictionary<int, IPiece>();
             MovesMade = 0;
             CreateRubixCube();
             _target = PieceFactory.GetPiece() as TargetPiece;
@@ -27,12 +29,13 @@ namespace Rubix_Cube
 
         public Cube(Cube c) //copy constructor
         {
-            _size = c._size;
+            Size = c.Size;
             MovesMade = c.MovesMade;
-            _pieces = new List<IPiece>();
-            foreach (IPiece piece in c._pieces)
+            Pieces = new Dictionary<int, IPiece>();
+            var count = 0;
+            foreach (var piece in c.Pieces)
             {
-                _pieces.Add(PieceFactory.GetPiece(piece));
+                Pieces.Add(count++,PieceFactory.GetPiece(piece.Value));
             }
 
             _target = PieceFactory.GetPiece(c._target) as TargetPiece;
@@ -42,12 +45,12 @@ namespace Rubix_Cube
         {
             var numberOfPieces = GetNumberOfPieces();
             //create (SIZE)^3 pieces
-            for (int i = 0; i < numberOfPieces; i++)
+            for (var i = 0; i < numberOfPieces; i++)
             {
                 var x = GetXPosition(i);
                 var y = GetYPosition(i);
                 var z = GetZPosition(i);
-                _pieces.Add(PieceFactory.GetPiece(x, y, z, _size));
+                Pieces.Add(i, PieceFactory.GetPiece(x, y, z, Size));
             }
         }
 
@@ -55,21 +58,21 @@ namespace Rubix_Cube
         {
             var pieceLimit = GetNumberOfPieces();
             CheckRange(i, 0, pieceLimit);
-            return (int)(i / (Math.Pow(_size, 2)));
+            return (int)(i / Math.Pow(Size, 2));
         }
 
         private int GetYPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
             CheckRange(i, 0, pieceLimit);
-            return (i % (int)(Math.Pow(_size, 2))) / _size;
+            return i % (int)Math.Pow(Size, 2) / Size;
         }
 
         private int GetZPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
             CheckRange(i, 0, pieceLimit);
-            return i % _size;
+            return i % Size;
         }
 
         private static void CheckRange(int i, int min, int max)
@@ -80,12 +83,12 @@ namespace Rubix_Cube
 
         private int GetNumberOfPieces()
         {
-            return (int)Math.Pow(_size, 3);
+            return (int)Math.Pow(Size, 3);
         }
 
         private int GetDistanceFromSolved()
         {
-            var distance = _pieces.Sum(piece => piece.CalculateDistance(_target));
+            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(_target));
 
             return distance / 8;
         }
@@ -100,12 +103,12 @@ namespace Rubix_Cube
             LastMove.Axis = axis;
             LastMove.Layer = layer;
             LastMove.Direction = direction;
-			if (_size % 2 != 0 && layer == _size / 2) _target.TurnPiece(axis, direction);
+			if (Size % 2 != 0 && layer == Size / 2) _target.TurnPiece(axis, direction);
 
             var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
             foreach(var piece in pieces)
             {
-                piece.Move(axis, direction, _size);
+                piece.Move(axis, direction, Size);
             }
 
             MovesMade++;
@@ -116,12 +119,12 @@ namespace Rubix_Cube
             var axis = LastMove.Axis;
             var layer = LastMove.Layer;
             var direction = LastMove.Direction == Directions.Direction.Clockwise?LastMove.Direction:Directions.Direction.CounterClockwise;
-            if (_size % 2 == 1 && layer == _size / 2) _target.TurnPiece(axis, direction);
+            if (Size % 2 == 1 && layer == Size / 2) _target.TurnPiece(axis, direction);
 
             var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
             foreach (var piece in pieces)
             {
-                piece.Move(axis, direction, _size);
+                piece.Move(axis, direction, Size);
             }
 
             MovesMade--;
@@ -130,7 +133,7 @@ namespace Rubix_Cube
         private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
             var pieces = new List<IPiece>();
-            if (layer >= _size) return pieces;
+            if (layer >= Size) return pieces;
             foreach(var piece in pieces)
             {
                 if (PieceIsInLayerOnAxis(piece, layer, axis))
@@ -164,11 +167,97 @@ namespace Rubix_Cube
         {
             if (other == null) return -1;
 
-            var thisScore = GetScore();
-            var otherScore = other.GetScore();
+            var thisScore = Score;
+            var otherScore = other.Score;
 
             if (thisScore < otherScore) return -1;
             return thisScore == otherScore ? 0 : 1;
+        }
+
+        private IPiece GetPieceByCoordinates(Tuple<int, int, int> coordinates)
+        {
+            IPiece retPiece = new TargetPiece();
+            foreach (var piece in Pieces)
+            {
+                if (piece.Value.Coordinates.Item1 != coordinates.Item1) continue;
+                if (piece.Value.Coordinates.Item2 != coordinates.Item2) continue;
+                if (piece.Value.Coordinates.Item3 != coordinates.Item3) continue;
+                retPiece = piece.Value;
+            }
+            return retPiece;
+        }
+
+        private void Reorient()
+        {
+            var anchor = PieceFactory.GetPiece(GetPieceByCoordinates(new Tuple<int, int, int>(0, 0, 0)));
+
+            var oldDistance = anchor.CalculateDistance(_target);
+
+            for (var i = 0; i < oldDistance; i++)
+            {
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.X, Directions.Direction.Clockwise))
+                {
+                    TurnWholeCube(Axes.Axis.X, Directions.Direction.Clockwise);
+                    continue;
+                }
+
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.X, Directions.Direction.CounterClockwise))
+                {
+                    TurnWholeCube(Axes.Axis.X, Directions.Direction.CounterClockwise);
+                    continue;
+                }
+
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.Y, Directions.Direction.Clockwise))
+                {
+                    TurnWholeCube(Axes.Axis.Y, Directions.Direction.CounterClockwise);
+                    continue;
+                }
+
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.Y, Directions.Direction.CounterClockwise))
+                {
+                    TurnWholeCube(Axes.Axis.Y, Directions.Direction.CounterClockwise);
+                    continue;
+                }
+
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.Z, Directions.Direction.Clockwise))
+                {
+                    TurnWholeCube(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+                    continue;
+                }
+
+                if (IsTurnedPieceCloser(anchor, Axes.Axis.Z, Directions.Direction.CounterClockwise))
+                {
+                    TurnWholeCube(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+                }
+            }
+        }
+
+        private bool IsTurnedPieceCloser(IPiece anchor, Axes.Axis axis, Directions.Direction direction)
+        {
+            var oldDistance = anchor.CalculateDistance(_target);
+
+            anchor.Move(axis, direction, Size);
+
+            var newDistance = anchor.CalculateDistance(_target);
+
+            if (newDistance <= oldDistance)
+            {
+                return true;
+            }
+            var newDirection = direction == Directions.Direction.Clockwise
+                ? Directions.Direction.CounterClockwise
+                : direction;
+            anchor.Move(axis, newDirection, Size);
+            return false;
+        }
+
+        private void TurnWholeCube(Axes.Axis axis, Directions.Direction direction)
+        {
+            foreach (var piece in Pieces)
+            {
+                piece.Value.Move(axis, direction, Size);
+            }
+            _target.Move(axis, direction, Size);
         }
     }
 }

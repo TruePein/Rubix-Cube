@@ -10,7 +10,7 @@ namespace Rubix_Cube.Pieces
 		/// The current Position of the Side.
 		/// No other NumOfSides of the Piece will have the same Position.
 		/// </summary>
-        public SidePositions.Position Position { get; set; }
+        public SidePositions.Position Position { get; private set; }
 
 		
 		/// <summary>
@@ -135,27 +135,6 @@ namespace Rubix_Cube.Pieces
 
         private SidePositions.Position GetNextPositionY(Directions.Direction direction)
         {
-            if (Position == SidePositions.Position.Front)
-            {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
-            }
-            if (Position == SidePositions.Position.Left)
-            {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
-            }
-            if (Position == SidePositions.Position.Back)
-            {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
-            }
-            if (Position == SidePositions.Position.Right)
-            {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
-            }
-            return Position;
-        }
-
-        private SidePositions.Position GetNextPositionZ(Directions.Direction direction)
-        {
             if (Position == SidePositions.Position.Top)
             {
                 return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
@@ -171,6 +150,27 @@ namespace Rubix_Cube.Pieces
             if (Position == SidePositions.Position.Left)
             {
                 return direction == Directions.Direction.Clockwise ? SidePositions.Position.Top : SidePositions.Position.Bottom;
+            }
+            return Position;
+        }
+
+        private SidePositions.Position GetNextPositionZ(Directions.Direction direction)
+        {
+            if (Position == SidePositions.Position.Front)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
+            }
+            if (Position == SidePositions.Position.Left)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
+            }
+            if (Position == SidePositions.Position.Back)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
+            }
+            if (Position == SidePositions.Position.Right)
+            {
+                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
             }
             return Position;
         }

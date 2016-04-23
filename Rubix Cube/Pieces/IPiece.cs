@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Rubix_Cube.Enums;
 
 namespace Rubix_Cube.Pieces
@@ -8,6 +10,10 @@ namespace Rubix_Cube.Pieces
         Tuple<int, int, int> Coordinates { get; set; }
 
         PieceTypes.PieceType Type { get; }
+
+        int NumberOfSides { get; }
+
+        List<Side> Sides { get; }
 
         int CalculateDistance(TargetPiece target);
 

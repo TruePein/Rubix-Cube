@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
+using Rubix_Cube.Pieces;
 
 namespace Rubix_Cube_Test.Corner_Piece_Tests
 {
@@ -11,13 +11,13 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
 
         private CornerPiece _piece;
 
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void InitializeTests(TestContext context)
         {
             _target = new TargetPiece();
         }
 
-        [TestInitialize()]
+        [TestInitialize]
         public void InitializeTest()
         {
             _piece = new CornerPiece(0,0,0);
@@ -138,7 +138,7 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         }
 
         [TestMethod]
-        public void CornerPieceTurnedFourTimesInTheSameDirectionHasADistanceOfTwo()
+        public void CornerPieceTurnedFourTimesInTheSameDirectionHasADistanceOfZero()
         {
             var expected = 0;
             _piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);

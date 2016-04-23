@@ -30,12 +30,12 @@ namespace Rubix_Cube.Pieces
 			if (centerOfAxis == 2) return new MiddlePiece(x, y, z);
 
 			//only piece left is inner piece, which needs a color
-			if (x == 0) return new InnerPiece(x, y, z, Colors.Color.White);
-			if (x == size - 1) return new InnerPiece(x, y, z, Colors.Color.Yellow);
-			if (y == 0) return new InnerPiece(x, y, z, Colors.Color.Blue);
-			if (y == size - 1) return new InnerPiece(x, y, z, Colors.Color.Green);
-			if (z == 0) return new InnerPiece(x, y, z, Colors.Color.Red);
-			return new InnerPiece(x, y, z, Colors.Color.Orange);
+			if (x == 0) return new InnerPiece(x, y, z, Colors.Color.Green);
+			if (x == size - 1) return new InnerPiece(x, y, z, Colors.Color.Blue);
+			if (y == 0) return new InnerPiece(x, y, z, Colors.Color.Orange);
+			if (y == size - 1) return new InnerPiece(x, y, z, Colors.Color.Red);
+			if (z == 0) return new InnerPiece(x, y, z, Colors.Color.Yellow);
+			return new InnerPiece(x, y, z, Colors.Color.White);
 		}
 
 		public static IPiece GetPiece(IPiece piece)

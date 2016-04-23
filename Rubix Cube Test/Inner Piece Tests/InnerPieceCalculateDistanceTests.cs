@@ -45,41 +45,41 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         }
 
         [TestMethod]
-        public void WhiteClockWiseYTurnHasADistanceOfZero()
+        public void WhiteClockWiseZTurnHasADistanceOfZero()
         {
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 0;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void WhiteCounterClockWiseYTurnHasADistanceOfZero()
-        {
-            var piece = getInnerPiece(Colors.Color.White);
-            var expected = 0;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void WhiteClockWiseZTurnHasADistanceOfOne()
-        {
-            var piece = getInnerPiece(Colors.Color.White);
-            var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void WhiteCounterClockWiseZTurnHasADistanceOfOne()
+        public void WhiteCounterClockWiseZTurnHasADistanceOfZero()
+        {
+            var piece = getInnerPiece(Colors.Color.White);
+            var expected = 0;
+            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void WhiteClockWiseYTurnHasADistanceOfOne()
         {
             var piece = getInnerPiece(Colors.Color.White);
             var expected = 1;
-            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void WhiteCounterClockWiseYTurnHasADistanceOfOne()
+        {
+            var piece = getInnerPiece(Colors.Color.White);
+            var expected = 1;
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
@@ -105,41 +105,41 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         }
 
         [TestMethod]
-        public void RedClockWiseYTurnHasADistanceOfOne()
+        public void RedClockWiseZTurnHasADistanceOfOne()
         {
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 1;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void RedCounterClockWiseYTurnHasADistanceOfRed()
-        {
-            var piece = getInnerPiece(Colors.Color.Red);
-            var expected = 1;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void RedClockWiseZTurnHasADistanceOfZero()
-        {
-            var piece = getInnerPiece(Colors.Color.Red);
-            var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void RedCounterClockWiseZTurnHasADistanceOfZero()
+        public void RedCounterClockWiseZTurnHasADistanceOfOne()
+        {
+            var piece = getInnerPiece(Colors.Color.Red);
+            var expected = 1;
+            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RedClockWiseYTurnHasADistanceOfZero()
         {
             var piece = getInnerPiece(Colors.Color.Red);
             var expected = 0;
-            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RedCounterClockWiseYTurnHasADistanceOfZero()
+        {
+            var piece = getInnerPiece(Colors.Color.Red);
+            var expected = 0;
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
@@ -225,41 +225,41 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         }
 
         [TestMethod]
-        public void YellowClockWiseYTurnHasADistanceOfZero()
+        public void YellowClockWiseZTurnHasADistanceOfZero()
         {
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 0;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void YellowCounterClockWiseYTurnHasADistanceOfZero()
-        {
-            var piece = getInnerPiece(Colors.Color.Yellow);
-            var expected = 0;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void YellowClockWiseZTurnHasADistanceOfOne()
-        {
-            var piece = getInnerPiece(Colors.Color.Yellow);
-            var expected = 1;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void YellowCounterClockWiseZTurnHasADistanceOfOne()
+        public void YellowCounterClockWiseZTurnHasADistanceOfZero()
+        {
+            var piece = getInnerPiece(Colors.Color.Yellow);
+            var expected = 0;
+            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void YellowClockWiseYTurnHasADistanceOfOne()
         {
             var piece = getInnerPiece(Colors.Color.Yellow);
             var expected = 1;
-            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void YellowCounterClockWiseYTurnHasADistanceOfOne()
+        {
+            var piece = getInnerPiece(Colors.Color.Yellow);
+            var expected = 1;
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
@@ -285,41 +285,41 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         }
 
         [TestMethod]
-        public void OrangeClockWiseYTurnHasADistanceOfOne()
+        public void OrangeClockWiseZTurnHasADistanceOfOne()
         {
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 1;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void OrangeCounterClockWiseYTurnHasADistanceOfRed()
-        {
-            var piece = getInnerPiece(Colors.Color.Orange);
-            var expected = 1;
-            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-            var actual = piece.CalculateDistance(_target);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void OrangeClockWiseZTurnHasADistanceOfZero()
-        {
-            var piece = getInnerPiece(Colors.Color.Orange);
-            var expected = 0;
             piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void OrangeCounterClockWiseZTurnHasADistanceOfZero()
+        public void OrangeCounterClockWiseZTurnHasADistanceOfOne()
+        {
+            var piece = getInnerPiece(Colors.Color.Orange);
+            var expected = 1;
+            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void OrangeClockWiseYTurnHasADistanceOfZero()
         {
             var piece = getInnerPiece(Colors.Color.Orange);
             var expected = 0;
-            piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
+            var actual = piece.CalculateDistance(_target);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void OrangeCounterClockWiseYTurnHasADistanceOfZero()
+        {
+            var piece = getInnerPiece(Colors.Color.Orange);
+            var expected = 0;
+            piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
             var actual = piece.CalculateDistance(_target);
             Assert.AreEqual(expected, actual);
         }
