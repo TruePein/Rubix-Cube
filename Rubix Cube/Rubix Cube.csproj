@@ -49,6 +49,7 @@
     <Compile Include="Enums\PieceTypes.cs" />
     <Compile Include="Enums\SidePositions.cs" />
     <Compile Include="IEqualityComparers\CubeFullEqualityComparer.cs" />
+    <Compile Include="IEqualityComparers\CubePiecesEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\PieceEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\SideEqualityComparer.cs" />
     <Compile Include="LastMove.cs" />

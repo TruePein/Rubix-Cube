@@ -57,6 +57,7 @@
     <Compile Include="Corner Piece Tests\CornerPieceCopyConstructorTests.cs" />
     <Compile Include="Cube Tests\CubeConstructorTests.cs" />
     <Compile Include="Cube Tests\CubeCopyConstructorTests.cs" />
+    <Compile Include="Cube Tests\CubeMakeMoveTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceCalculateDistanceTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceConstructorTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceCopyConstructorTests.cs" />
@@ -74,6 +75,9 @@
     <Compile Include="Side Tests\SideConstructorTests.cs" />
     <Compile Include="Side Tests\SideCopyConstructorTest.cs" />
     <Compile Include="Side Tests\SideMoveToNextPositionTests.cs" />
+    <Compile Include="Target Piece Tests\TargetPieceCalculateDistanceTests.cs" />
+    <Compile Include="Target Piece Tests\TargetPieceConstructorTests.cs" />
+    <Compile Include="Target Piece Tests\TargetPieceCopyConstructorTests.cs" />
     <Compile Include="Unseen Piece Tests\UnseenPieceCalculateDistanceTests.cs" />
     <Compile Include="Unseen Piece Tests\UnseenPieceConstructorTests.cs" />
     <Compile Include="Unseen Piece Tests\UnseenPieceCopyConstructorTests.cs" />

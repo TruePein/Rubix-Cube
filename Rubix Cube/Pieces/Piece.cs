@@ -49,7 +49,7 @@ namespace Rubix_Cube.Pieces
             Sides = new List<Side>();
 		    foreach (var side in p.Sides)
 		    {
-		        Sides.Add(side);
+		        Sides.Add(new Side(side));
 		    }
             Coordinates = new Tuple<int, int, int>(p.Coordinates.Item1, p.Coordinates.Item2, p.Coordinates.Item3);
         }

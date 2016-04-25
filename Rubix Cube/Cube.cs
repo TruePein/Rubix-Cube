@@ -16,15 +16,15 @@ namespace Rubix_Cube
 
         public int Score => GetScore();
 
-        private readonly TargetPiece _target;
+        public readonly TargetPiece Target;
 
-        public Cube(int size)
+        public Cube(int size = 3)
         {
             Size = size;
             Pieces = new Dictionary<int, IPiece>();
             MovesMade = 0;
             CreateRubixCube();
-            _target = PieceFactory.GetPiece() as TargetPiece;
+            Target = PieceFactory.GetPiece() as TargetPiece;
         }
 
         public Cube(Cube c) //copy constructor
@@ -38,7 +38,7 @@ namespace Rubix_Cube
                 Pieces.Add(count++,PieceFactory.GetPiece(piece.Value));
             }
 
-            _target = PieceFactory.GetPiece(c._target) as TargetPiece;
+            Target = PieceFactory.GetPiece(c.Target) as TargetPiece;
         }
 
         private void CreateRubixCube()
@@ -88,7 +88,7 @@ namespace Rubix_Cube
 
         private int GetDistanceFromSolved()
         {
-            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(_target));
+            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
 
             return distance / 8;
         }
@@ -100,16 +100,13 @@ namespace Rubix_Cube
 
         public void MakeMove(Axes.Axis axis, int layer, Directions.Direction direction)
         {
+            if (layer >= Size) return;
             LastMove.Axis = axis;
             LastMove.Layer = layer;
             LastMove.Direction = direction;
-			if (Size % 2 != 0 && layer == Size / 2) _target.TurnPiece(axis, direction);
+			if (IsMiddleLayer(layer)) Target.TurnPiece(axis, direction);
 
-            var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
-            foreach(var piece in pieces)
-            {
-                piece.Move(axis, direction, Size);
-            }
+            FindAndMovePieces(axis, layer, direction);
 
             MovesMade++;
         }
@@ -118,23 +115,40 @@ namespace Rubix_Cube
         {
             var axis = LastMove.Axis;
             var layer = LastMove.Layer;
-            var direction = LastMove.Direction == Directions.Direction.Clockwise?LastMove.Direction:Directions.Direction.CounterClockwise;
-            if (Size % 2 == 1 && layer == Size / 2) _target.TurnPiece(axis, direction);
+            var direction = LastMove.Direction == Directions.Direction.Clockwise
+                ? Directions.Direction.CounterClockwise
+                : LastMove.Direction;
+            if (IsMiddleLayer(layer)) Target.TurnPiece(axis, direction);
 
+            FindAndMovePieces(axis, layer, direction);
+
+            MovesMade--;
+        }
+
+        private bool IsMiddleLayer(int layer)
+        {
+            return Size%2 == 1 && layer == Size/2;
+        }
+
+        private void FindAndMovePieces(Axes.Axis axis, int layer, Directions.Direction direction)
+        {
             var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
+            MovePieces(pieces, axis, direction);
+        }
+
+        private void MovePieces(IEnumerable<IPiece> pieces, Axes.Axis axis, Directions.Direction direction)
+        {
             foreach (var piece in pieces)
             {
                 piece.Move(axis, direction, Size);
             }
-
-            MovesMade--;
         }
 
         private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
             var pieces = new List<IPiece>();
             if (layer >= Size) return pieces;
-            foreach(var piece in pieces)
+            foreach(var piece in Pieces.Values)
             {
                 if (PieceIsInLayerOnAxis(piece, layer, axis))
                 pieces.Add(piece);
@@ -189,9 +203,11 @@ namespace Rubix_Cube
 
         private void Reorient()
         {
-            var anchor = PieceFactory.GetPiece(GetPieceByCoordinates(new Tuple<int, int, int>(0, 0, 0)));
+            var oldMovesMade = MovesMade;
 
-            var oldDistance = anchor.CalculateDistance(_target);
+            var anchor = PieceFactory.GetPiece(Pieces[0]); //first piece created, the yellow-red-green corner
+
+            var oldDistance = anchor.CalculateDistance(Target);
 
             for (var i = 0; i < oldDistance; i++)
             {
@@ -230,15 +246,16 @@ namespace Rubix_Cube
                     TurnWholeCube(Axes.Axis.Z, Directions.Direction.CounterClockwise);
                 }
             }
+            MovesMade = oldMovesMade;
         }
 
         private bool IsTurnedPieceCloser(IPiece anchor, Axes.Axis axis, Directions.Direction direction)
         {
-            var oldDistance = anchor.CalculateDistance(_target);
+            var oldDistance = anchor.CalculateDistance(Target);
 
             anchor.Move(axis, direction, Size);
 
-            var newDistance = anchor.CalculateDistance(_target);
+            var newDistance = anchor.CalculateDistance(Target);
 
             if (newDistance <= oldDistance)
             {
@@ -257,7 +274,23 @@ namespace Rubix_Cube
             {
                 piece.Value.Move(axis, direction, Size);
             }
-            _target.Move(axis, direction, Size);
+
+            Target.Move(axis, direction, Size);
+        }
+
+        public void Scramble(int moves = 1000)
+        {
+            var r = new Random();
+
+            for (var i = 0; i < moves; i++)
+            {
+                var axis = (Axes.Axis) r.Next(3);
+                var layer = r.Next(Size);
+                var direction = (Directions.Direction) r.Next(2);
+                MakeMove(axis, layer, direction);
+            }
+
+            MovesMade = 0;
         }
     }
 }

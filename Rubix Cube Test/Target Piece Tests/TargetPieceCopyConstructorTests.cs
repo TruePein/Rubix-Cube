@@ -1,25 +1,25 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 using Rubix_Cube.IEqualityComparers;
+using Rubix_Cube.Pieces;
 
-namespace Rubix_Cube_Test.Inner_Piece_Tests
+namespace Rubix_Cube_Test.Target_Piece_Tests
 {
     [TestClass]
-    public class InnerPieceCopyConstructorTests
+    public class TargetPieceCopyConstructorTests
     {
-        private InnerPiece _original;
-        private InnerPiece _copy;
+        private TargetPiece _original;
+        private TargetPiece _copy;
 
         [TestInitialize]
         public void CreateAndCopyPiece()
         {
-            _original = new InnerPiece(1, 1, 0, Colors.Color.White);
-            _copy = new InnerPiece(_original);
+            _original = new TargetPiece();
+            _copy = new TargetPiece(_original);
         }
 
         [TestMethod]
-        public void PiecesAreDifferent()
+        public void PiecesAreNotTheSame()
         {
             Assert.AreNotEqual(_original, _copy);
         }

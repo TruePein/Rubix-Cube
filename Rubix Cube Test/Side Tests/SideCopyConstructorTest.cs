@@ -10,59 +10,34 @@ namespace Rubix_Cube_Test.Side_Tests
 	{
 		private Side _originalSide;
 		private Side _copySide;
+	    private SideEqualityComparer _comparer;
 
 		[TestInitialize]
 		public void MakeSides()
 		{
 			_originalSide = new Side(Colors.Color.White, SidePositions.Position.Top);
 			_copySide = new Side(_originalSide);
+            _comparer = new SideEqualityComparer();
 		}
 
 		[TestMethod]
 		public void NoChangesAndSidesAreTheSame()
 		{
-			Assert.AreEqual(_originalSide.Position, _copySide.Position);
+            Assert.IsTrue(_comparer.Equals(_originalSide, _copySide));
 		}
 
 		[TestMethod]
 		public void ChangeOriginalAndSidesAreDifferent()
 		{
-			var refSide = _originalSide;
 			_originalSide.MoveToNextPosition(Axes.Axis.X, Directions.Direction.Clockwise);
-			Assert.AreNotEqual(_originalSide.Position, _copySide.Position);
-			Assert.AreEqual(_originalSide.Position, refSide.Position);
-		}
+            Assert.IsFalse(_comparer.Equals(_originalSide, _copySide));
+        }
 
 		[TestMethod]
 		public void ChangeCopyAndSidesAreDifferent()
 		{
-			var refSide = _originalSide;
 			_copySide.MoveToNextPosition(Axes.Axis.X, Directions.Direction.Clockwise);
-			Assert.AreNotEqual(_originalSide.Position, _copySide.Position);
-			Assert.AreEqual(_originalSide.Position, refSide.Position);
-		}
-
-	    [TestMethod]
-	    public void CopySideIsADuplicateOfTheOriginal()
-	    {
-	        var sideComparer = new SideEqualityComparer();
-            Assert.IsTrue(sideComparer.Equals(_originalSide, _copySide));
-	    }
-
-	    [TestMethod]
-	    public void AChangedCopySideIsNoLongerADuplicate()
-	    {
-	        _copySide.MoveToNextPosition(0, Directions.Direction.Clockwise);
-            var sideComparer = new SideEqualityComparer();
-            Assert.IsFalse(sideComparer.Equals(_originalSide, _copySide));
-        }
-
-        [TestMethod]
-        public void AChangedOriginalSideAfterCopyIsNoLongerADuplicate()
-        {
-            _originalSide.MoveToNextPosition(0, Directions.Direction.Clockwise);
-            var sideComparer = new SideEqualityComparer();
-            Assert.IsFalse(sideComparer.Equals(_originalSide, _copySide));
+            Assert.IsFalse(_comparer.Equals(_originalSide, _copySide));
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Rubix_Cube.IEqualityComparers
 {
-    public class CubeFullEqualityComparer:IEqualityComparer<Cube>
+    public class CubePiecesEqualityComparer:IEqualityComparer<Cube>
     {
         public bool Equals(Cube x, Cube y)
         {
@@ -13,8 +13,6 @@ namespace Rubix_Cube.IEqualityComparers
             {
                 if (!pieceComparer.Equals(x.Pieces[i], y.Pieces[i])) return false;
             }
-            if (x.Score != y.Score) return false;
-            if (x.MovesMade != y.MovesMade) return false;
             return true;
         }
 

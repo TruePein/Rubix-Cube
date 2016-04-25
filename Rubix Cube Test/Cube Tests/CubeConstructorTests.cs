@@ -11,7 +11,7 @@ namespace Rubix_Cube_Test.Cube_Tests
         [TestInitialize]
         public void CreateCube()
         {
-            _cube = new Cube(3);
+            _cube = new Cube();
         }
 
         [TestMethod]
@@ -19,6 +19,14 @@ namespace Rubix_Cube_Test.Cube_Tests
         {
             var expected = 0;
             var actual = _cube.MovesMade;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void NewCubeHasSizeOfThree()
+        {
+            var expected = 3;
+            var actual = _cube.Size;
             Assert.AreEqual(expected, actual);
         }
     }

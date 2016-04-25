@@ -34,18 +34,18 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         [TestMethod]
         public void MovingCopyMakesThePiecesDifferent()
         {
-            _copy.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            _copy.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
             var pieceComparer = new PieceEqualityComparer();
-            Assert.IsTrue(!pieceComparer.Equals(_original, _copy));
+            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
         }
 
 
         [TestMethod]
         public void MovingOriginalMakesThePiecesDifferent()
         {
-            _original.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            _original.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
             var pieceComparer = new PieceEqualityComparer();
-            Assert.IsTrue(!pieceComparer.Equals(_original, _copy));
+            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
         }
     }
 }
