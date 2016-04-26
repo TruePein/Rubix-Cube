@@ -9,21 +9,21 @@ namespace Rubix_Cube_Test.Piece_Tests
     public class PieceMoveToNextCoordiantesTests
     {
         [TestMethod]
-        public void XAxisClockwiseTurnOfCornerPieceWillMoveFrom000To002()
+        public void XAxisCounterClockwiseTurnOfCornerPieceWillMoveFrom000To002()
         {
             var piece = getPiece(PieceTypes.PieceType.Corner);
             var expected = new Tuple<int, int, int>(0, 0, 2);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void XAxisCounterClockwiseTurnOfCornerPieceWillMoveFrom000To020()
+        public void XAxisClockwiseTurnOfCornerPieceWillMoveFrom000To020()
         {
             var piece = getPiece(PieceTypes.PieceType.Corner);
             var expected = new Tuple<int, int, int>(0, 2, 0);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
@@ -69,21 +69,21 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void XAxisClockwiseTurnOfEdgePieceWillMoveFrom100To102()
+        public void XAxisCounterClockwiseTurnOfEdgePieceWillMoveFrom100To102()
         {
             var piece = getPiece(PieceTypes.PieceType.Edge);
             var expected = new Tuple<int, int, int>(1, 0, 2);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void XAxisCounterClockwiseTurnOfEdgePieceWillMoveFrom100To120()
+        public void XAxisClockwiseTurnOfEdgePieceWillMoveFrom100To120()
         {
             var piece = getPiece(PieceTypes.PieceType.Edge);
             var expected = new Tuple<int, int, int>(1, 2, 0);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
@@ -129,21 +129,21 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void XAxisClockwiseTurnOfInnerPieceWillMoveFrom011To012()
+        public void XAxisCounterClockwiseTurnOfInnerPieceWillMoveFrom011To012()
         {
             var piece = getPiece(PieceTypes.PieceType.Inner);
             var expected = new Tuple<int, int, int>(0, 1, 2);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 4);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 4);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void XAxisCounterClockwiseTurnOfInnerPieceWillMoveFrom011To021()
+        public void XAxisClockwiseTurnOfInnerPieceWillMoveFrom011To021()
         {
             var piece = getPiece(PieceTypes.PieceType.Inner);
             var expected = new Tuple<int, int, int>(0, 2, 1);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 4);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 4);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
@@ -189,21 +189,21 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void XAxisClockwiseTurnOfMiddlePieceWillMoveFrom110To101()
+        public void XAxisCounterClockwiseTurnOfMiddlePieceWillMoveFrom110To101()
         {
             var piece = getPiece(PieceTypes.PieceType.Middle);
             var expected = new Tuple<int, int, int>(1, 0, 1);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void XAxisCounterClockwiseTurnOfMiddlePieceWillMoveFrom110To121()
+        public void XAxisClockwiseTurnOfMiddlePieceWillMoveFrom110To121()
         {
             var piece = getPiece(PieceTypes.PieceType.Middle);
             var expected = new Tuple<int, int, int>(1, 2, 1);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 3);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 3);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
@@ -249,21 +249,21 @@ namespace Rubix_Cube_Test.Piece_Tests
         }
 
         [TestMethod]
-        public void XAxisClockwiseTurnOfUnseenPieceWillMoveFrom111To112()
+        public void XAxisCounterClockwiseTurnOfUnseenPieceWillMoveFrom111To112()
         {
             var piece = getPiece(PieceTypes.PieceType.Unseen);
             var expected = new Tuple<int, int, int>(1, 1, 2);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 4);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 4);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void XAxisCounterClockwiseTurnOfUnseenPieceWillMoveFrom111To121()
+        public void XAxisClockwiseTurnOfUnseenPieceWillMoveFrom111To121()
         {
             var piece = getPiece(PieceTypes.PieceType.Unseen);
             var expected = new Tuple<int, int, int>(1, 2, 1);
-            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.CounterClockwise, 4);
+            piece.MoveToNextCoordinates(Axes.Axis.X, Directions.Direction.Clockwise, 4);
             var actual = piece.Coordinates;
             Assert.AreEqual(expected, actual);
         }

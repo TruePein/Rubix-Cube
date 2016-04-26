@@ -1,5 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=94178C3AC48F4320A346AA4DF5DD976E/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=94178C3AC48F4320A346AA4DF5DD976E/ProductVersion/@EntryValue">2016.1</s:String>
+	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=94178C3AC48F4320A346AA4DF5DD976E/SnapshotLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\ssm.Hitalyl.tmp</s:String>
 	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\JetBrains\ContinuousTesting\ac54a9d3-b450-4001-b197-93ae28cfdbdc</s:String>
-	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\ssm.Gyhepal.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/ScopeCriterion/@EntryValue">+SNpzQIAAAD1vSchAgAAAIlsuiHXrZUS9b0nIQIAAADRDtxcHwAAAEMAbwBuAHQAaQBuAHUAbwB1AHMAVABlAHMAdABpAG4AZwBIAG8AcwB0AFAAcgBvAHYAaQBkAGUAcgBJAGQAz+IxaBEAAAA8AFIAdQBiAGkAeAAgAEMAdQBiAGUAIABUAGUAcwB0AD4AQwAAAEMAOgBcAFUAcwBlAHIAcwBcAHMAdABvAG4AZQBcAE8AbgBlAEQAcgBpAHYAZQBcAEQAbwBjAHUAbQBlAG4AdABzAFwARwBpAHQASAB1AGIAXABSAHUAYgBpAHgALQBDAHUAYgBlAFwAUgB1AGIAaQB4ACAAQwB1AGIAZQAgAFQAZQBzAHQA0Q7cXB8AAABDAG8AbgB0AGkAbgB1AG8AdQBzAFQAZQBzAHQAaQBuAGcASABvAHMAdABQAHIAbwB2AGkAZABlAHIASQBkAA==</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\ssm.Zugynic.tmp</s:String>
+	
+	<s:String x:Key="/Default/Environment/ContinuousTesting/Strategy/@EntryValue">RunTests</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/TriggerMode/@EntryValue">OnBuild</s:String>
 	
 	</wpf:ResourceDictionary>

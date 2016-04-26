@@ -100,11 +100,25 @@ namespace Rubix_Cube
 
         public void MakeMove(Axes.Axis axis, int layer, Directions.Direction direction)
         {
-            if (layer >= Size) return;
+            if (layer >= Size || layer < 0)
+                throw new IndexOutOfRangeException($"Expected range to be between 0 and {Size - 1}.");
             LastMove.Axis = axis;
             LastMove.Layer = layer;
             LastMove.Direction = direction;
-			if (IsMiddleLayer(layer)) Target.TurnPiece(axis, direction);
+
+            if (layer == 0)
+            {
+                direction = direction == Directions.Direction.Clockwise
+                                ? Directions.Direction.CounterClockwise
+                                : Directions.Direction.Clockwise;
+                for (layer = 1; layer < Size; layer++)
+                {
+                    FindAndMovePieces(axis,layer, direction);
+                }
+
+                MovesMade++;
+                return;
+            }
 
             FindAndMovePieces(axis, layer, direction);
 
@@ -117,17 +131,25 @@ namespace Rubix_Cube
             var layer = LastMove.Layer;
             var direction = LastMove.Direction == Directions.Direction.Clockwise
                 ? Directions.Direction.CounterClockwise
-                : LastMove.Direction;
-            if (IsMiddleLayer(layer)) Target.TurnPiece(axis, direction);
+                : Directions.Direction.Clockwise;
+
+            if (layer == 0)
+            {
+                direction = direction == Directions.Direction.Clockwise
+                                ? Directions.Direction.CounterClockwise
+                                : Directions.Direction.Clockwise;
+                for (layer = 1; layer < Size; layer++)
+                {
+                    FindAndMovePieces(axis, layer, direction);
+                }
+
+                MovesMade++;
+                return;
+            }
 
             FindAndMovePieces(axis, layer, direction);
 
-            MovesMade--;
-        }
-
-        private bool IsMiddleLayer(int layer)
-        {
-            return Size%2 == 1 && layer == Size/2;
+            MovesMade++;
         }
 
         private void FindAndMovePieces(Axes.Axis axis, int layer, Directions.Direction direction)
@@ -147,12 +169,9 @@ namespace Rubix_Cube
         private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
             var pieces = new List<IPiece>();
-            if (layer >= Size) return pieces;
-            foreach(var piece in Pieces.Values)
-            {
-                if (PieceIsInLayerOnAxis(piece, layer, axis))
-                pieces.Add(piece);
-            }
+            if (layer >= Size) throw new IndexOutOfRangeException();
+
+            pieces.AddRange(Pieces.Values.Where(piece => PieceIsInLayerOnAxis(piece, layer, axis)));
             return pieces;
         }
 
@@ -186,96 +205,6 @@ namespace Rubix_Cube
 
             if (thisScore < otherScore) return -1;
             return thisScore == otherScore ? 0 : 1;
-        }
-
-        private IPiece GetPieceByCoordinates(Tuple<int, int, int> coordinates)
-        {
-            IPiece retPiece = new TargetPiece();
-            foreach (var piece in Pieces)
-            {
-                if (piece.Value.Coordinates.Item1 != coordinates.Item1) continue;
-                if (piece.Value.Coordinates.Item2 != coordinates.Item2) continue;
-                if (piece.Value.Coordinates.Item3 != coordinates.Item3) continue;
-                retPiece = piece.Value;
-            }
-            return retPiece;
-        }
-
-        private void Reorient()
-        {
-            var oldMovesMade = MovesMade;
-
-            var anchor = PieceFactory.GetPiece(Pieces[0]); //first piece created, the yellow-red-green corner
-
-            var oldDistance = anchor.CalculateDistance(Target);
-
-            for (var i = 0; i < oldDistance; i++)
-            {
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.X, Directions.Direction.Clockwise))
-                {
-                    TurnWholeCube(Axes.Axis.X, Directions.Direction.Clockwise);
-                    continue;
-                }
-
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.X, Directions.Direction.CounterClockwise))
-                {
-                    TurnWholeCube(Axes.Axis.X, Directions.Direction.CounterClockwise);
-                    continue;
-                }
-
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.Y, Directions.Direction.Clockwise))
-                {
-                    TurnWholeCube(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-                    continue;
-                }
-
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.Y, Directions.Direction.CounterClockwise))
-                {
-                    TurnWholeCube(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-                    continue;
-                }
-
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.Z, Directions.Direction.Clockwise))
-                {
-                    TurnWholeCube(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-                    continue;
-                }
-
-                if (IsTurnedPieceCloser(anchor, Axes.Axis.Z, Directions.Direction.CounterClockwise))
-                {
-                    TurnWholeCube(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-                }
-            }
-            MovesMade = oldMovesMade;
-        }
-
-        private bool IsTurnedPieceCloser(IPiece anchor, Axes.Axis axis, Directions.Direction direction)
-        {
-            var oldDistance = anchor.CalculateDistance(Target);
-
-            anchor.Move(axis, direction, Size);
-
-            var newDistance = anchor.CalculateDistance(Target);
-
-            if (newDistance <= oldDistance)
-            {
-                return true;
-            }
-            var newDirection = direction == Directions.Direction.Clockwise
-                ? Directions.Direction.CounterClockwise
-                : direction;
-            anchor.Move(axis, newDirection, Size);
-            return false;
-        }
-
-        private void TurnWholeCube(Axes.Axis axis, Directions.Direction direction)
-        {
-            foreach (var piece in Pieces)
-            {
-                piece.Value.Move(axis, direction, Size);
-            }
-
-            Target.Move(axis, direction, Size);
         }
 
         public void Scramble(int moves = 1000)

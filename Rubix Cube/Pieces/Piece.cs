@@ -45,7 +45,8 @@ namespace Rubix_Cube.Pieces
 		/// </summary>
 		/// <param name="p"></param>
 		protected Piece(IPiece p)
-        {
+		{
+		    NumberOfSides = 6;
             Sides = new List<Side>();
 		    foreach (var side in p.Sides)
 		    {
@@ -151,8 +152,8 @@ namespace Rubix_Cube.Pieces
 	    {
 	        var oldY = Coordinates.Item2;
 	        var oldZ = Coordinates.Item3;
-	        var newY = direction == Directions.Direction.Clockwise ? oldZ : sizeOfCube - (oldZ + 1);
-	        var newZ = direction == Directions.Direction.Clockwise ? sizeOfCube - (oldY + 1) : oldY;
+	        var newY = direction == Directions.Direction.Clockwise ? sizeOfCube - (oldZ + 1) : oldZ;
+	        var newZ = direction == Directions.Direction.Clockwise ? oldY : sizeOfCube - (oldY + 1);
 	        Coordinates = new Tuple<int, int, int>(Coordinates.Item1, newY, newZ);
 	    }
 
