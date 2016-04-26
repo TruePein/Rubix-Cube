@@ -48,6 +48,7 @@
     <Compile Include="Enums\Directions.cs" />
     <Compile Include="Enums\PieceTypes.cs" />
     <Compile Include="Enums\SidePositions.cs" />
+    <Compile Include="ICube.cs" />
     <Compile Include="IEqualityComparers\CubeFullEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\CubePiecesEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\PieceEqualityComparer.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Pieces\UnseenPiece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solver.cs" />
+    <Compile Include="Step.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

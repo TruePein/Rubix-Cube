@@ -4,7 +4,7 @@
     {
         public CornerOrEdgePiece(int x, int y, int z) : base(x, y, z) { }
 
-        public CornerOrEdgePiece(Piece p) : base(p) { }
+        public CornerOrEdgePiece(IPiece p) : base(p) { }
 
         public override int CalculateDistance(TargetPiece target)
         {

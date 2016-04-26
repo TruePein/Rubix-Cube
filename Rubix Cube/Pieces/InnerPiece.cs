@@ -8,19 +8,22 @@ namespace Rubix_Cube.Pieces
 	/// </summary>
 	public class InnerPiece : Piece
     {
-		/// <summary>
+	    /// <summary>
 		/// The Color that this Piece is showing. This value will never change.
 		/// </summary>
-        public Colors.Color Color { get; private set; }
+        public Colors.Color Color { get; }
 
-		/// <summary>
-		/// Constructor for the Inner Piece.
-		/// Calls the default base constructor.
-		/// Sets it's type to Inner in order to properly identify it.
-		/// Sets the Color to the given color.
-		/// </summary>
-		/// <param name="color">The color of the side of the piece that is showing.</param>
-		public InnerPiece(int x, int y, int z, Colors.Color color) : base(x, y, z)
+	    /// <summary>
+	    /// Constructor for the Inner Piece.
+	    /// Calls the default base constructor.
+	    /// Sets its type to Inner in order to properly identify it.
+	    /// Sets the Color to the given color.
+	    /// </summary>
+	    /// <param name="color">The color of the side of the piece that is showing.</param>
+	    /// <param name="x"></param>
+	    /// <param name="y"></param>
+	    /// <param name="z"></param>
+	    public InnerPiece(int x, int y, int z, Colors.Color color) : base(x, y, z)
         {
             Type = PieceTypes.PieceType.Inner;
             Color = color;
@@ -29,13 +32,13 @@ namespace Rubix_Cube.Pieces
 		/// <summary>
 		/// Copy constructor for the Inner Piece.
 		/// Calls the base copy constructor.
-		/// Sets it's type to Inner in order to properly identify it.
+		/// Sets its type to Inner in order to properly identify it.
 		/// Sets the Color to the color of the piven piece.
 		/// </summary>
 		/// <param name="piece">The piece that is being copied.</param>
 		public InnerPiece(InnerPiece piece) : base(piece)
 		{
-			Type = PieceTypes.PieceType.Inner;
+		    Type = PieceTypes.PieceType.Inner;
 			Color = piece.Color;
 		}
 

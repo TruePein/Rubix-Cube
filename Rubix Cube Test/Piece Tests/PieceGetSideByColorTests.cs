@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 
@@ -385,6 +386,22 @@ namespace Rubix_Cube_Test.Piece_Tests
 			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
 			var actual = _piece.GetSideByColor(Colors.Color.Green).Position;
 			Assert.AreEqual(expected, actual);
-		}
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+	    public void NoWhiteSidesWillThrowAnError()
+	    {
+	        _piece.Sides[0] = new Side(Colors.Color.Red, SidePositions.Position.Front);
+	        _piece.GetSideByColor(Colors.Color.White);
+	    }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TwoWhiteSidesWillThrowAnError()
+        {
+            _piece.Sides[1] = new Side(Colors.Color.White, SidePositions.Position.Top);
+            _piece.GetSideByColor(Colors.Color.White);
+        }
 	}
 }

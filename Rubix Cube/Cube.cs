@@ -3,30 +3,62 @@ using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 using System.Collections.Generic;
 using System.Linq;
-
+//TODO: Document fields, properties and methods
 namespace Rubix_Cube
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Cube : IComparable<Cube>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Step> Path { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly int Size;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int MovesMade { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<int,IPiece> Pieces { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Score => GetScore();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly TargetPiece Target;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="size"></param>
         public Cube(int size = 3)
         {
             Size = size;
-            Pieces = new Dictionary<int, IPiece>();
             MovesMade = 0;
+            Pieces = new Dictionary<int, IPiece>();
             CreateRubixCube();
+            Path = new List<Step>();
             Target = PieceFactory.GetPiece() as TargetPiece;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
         public Cube(Cube c) //copy constructor
         {
             Size = c.Size;
@@ -37,10 +69,17 @@ namespace Rubix_Cube
             {
                 Pieces.Add(count++,PieceFactory.GetPiece(piece.Value));
             }
-
+            Path = new List<Step>();
+            foreach (var step in c.Path)
+            {
+                Path.Add(step);
+            }
             Target = PieceFactory.GetPiece(c.Target) as TargetPiece;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void CreateRubixCube()
         {
             var numberOfPieces = GetNumberOfPieces();
@@ -54,6 +93,11 @@ namespace Rubix_Cube
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         private int GetXPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
@@ -61,6 +105,11 @@ namespace Rubix_Cube
             return (int)(i / Math.Pow(Size, 2));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         private int GetYPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
@@ -68,6 +117,11 @@ namespace Rubix_Cube
             return i % (int)Math.Pow(Size, 2) / Size;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         private int GetZPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
@@ -75,17 +129,31 @@ namespace Rubix_Cube
             return i % Size;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
         private static void CheckRange(int i, int min, int max)
         {
             if (i < min || i > max) throw new IndexOutOfRangeException(
                 string.Format("Error: {0} is outside the range of {1} to {2}", i, min, max));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private int GetNumberOfPieces()
         {
             return (int)Math.Pow(Size, 3);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private int GetDistanceFromSolved()
         {
             var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
@@ -98,6 +166,12 @@ namespace Rubix_Cube
             return MovesMade + GetDistanceFromSolved();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="layer"></param>
+        /// <param name="direction"></param>
         public void MakeMove(Axes.Axis axis, int layer, Directions.Direction direction)
         {
             if (layer >= Size || layer < 0)
@@ -105,7 +179,7 @@ namespace Rubix_Cube
             LastMove.Axis = axis;
             LastMove.Layer = layer;
             LastMove.Direction = direction;
-
+            AddToPath(axis, layer, direction);
             if (layer == 0)
             {
                 direction = direction == Directions.Direction.Clockwise
@@ -125,6 +199,15 @@ namespace Rubix_Cube
             MovesMade++;
         }
 
+        private void AddToPath(Axes.Axis axis, int layer, Directions.Direction direction)
+        {
+            var step = new Step(axis, layer, direction);
+            Path.Add(step);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void UndoLastMove()
         {
             var axis = LastMove.Axis;
@@ -152,12 +235,24 @@ namespace Rubix_Cube
             MovesMade++;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="layer"></param>
+        /// <param name="direction"></param>
         private void FindAndMovePieces(Axes.Axis axis, int layer, Directions.Direction direction)
         {
             var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
             MovePieces(pieces, axis, direction);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pieces"></param>
+        /// <param name="axis"></param>
+        /// <param name="direction"></param>
         private void MovePieces(IEnumerable<IPiece> pieces, Axes.Axis axis, Directions.Direction direction)
         {
             foreach (var piece in pieces)
@@ -166,6 +261,12 @@ namespace Rubix_Cube
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
         private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
         {
             var pieces = new List<IPiece>();
@@ -175,6 +276,13 @@ namespace Rubix_Cube
             return pieces;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="piece"></param>
+        /// <param name="layer"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
         private static bool PieceIsInLayerOnAxis(IPiece piece, int layer, Axes.Axis axis)
         {
             switch (axis)
@@ -191,11 +299,15 @@ namespace Rubix_Cube
                     {
                         return piece.Coordinates.Item3 == layer;
                     }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
             }
+            throw new InvalidOperationException("Axis provided wasn't one of the ones available. Somehow.");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(Cube other)
         {
             if (other == null) return -1;
@@ -207,6 +319,10 @@ namespace Rubix_Cube
             return thisScore == otherScore ? 0 : 1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="moves"></param>
         public void Scramble(int moves = 1000)
         {
             var r = new Random();

@@ -9,7 +9,7 @@ namespace Rubix_Cube.Pieces
     {
 		/// <summary>
 		/// Default constructor for the Side Piece.
-		/// Calls the default base constructor and then sets it's type to Edge in order to properly identify it.
+		/// Calls the default base constructor and then sets its type to Edge in order to properly identify it.
 		/// </summary>
 		public EdgePiece(int x, int y, int z) : base(x, y, z)
         {
@@ -18,10 +18,10 @@ namespace Rubix_Cube.Pieces
 
 		/// <summary>
 		/// Copy constructor for the Corner Piece.
-		/// Calls the base copy constructor and then sets it's type to Corner in order to properly identify it.
+		/// Calls the base copy constructor and then sets its type to Corner in order to properly identify it.
 		/// </summary>
 		/// <param name="piece">The piece that is being copied.</param>
-		public EdgePiece(EdgePiece piece) : base(piece)
+		public EdgePiece(IPiece piece) : base(piece)
 		{
 			Type = PieceTypes.PieceType.Edge;
 		}

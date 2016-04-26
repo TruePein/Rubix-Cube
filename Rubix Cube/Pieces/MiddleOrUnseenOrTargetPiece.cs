@@ -4,7 +4,7 @@
     {
         public MiddleOrUnseenOrTargetPiece(int x, int y, int z):base(x, y, z) { }
 
-        public MiddleOrUnseenOrTargetPiece(Piece p) : base(p) { }
+        public MiddleOrUnseenOrTargetPiece(IPiece p) : base(p) { }
         
         /// <summary>
         /// Calculates how many moves the Piece will have to make in order to match the Target Piece.

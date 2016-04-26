@@ -8,7 +8,7 @@ namespace Rubix_Cube.Pieces
     {
 		/// <summary>
 		/// Default constructor for the Unseen Piece.
-		/// Calls the default base constructor and then sets it's type to Unseen in order to properly identify it.
+		/// Calls the default base constructor and then sets its type to Unseen in order to properly identify it.
 		/// </summary>
 		public UnseenPiece(int x, int y, int z) : base(x, y, z)
         {
@@ -17,10 +17,10 @@ namespace Rubix_Cube.Pieces
 
 		/// <summary>
 		/// Copy constructor for the Unseen Piece.
-		/// Calls the base copy constructor and then sets it's type to Unseen in order to properly identify it.
+		/// Calls the base copy constructor and then sets its type to Unseen in order to properly identify it.
 		/// </summary>
 		/// <param name="piece">The piece that is being copied.</param>
-		public UnseenPiece(UnseenPiece piece) : base(piece)
+		public UnseenPiece(IPiece piece) : base(piece)
         {
             Type = PieceTypes.PieceType.Unseen;
         }

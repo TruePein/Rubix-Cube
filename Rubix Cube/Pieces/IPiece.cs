@@ -10,8 +10,6 @@ namespace Rubix_Cube.Pieces
 
         PieceTypes.PieceType Type { get; }
 
-        int NumberOfSides { get; }
-
         List<Side> Sides { get; }
 
         int CalculateDistance(TargetPiece target);

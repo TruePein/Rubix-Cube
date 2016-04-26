@@ -8,9 +8,12 @@ namespace Rubix_Cube.IEqualityComparers
     {
         public bool Equals(Side x, Side y)
         {
-            if (x == y) throw new ArgumentException($"The two objects both point to the same {x.GetType()} object.");
-            if (x.Color != y.Color) return false;
-            if (x.Position != y.Position) return false;
+            if (x == y)
+                throw new ArgumentException($"The two objects both point to the same {x.GetType()} object.");
+            if (x.Color != y.Color)
+                return false;
+            if (x.Position != y.Position)
+                return false;
             return true;
         }
 
