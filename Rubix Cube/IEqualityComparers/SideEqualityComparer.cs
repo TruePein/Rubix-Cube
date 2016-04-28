@@ -10,9 +10,9 @@ namespace Rubix_Cube.IEqualityComparers
         {
             if (x == y)
                 throw new ArgumentException($"The two objects both point to the same {x.GetType()} object.");
-            if (x.Color != y.Color)
+            if (x.ColorEnum != y.ColorEnum)
                 return false;
-            if (x.Position != y.Position)
+            if (x.SidePositionEnum != y.SidePositionEnum)
                 return false;
             return true;
         }

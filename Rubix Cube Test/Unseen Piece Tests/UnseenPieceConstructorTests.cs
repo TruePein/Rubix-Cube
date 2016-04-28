@@ -18,8 +18,8 @@ namespace Rubix_Cube_Test.Unseen_Piece_Tests
 		[TestMethod]
 		public void NewPiece()
 		{
-			var expected = PieceTypes.PieceType.Unseen;
-			var actual = _piece.Type;
+			var expected = PieceTypeEnum.Unseen;
+			var actual = _piece.TypeEnum;
 			Assert.AreEqual(expected, actual);
 		}
 	}

@@ -1,37 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rubix_Cube.Enums;
+﻿using Rubix_Cube.Enums;
 
 namespace Rubix_Cube
 {
     public class Step
     {
-        private Axes.Axis _axis;
+        private readonly AxisEnum _axisEnum;
 
-        private int _layer;
+        private readonly int _layer;
 
-        private Directions.Direction _direction;
+        private readonly DirectionEnum _directionEnum;
 
-        public Step(Axes.Axis axis, int layer, Directions.Direction direction)
+        public Step(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
         {
-            _axis = axis;
+            _axisEnum = axisEnum;
             _layer = layer;
-            _direction = direction;
+            _directionEnum = directionEnum;
         }
 
         public Step(Step step)
         {
-            _axis = step._axis;
+            _axisEnum = step._axisEnum;
             _layer = step._layer;
-            _direction = step._direction;
+            _directionEnum = step._directionEnum;
         }
 
         public override string ToString()
         {
-            return $"Moved the {_layer} on the {_axis.ToString()} axis {_direction.ToString()}.";
+            return $"Moved the {_layer} on the {_axisEnum} axis {_directionEnum}.";
         }
     }
 }

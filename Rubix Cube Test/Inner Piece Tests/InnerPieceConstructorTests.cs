@@ -12,22 +12,22 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         [TestInitialize]
         public void CreatePiece()
         {
-            _piece = new InnerPiece(0, 0, 0, Colors.Color.White);
+            _piece = new InnerPiece(0, 0, 0, ColorEnum.White);
         }
 
         [TestMethod]
         public void NewPieceIsInner()
         {
-            var expected = PieceTypes.PieceType.Inner;
-            var actual = _piece.Type;
+            var expected = PieceTypeEnum.Inner;
+            var actual = _piece.TypeEnum;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void NewWhitePieceIsWhite()
         {
-            var expected = Colors.Color.White;
-            var actual = _piece.Color;
+            var expected = ColorEnum.White;
+            var actual = _piece.ColorEnum;
             Assert.AreEqual(expected, actual);
         }
     }

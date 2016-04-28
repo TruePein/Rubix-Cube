@@ -14,7 +14,7 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         [TestInitialize]
         public void CreateAndCopyPiece()
         {
-            _original = new MiddlePiece(1, 1, 0);
+            _original = PieceFactory.GetPiece(0, 1, 1, 3) as MiddlePiece;
             _copy = new MiddlePiece(_original);
         }
 
@@ -32,20 +32,11 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         }
 
         [TestMethod]
-        public void MovingCopyMakesThePiecesDifferent()
+        public void MovingThePieceSoItsPositionRemainsTheSameDoesntChangeIt()
         {
-            _copy.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
+            _copy.Move(AxisEnum.X, DirectionEnum.Clockwise, 3);
             var pieceComparer = new PieceEqualityComparer();
-            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
-        }
-
-
-        [TestMethod]
-        public void MovingOriginalMakesThePiecesDifferent()
-        {
-            _original.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            var pieceComparer = new PieceEqualityComparer();
-            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
+            Assert.IsTrue(pieceComparer.Equals(_original, _copy));
         }
     }
 }

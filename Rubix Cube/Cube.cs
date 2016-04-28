@@ -3,48 +3,23 @@ using Rubix_Cube.Pieces;
 using Rubix_Cube.Enums;
 using System.Collections.Generic;
 using System.Linq;
-//TODO: Document fields, properties and methods
+
 namespace Rubix_Cube
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class Cube : IComparable<Cube>
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public List<Step> Path { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public readonly int Size;
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public int MovesMade { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public Dictionary<int,IPiece> Pieces { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public int Score => GetScore();
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public readonly TargetPiece Target;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="size"></param>
+        
         public Cube(int size = 3)
         {
             Size = size;
@@ -54,11 +29,7 @@ namespace Rubix_Cube
             Path = new List<Step>();
             Target = PieceFactory.GetPiece() as TargetPiece;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="c"></param>
+        
         public Cube(Cube c) //copy constructor
         {
             Size = c.Size;
@@ -76,14 +47,10 @@ namespace Rubix_Cube
             }
             Target = PieceFactory.GetPiece(c.Target) as TargetPiece;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         private void CreateRubixCube()
         {
             var numberOfPieces = GetNumberOfPieces();
-            //create (SIZE)^3 pieces
             for (var i = 0; i < numberOfPieces; i++)
             {
                 var x = GetXPosition(i);
@@ -92,24 +59,14 @@ namespace Rubix_Cube
                 Pieces.Add(i, PieceFactory.GetPiece(x, y, z, Size));
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
+        
         private int GetXPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
             CheckRange(i, 0, pieceLimit);
             return (int)(i / Math.Pow(Size, 2));
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
+        
         private int GetYPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
@@ -117,11 +74,6 @@ namespace Rubix_Cube
             return i % (int)Math.Pow(Size, 2) / Size;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
         private int GetZPosition(int i)
         {
             var pieceLimit = GetNumberOfPieces();
@@ -129,31 +81,17 @@ namespace Rubix_Cube
             return i % Size;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="i"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
         private static void CheckRange(int i, int min, int max)
         {
             if (i < min || i > max) throw new IndexOutOfRangeException(
                 string.Format("Error: {0} is outside the range of {1} to {2}", i, min, max));
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         private int GetNumberOfPieces()
         {
             return (int)Math.Pow(Size, 3);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         private int GetDistanceFromSolved()
         {
             var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
@@ -165,62 +103,62 @@ namespace Rubix_Cube
         {
             return MovesMade + GetDistanceFromSolved();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="axis"></param>
-        /// <param name="layer"></param>
-        /// <param name="direction"></param>
-        public void MakeMove(Axes.Axis axis, int layer, Directions.Direction direction)
+        
+        public void MakeMove(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
         {
             if (layer >= Size || layer < 0)
                 throw new IndexOutOfRangeException($"Expected range to be between 0 and {Size - 1}.");
-            LastMove.Axis = axis;
+            LastMove.AxisEnum = axisEnum;
             LastMove.Layer = layer;
-            LastMove.Direction = direction;
-            AddToPath(axis, layer, direction);
+            LastMove.DirectionEnum = directionEnum;
+            if (layer % 2 == 1 && (layer == 0 || layer == Size / 2))
+            {
+                Target.TurnPiece(axisEnum, directionEnum);
+            }
+            AddToPath(axisEnum, layer, directionEnum);
             if (layer == 0)
             {
-                direction = direction == Directions.Direction.Clockwise
-                                ? Directions.Direction.CounterClockwise
-                                : Directions.Direction.Clockwise;
+                directionEnum = directionEnum == DirectionEnum.Clockwise
+                                ? DirectionEnum.CounterClockwise
+                                : DirectionEnum.Clockwise;
                 for (layer = 1; layer < Size; layer++)
                 {
-                    FindAndMovePieces(axis,layer, direction);
+                    FindAndMovePieces(axisEnum,layer, directionEnum);
                 }
 
                 MovesMade++;
                 return;
             }
 
-            FindAndMovePieces(axis, layer, direction);
+            FindAndMovePieces(axisEnum, layer, directionEnum);
 
             MovesMade++;
         }
 
-        private void AddToPath(Axes.Axis axis, int layer, Directions.Direction direction)
+        private void AddToPath(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
         {
-            var step = new Step(axis, layer, direction);
+            var step = new Step(axisEnum, layer, directionEnum);
             Path.Add(step);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public void UndoLastMove()
         {
-            var axis = LastMove.Axis;
+            var axis = LastMove.AxisEnum;
             var layer = LastMove.Layer;
-            var direction = LastMove.Direction == Directions.Direction.Clockwise
-                ? Directions.Direction.CounterClockwise
-                : Directions.Direction.Clockwise;
+            var direction = LastMove.DirectionEnum == DirectionEnum.Clockwise
+                ? DirectionEnum.CounterClockwise
+                : DirectionEnum.Clockwise;
+
+            if (layer % 2 == 1 && (layer == 0 || layer == Size / 2))
+            {
+                Target.TurnPiece(axis, direction);
+            }
 
             if (layer == 0)
             {
-                direction = direction == Directions.Direction.Clockwise
-                                ? Directions.Direction.CounterClockwise
-                                : Directions.Direction.Clockwise;
+                direction = direction == DirectionEnum.Clockwise
+                                ? DirectionEnum.CounterClockwise
+                                : DirectionEnum.Clockwise;
                 for (layer = 1; layer < Size; layer++)
                 {
                     FindAndMovePieces(axis, layer, direction);
@@ -234,80 +172,50 @@ namespace Rubix_Cube
 
             MovesMade++;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="axis"></param>
-        /// <param name="layer"></param>
-        /// <param name="direction"></param>
-        private void FindAndMovePieces(Axes.Axis axis, int layer, Directions.Direction direction)
+        
+        private void FindAndMovePieces(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
         {
-            var pieces = GetAllPiecesInALayerOnAnAxis(layer, axis);
-            MovePieces(pieces, axis, direction);
+            var pieces = GetAllPiecesInALayerOnAnAxis(layer, axisEnum);
+            MovePieces(pieces, axisEnum, directionEnum);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pieces"></param>
-        /// <param name="axis"></param>
-        /// <param name="direction"></param>
-        private void MovePieces(IEnumerable<IPiece> pieces, Axes.Axis axis, Directions.Direction direction)
+        
+        private void MovePieces(IEnumerable<IPiece> pieces, AxisEnum axisEnum, DirectionEnum directionEnum)
         {
             foreach (var piece in pieces)
             {
-                piece.Move(axis, direction, Size);
+                piece.Move(axisEnum, directionEnum, Size);
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layer"></param>
-        /// <param name="axis"></param>
-        /// <returns></returns>
-        private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, Axes.Axis axis)
+        
+        private IEnumerable<IPiece> GetAllPiecesInALayerOnAnAxis(int layer, AxisEnum axisEnum)
         {
             var pieces = new List<IPiece>();
             if (layer >= Size) throw new IndexOutOfRangeException();
 
-            pieces.AddRange(Pieces.Values.Where(piece => PieceIsInLayerOnAxis(piece, layer, axis)));
+            pieces.AddRange(Pieces.Values.Where(piece => PieceIsInLayerOnAxis(piece, layer, axisEnum)));
             return pieces;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="piece"></param>
-        /// <param name="layer"></param>
-        /// <param name="axis"></param>
-        /// <returns></returns>
-        private static bool PieceIsInLayerOnAxis(IPiece piece, int layer, Axes.Axis axis)
+        
+        private static bool PieceIsInLayerOnAxis(IPiece piece, int layer, AxisEnum axisEnum)
         {
-            switch (axis)
+            switch (axisEnum)
             {
-                case Axes.Axis.X:
+                case AxisEnum.X:
                     {
                         return piece.Coordinates.Item1 == layer;
                     }
-                case Axes.Axis.Y:
+                case AxisEnum.Y:
                     {
                         return piece.Coordinates.Item2 == layer;
                     }
-                case Axes.Axis.Z:
+                case AxisEnum.Z:
                     {
                         return piece.Coordinates.Item3 == layer;
                     }
             }
             throw new InvalidOperationException("Axis provided wasn't one of the ones available. Somehow.");
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
+        
         public int CompareTo(Cube other)
         {
             if (other == null) return -1;
@@ -318,24 +226,33 @@ namespace Rubix_Cube
             if (thisScore < otherScore) return -1;
             return thisScore == otherScore ? 0 : 1;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="moves"></param>
+        
         public void Scramble(int moves = 1000)
         {
             var r = new Random();
 
             for (var i = 0; i < moves; i++)
             {
-                var axis = (Axes.Axis) r.Next(3);
+                var axis = (AxisEnum) r.Next(3);
                 var layer = r.Next(Size);
-                var direction = (Directions.Direction) r.Next(2);
+                var direction = (DirectionEnum) r.Next(2);
                 MakeMove(axis, layer, direction);
             }
 
             MovesMade = 0;
+        }
+
+        public IPiece GetPieceByCoordinates(int x, int y, int z)
+        {
+            foreach (var piece in Pieces)
+            {
+                if (piece.Value.Coordinates.Item1 != x) continue;
+                if (piece.Value.Coordinates.Item2 != y) continue;
+                if (piece.Value.Coordinates.Item3 != z) continue;
+
+                return piece.Value;
+            }
+            throw new IndexOutOfRangeException("Coordinates provided don't exist. Somehow.");
         }
     }
 }

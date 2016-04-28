@@ -14,7 +14,7 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         [TestInitialize]
         public void CreateAndCopyPiece()
         {
-            _original = new InnerPiece(1, 1, 0, Colors.Color.White);
+            _original = new InnerPiece(1, 1, 0, ColorEnum.White);
             _copy = new InnerPiece(_original);
         }
 
@@ -29,23 +29,6 @@ namespace Rubix_Cube_Test.Inner_Piece_Tests
         {
             var pieceComparer = new PieceEqualityComparer();
             Assert.IsTrue(pieceComparer.Equals(_original, _copy));
-        }
-
-        [TestMethod]
-        public void MovingCopyMakesThePiecesDifferent()
-        {
-            _copy.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            var pieceComparer = new PieceEqualityComparer();
-            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
-        }
-
-
-        [TestMethod]
-        public void MovingOriginalMakesThePiecesDifferent()
-        {
-            _original.Move(Axes.Axis.X, Directions.Direction.Clockwise, 3);
-            var pieceComparer = new PieceEqualityComparer();
-            Assert.IsFalse(pieceComparer.Equals(_original, _copy));
         }
     }
 }

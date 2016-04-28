@@ -1,15 +1,12 @@
 ﻿namespace Rubix_Cube.Enums
 {
-    public class Colors
+    public enum ColorEnum
     {
-        public enum Color
-        {
-            White,
-            Red,
-            Blue,
-            Yellow,
-            Orange,
-            Green
-        }
+        White,
+        Red,
+        Blue,
+        Yellow,
+        Orange,
+        Green
     }
 }

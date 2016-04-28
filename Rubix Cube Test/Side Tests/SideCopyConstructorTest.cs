@@ -15,7 +15,7 @@ namespace Rubix_Cube_Test.Side_Tests
 		[TestInitialize]
 		public void MakeSides()
 		{
-			_originalSide = new Side(Colors.Color.White, SidePositions.Position.Top);
+			_originalSide = new Side(ColorEnum.White, SidePositionEnum.Top);
 			_copySide = new Side(_originalSide);
             _comparer = new SideEqualityComparer();
 		}
@@ -25,19 +25,5 @@ namespace Rubix_Cube_Test.Side_Tests
 		{
             Assert.IsTrue(_comparer.Equals(_originalSide, _copySide));
 		}
-
-		[TestMethod]
-		public void ChangeOriginalAndSidesAreDifferent()
-		{
-			_originalSide.MoveToNextPosition(Axes.Axis.X, Directions.Direction.Clockwise);
-            Assert.IsFalse(_comparer.Equals(_originalSide, _copySide));
-        }
-
-		[TestMethod]
-		public void ChangeCopyAndSidesAreDifferent()
-		{
-			_copySide.MoveToNextPosition(Axes.Axis.X, Directions.Direction.Clockwise);
-            Assert.IsFalse(_comparer.Equals(_originalSide, _copySide));
-        }
     }
 }

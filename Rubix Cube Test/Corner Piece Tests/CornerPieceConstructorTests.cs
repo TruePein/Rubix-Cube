@@ -17,8 +17,8 @@ namespace Rubix_Cube_Test.Corner_Piece_Tests
         [TestMethod]
         public void NewPieceIsCorner()
         {
-            var expected = PieceTypes.PieceType.Corner;
-            var actual = _piece.Type;
+            var expected = PieceTypeEnum.Corner;
+            var actual = _piece.TypeEnum;
             Assert.AreEqual(expected, actual);
         }
     }

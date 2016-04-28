@@ -17,8 +17,8 @@ namespace Rubix_Cube_Test.Edge_Piece_Tests
         [TestMethod]
         public void NewPieceIsEdge()
         {
-            var expected = PieceTypes.PieceType.Edge;
-            var actual = _piece.Type;
+            var expected = PieceTypeEnum.Edge;
+            var actual = _piece.TypeEnum;
             Assert.AreEqual(expected, actual);
         }
     }

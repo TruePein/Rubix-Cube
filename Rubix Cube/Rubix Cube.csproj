@@ -52,6 +52,7 @@
     <Compile Include="IEqualityComparers\CubeFullEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\CubePiecesEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\PieceEqualityComparer.cs" />
+    <Compile Include="IEqualityComparers\PieceFullEqualityComparer.cs" />
     <Compile Include="IEqualityComparers\SideEqualityComparer.cs" />
     <Compile Include="LastMove.cs" />
     <Compile Include="Pieces\CornerOrEdgePiece.cs" />

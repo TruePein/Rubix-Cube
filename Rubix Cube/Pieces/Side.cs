@@ -1,108 +1,84 @@
 ﻿using Rubix_Cube.Enums;
 namespace Rubix_Cube.Pieces
 {
-	/// <summary>
-	/// Class representing a Side of a Piece.
-	/// </summary>
     public class Side
     {
-		/// <summary>
-		/// The current Position of the Side.
-		/// No other NumOfSides of the Piece will have the same Position.
-		/// </summary>
-        public SidePositions.Position Position { get; private set; }
-
-		
-		/// <summary>
-		/// The color of the Side.
-		/// Once it is set, it cannot be changed.
-		/// No other NumOfSides on the Piece will have the same color.
-		/// </summary>
-		public Colors.Color Color { get; }
-
-	    /// <summary>
-	    /// Constructor for the Side.
-	    /// Sets both Position and Color to an enumeration representation of the argument passed in.
-	    /// </summary>
-	    /// <param name="color"></param>
-	    /// <param name="position"></param>
-	    public Side(Colors.Color color, SidePositions.Position position)
+        public SidePositionEnum SidePositionEnum { get; private set; }
+        
+		public ColorEnum ColorEnum { get; }
+        
+	    public Side(ColorEnum colorEnum, SidePositionEnum sidePositionEnum)
         {
-            Position = position;
-            Color = color;
+            SidePositionEnum = sidePositionEnum;
+            ColorEnum = colorEnum;
         }
-
-		/// <summary>
-		/// Copy constructor for the Side.
-		/// Sets the Position and color the the corresponding values of the Side that is being copied.
-		/// </summary>
-		/// <param name="side">The Side that is being copied.</param>
+        
 		public Side(Side side)
         {
-            Position = side.Position;
-            Color = side.Color;
+            SidePositionEnum = side.SidePositionEnum;
+            ColorEnum = side.ColorEnum;
         }
 
-        public void MoveToNextPosition(Axes.Axis axis, Directions.Direction direction)
+        public void MoveToNextPosition(AxisEnum axisEnum, DirectionEnum directionEnum)
         {
-            switch (axis)
+            switch (axisEnum)
             {
-                case Axes.Axis.X:
+                case AxisEnum.X:
                     {
-                        Position = GetNextPositionX(direction);
+                        SidePositionEnum = GetNextPositionX(directionEnum);
                         break;
                     }
-                case Axes.Axis.Y:
+                case AxisEnum.Y:
                     {
-                        Position = GetNextPositionY(direction);
+                        SidePositionEnum = GetNextPositionY(directionEnum);
                         break;
                     }
-                case Axes.Axis.Z:
+                case AxisEnum.Z:
                     {
-                        Position = GetNextPositionZ(direction);
+                        SidePositionEnum = GetNextPositionZ(directionEnum);
                         break;
                     }
             }
         }
 
-        public int GetDistanceFrom(SidePositions.Position actualPosition)
+        public int GetDistanceFrom(SidePositionEnum actualSidePositionEnum)
         {
-            switch (actualPosition)
+            switch (actualSidePositionEnum)
             {
-                case SidePositions.Position.Top:
+                case SidePositionEnum.Top:
                     {
-                        if (Position == SidePositions.Position.Top) return 0;
-                        if (Position == SidePositions.Position.Bottom) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Top) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Bottom) return 2;
                         return 1;
                     }
-                case SidePositions.Position.Front:
+                case SidePositionEnum.Front:
                     {
-                        if (Position == SidePositions.Position.Front) return 0;
-                        if (Position == SidePositions.Position.Back) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Front) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Back) return 2;
                         return 1;
                     }
-                case SidePositions.Position.Right:
+                case SidePositionEnum.Right:
                     {
-                        if (Position == SidePositions.Position.Right) return 0;
-                        if (Position == SidePositions.Position.Left) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Right) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Left) return 2;
                         return 1;
                     }
-                case SidePositions.Position.Bottom:
+                case SidePositionEnum.Bottom:
                     {
-                        if (Position == SidePositions.Position.Bottom) return 0;
-                        if (Position == SidePositions.Position.Top) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Bottom) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Top) return 2;
                         return 1;
                     }
-                case SidePositions.Position.Back:
+                case SidePositionEnum.Back:
                     {
-                        if (Position == SidePositions.Position.Back) return 0;
-                        if (Position == SidePositions.Position.Front) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Back) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Front) return 2;
                         return 1;
                     }
-                case SidePositions.Position.Left:
+                case SidePositionEnum.Left:
                     {
-                        if (Position == SidePositions.Position.Left) return 0;
-                        if (Position == SidePositions.Position.Right) return 2;
+                        if (SidePositionEnum == SidePositionEnum.Left) return 0;
+                        if (SidePositionEnum == SidePositionEnum.Right) return 2;
                         return 1;
                     }
                 default:
@@ -112,67 +88,67 @@ namespace Rubix_Cube.Pieces
             }
         }
 
-        private SidePositions.Position GetNextPositionX(Directions.Direction direction)
+        private SidePositionEnum GetNextPositionX(DirectionEnum directionEnum)
         {
-            if (Position == SidePositions.Position.Top)
+            if (SidePositionEnum == SidePositionEnum.Top)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Back : SidePositionEnum.Front;
             }
-            if (Position == SidePositions.Position.Back)
+            if (SidePositionEnum == SidePositionEnum.Back)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Bottom : SidePositions.Position.Top;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Bottom : SidePositionEnum.Top;
             }
-            if (Position == SidePositions.Position.Bottom)
+            if (SidePositionEnum == SidePositionEnum.Bottom)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Front : SidePositionEnum.Back;
             }
-            if (Position == SidePositions.Position.Front)
+            if (SidePositionEnum == SidePositionEnum.Front)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Top : SidePositions.Position.Bottom;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Top : SidePositionEnum.Bottom;
             }
-            return Position;
+            return SidePositionEnum;
         }
 
-        private SidePositions.Position GetNextPositionY(Directions.Direction direction)
+        private SidePositionEnum GetNextPositionY(DirectionEnum directionEnum)
         {
-            if (Position == SidePositions.Position.Top)
+            if (SidePositionEnum == SidePositionEnum.Top)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Right : SidePositionEnum.Left;
             }
-            if (Position == SidePositions.Position.Right)
+            if (SidePositionEnum == SidePositionEnum.Right)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Bottom : SidePositions.Position.Top;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Bottom : SidePositionEnum.Top;
             }
-            if (Position == SidePositions.Position.Bottom)
+            if (SidePositionEnum == SidePositionEnum.Bottom)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Left : SidePositionEnum.Right;
             }
-            if (Position == SidePositions.Position.Left)
+            if (SidePositionEnum == SidePositionEnum.Left)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Top : SidePositions.Position.Bottom;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Top : SidePositionEnum.Bottom;
             }
-            return Position;
+            return SidePositionEnum;
         }
 
-        private SidePositions.Position GetNextPositionZ(Directions.Direction direction)
+        private SidePositionEnum GetNextPositionZ(DirectionEnum directionEnum)
         {
-            if (Position == SidePositions.Position.Front)
+            if (SidePositionEnum == SidePositionEnum.Front)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Left : SidePositions.Position.Right;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Left : SidePositionEnum.Right;
             }
-            if (Position == SidePositions.Position.Left)
+            if (SidePositionEnum == SidePositionEnum.Left)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Back : SidePositions.Position.Front;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Back : SidePositionEnum.Front;
             }
-            if (Position == SidePositions.Position.Back)
+            if (SidePositionEnum == SidePositionEnum.Back)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Right : SidePositions.Position.Left;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Right : SidePositionEnum.Left;
             }
-            if (Position == SidePositions.Position.Right)
+            if (SidePositionEnum == SidePositionEnum.Right)
             {
-                return direction == Directions.Direction.Clockwise ? SidePositions.Position.Front : SidePositions.Position.Back;
+                return directionEnum == DirectionEnum.Clockwise ? SidePositionEnum.Front : SidePositionEnum.Back;
             }
-            return Position;
+            return SidePositionEnum;
         }
     }
 }

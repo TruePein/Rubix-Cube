@@ -19,372 +19,372 @@ namespace Rubix_Cube_Test.Piece_Tests
 		[TestMethod]
 		public void NewPieceTopIsWhite()
 		{
-			var expected = Colors.Color.White;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.White;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void NewPieceFrontIsRed()
 		{
-			var expected = Colors.Color.Red;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Red;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void NewPieceRightIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Blue;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void NewPieceBottomIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Yellow;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void NewPieceBackIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Orange;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void NewPieceLeftIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Green;
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnTopIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnFrontIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnRightIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnBottomIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnBackIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseXTurnLeftIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnTopIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnFrontIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnRightIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnBottomIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnBackIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseXTurnLeftIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.X, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.X, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnTopIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnFrontIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnRightIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnBottomIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnBackIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseZTurnLeftIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnTopIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnFrontIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnRightIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnBottomIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnBackIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseZTurnLeftIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.Z, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.Z, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnTopIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnFrontIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnRightIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnBottomIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnBackIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceClockWiseYTurnLeftIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.Clockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.Clockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnTopIsBlue()
 		{
-			var expected = Colors.Color.Blue;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Top).Color;
+			var expected = ColorEnum.Blue;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Top).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnFrontIsRed()
 		{
-			var expected = Colors.Color.Red;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Front).Color;
+			var expected = ColorEnum.Red;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Front).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnRightIsYellow()
 		{
-			var expected = Colors.Color.Yellow;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Right).Color;
+			var expected = ColorEnum.Yellow;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Right).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnBottomIsGreen()
 		{
-			var expected = Colors.Color.Green;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Bottom).Color;
+			var expected = ColorEnum.Green;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Bottom).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnBackIsOrange()
 		{
-			var expected = Colors.Color.Orange;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Back).Color;
+			var expected = ColorEnum.Orange;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Back).ColorEnum;
 			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void PieceCounterClockWiseYTurnLeftIsWhite()
 		{
-			var expected = Colors.Color.White;
-			_piece.TurnPiece(Axes.Axis.Y, Directions.Direction.CounterClockwise);
-			var actual = _piece.GetSideByPosition(SidePositions.Position.Left).Color;
+			var expected = ColorEnum.White;
+			_piece.TurnPiece(AxisEnum.Y, DirectionEnum.CounterClockwise);
+			var actual = _piece.GetSideByPosition(SidePositionEnum.Left).ColorEnum;
 			Assert.AreEqual(expected, actual);
         }
 
@@ -392,16 +392,16 @@ namespace Rubix_Cube_Test.Piece_Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void NoTopSidesWillThrowAnError()
         {
-            _piece.Sides[0] = new Side(Colors.Color.Red, SidePositions.Position.Front);
-            _piece.GetSideByPosition(SidePositions.Position.Top);
+            _piece.Sides[0] = new Side(ColorEnum.Red, SidePositionEnum.Front);
+            _piece.GetSideByPosition(SidePositionEnum.Top);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TwoTopSidesWillThrowAnError()
         {
-            _piece.Sides[1] = new Side(Colors.Color.White, SidePositions.Position.Top);
-            _piece.GetSideByPosition(SidePositions.Position.Top);
+            _piece.Sides[1] = new Side(ColorEnum.White, SidePositionEnum.Top);
+            _piece.GetSideByPosition(SidePositionEnum.Top);
         }
     }
 }

@@ -1,12 +1,9 @@
 ﻿namespace Rubix_Cube.Enums
 {
-    public class Axes
+    public enum AxisEnum
     {
-        public enum Axis
-        {
-            X,
-            Y,
-            Z
-        }
+        X,
+        Y,
+        Z
     }
 }

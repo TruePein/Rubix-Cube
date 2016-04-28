@@ -12,14 +12,14 @@ namespace Rubix_Cube_Test.Middle_Piece_Tests
         [TestInitialize]
         public void CreatePiece()
         {
-            _piece = new MiddlePiece(0, 0, 0);
+            _piece = PieceFactory.GetPiece(0, 1, 1, 3) as MiddlePiece;
         }
 
         [TestMethod]
         public void NewPieceIsMiddle()
         {
-            var expected = PieceTypes.PieceType.Middle;
-            var actual = _piece.Type;
+            var expected = PieceTypeEnum.Middle;
+            var actual = _piece.TypeEnum;
             Assert.AreEqual(expected, actual);
         }
     }

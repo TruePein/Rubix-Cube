@@ -27,24 +27,24 @@ namespace Rubix_Cube.Pieces
 			if (edgeOfAxis == 3) return new CornerPiece(x, y, z);
 			if (edgeOfAxis == 2) return new EdgePiece(x, y, z);
 			if (edgeOfAxis == 0) return new UnseenPiece(x, y, z);
-			if (centerOfAxis == 2) return new MiddlePiece(x, y, z);
 
-			//only piece left is inner piece, which needs a color
-			if (x == 0) return new InnerPiece(x, y, z, Colors.Color.Green);
-			if (x == size - 1) return new InnerPiece(x, y, z, Colors.Color.Blue);
-			if (y == 0) return new InnerPiece(x, y, z, Colors.Color.Orange);
-			if (y == size - 1) return new InnerPiece(x, y, z, Colors.Color.Red);
-			if (z == 0) return new InnerPiece(x, y, z, Colors.Color.Yellow);
-			return new InnerPiece(x, y, z, Colors.Color.White);
+            var color = ColorEnum.White;
+            if (x == 0) color = ColorEnum.Green;
+            if (x == size -1) color = ColorEnum.Blue;
+            if (y == 0) color = ColorEnum.Orange;
+            if (y == size - 1) color = ColorEnum.Red;
+            if (z == 0) color = ColorEnum.Yellow;
+            if (centerOfAxis == 2) return new MiddlePiece(x, y, z, color);
+			return new InnerPiece(x, y, z, color);
 		}
 
 		public static IPiece GetPiece(IPiece piece)
 		{
-			if (piece.Type == PieceTypes.PieceType.Corner) return new CornerPiece(piece as CornerPiece);
-			if (piece.Type == PieceTypes.PieceType.Edge) return new EdgePiece(piece as EdgePiece);
-			if (piece.Type == PieceTypes.PieceType.Middle) return new MiddlePiece(piece as MiddlePiece);
-			if (piece.Type == PieceTypes.PieceType.Inner) return new InnerPiece(piece as InnerPiece);
-			if (piece.Type == PieceTypes.PieceType.Target) return new TargetPiece(piece as TargetPiece);
+			if (piece.TypeEnum == PieceTypeEnum.Corner) return new CornerPiece(piece as CornerPiece);
+			if (piece.TypeEnum == PieceTypeEnum.Edge) return new EdgePiece(piece as EdgePiece);
+			if (piece.TypeEnum == PieceTypeEnum.Middle) return new MiddlePiece(piece as MiddlePiece);
+			if (piece.TypeEnum == PieceTypeEnum.Inner) return new InnerPiece(piece as InnerPiece);
+			if (piece.TypeEnum == PieceTypeEnum.Target) return new TargetPiece(piece as TargetPiece);
 			return new UnseenPiece(piece as UnseenPiece);
 		}
     }

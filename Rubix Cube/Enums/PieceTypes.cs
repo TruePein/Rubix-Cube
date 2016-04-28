@@ -1,15 +1,12 @@
 ﻿namespace Rubix_Cube.Enums
 {
-    public class PieceTypes
+    public enum PieceTypeEnum
     {
-        public enum PieceType
-        {
-            Unseen,
-            Middle,
-            Inner,
-            Edge,
-            Corner,
-            Target
-        }
+        Unseen,
+        Middle,
+        Inner,
+        Edge,
+        Corner,
+        Target
     }
 }

@@ -3,17 +3,23 @@ using System.Collections.Generic;
 
 namespace Rubix_Cube.IEqualityComparers
 {
-    public class CubeFullEqualityComparer:IEqualityComparer<Cube>
+    public class CubeFullEqualityComparer : IEqualityComparer<Cube>
     {
         public bool Equals(Cube x, Cube y)
         {
             if (x == y)
                 throw new ArgumentException($"The two objects both point to the same {x.GetType()} object.");
-            var pieceComparer = new PieceEqualityComparer();
-            for (var i = 0; i < Math.Pow(x.Size, 3); i++)
+            var pieceComparer = new PieceFullEqualityComparer();
+            for (var i = 0; i < x.Size; i++)
             {
-                if (!pieceComparer.Equals(x.Pieces[i], y.Pieces[i]))
-                    return false;
+                for (var j = 0; j < x.Size; j++)
+                {
+                    for (var k = 0; k < x.Size; k++)
+                    {
+                        if (!pieceComparer.Equals(x.GetPieceByCoordinates(i, j, k), y.GetPieceByCoordinates(i, j, k)))
+                            return false;
+                    }
+                }
             }
             if (x.Score != y.Score)
                 return false;

@@ -10,11 +10,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInZeroCreatesATopWhiteSide()
         {
-            var side = new Side(Colors.Color.White, SidePositions.Position.Top);
-            var expectedPosition = SidePositions.Position.Top;
-            var expectedColor = Colors.Color.White;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.White, SidePositionEnum.Top);
+            var expectedPosition = SidePositionEnum.Top;
+            var expectedColor = ColorEnum.White;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -22,11 +22,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInOneCreatesAFrontRedSide()
         {
-            var side = new Side(Colors.Color.Red, SidePositions.Position.Front);
-            var expectedPosition = SidePositions.Position.Front;
-            var expectedColor = Colors.Color.Red;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.Red, SidePositionEnum.Front);
+            var expectedPosition = SidePositionEnum.Front;
+            var expectedColor = ColorEnum.Red;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -34,11 +34,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInTwoCreatesALeftBlueSide()
         {
-            var side = new Side(Colors.Color.Blue, SidePositions.Position.Right);
-            var expectedPosition = SidePositions.Position.Right;
-            var expectedColor = Colors.Color.Blue;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.Blue, SidePositionEnum.Right);
+            var expectedPosition = SidePositionEnum.Right;
+            var expectedColor = ColorEnum.Blue;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -46,11 +46,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInThreeCreatesABottomYellowSide()
         {
-            var side = new Side(Colors.Color.Yellow, SidePositions.Position.Bottom);
-            var expectedPosition = SidePositions.Position.Bottom;
-            var expectedColor = Colors.Color.Yellow;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.Yellow, SidePositionEnum.Bottom);
+            var expectedPosition = SidePositionEnum.Bottom;
+            var expectedColor = ColorEnum.Yellow;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -58,11 +58,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInFourCreatesABackOrangePiece()
         {
-            var side = new Side(Colors.Color.Orange, SidePositions.Position.Back);
-            var expectedPosition = SidePositions.Position.Back;
-            var expectedColor = Colors.Color.Orange;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.Orange, SidePositionEnum.Back);
+            var expectedPosition = SidePositionEnum.Back;
+            var expectedColor = ColorEnum.Orange;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }
@@ -70,11 +70,11 @@ namespace Rubix_Cube_Test.Side_Tests
         [TestMethod]
         public void PassingInFiveCreatesALeftGreenPiece()
         {
-            var side = new Side(Colors.Color.Green, SidePositions.Position.Left);
-            var expectedPosition = SidePositions.Position.Left;
-            var expectedColor = Colors.Color.Green;
-            var actualPosition = side.Position;
-            var actualColor = side.Color;
+            var side = new Side(ColorEnum.Green, SidePositionEnum.Left);
+            var expectedPosition = SidePositionEnum.Left;
+            var expectedColor = ColorEnum.Green;
+            var actualPosition = side.SidePositionEnum;
+            var actualColor = side.ColorEnum;
             Assert.AreEqual(expectedPosition, actualPosition);
             Assert.AreEqual(expectedColor, actualColor);
         }

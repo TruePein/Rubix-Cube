@@ -1,15 +1,12 @@
 ﻿namespace Rubix_Cube.Enums
 {
-    public class SidePositions
+    public enum SidePositionEnum
     {
-        public enum Position
-        {
-            Top,
-            Front,
-            Right,
-            Bottom,
-            Back,
-            Left
-        }
+        Top,
+        Front,
+        Right,
+        Bottom,
+        Back,
+        Left
     }
 }

@@ -61,6 +61,9 @@
     <Compile Include="Edge Piece Tests\EdgePieceCalculateDistanceTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceConstructorTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceCopyConstructorTests.cs" />
+    <Compile Include="Equality Comparer Tests\Cube Full Equality Comparer Tests\CubeFullEqualsTests.cs" />
+    <Compile Include="Equality Comparer Tests\Piece Equality Comparer Tests\PieceEqualityRqualsTests.cs" />
+    <Compile Include="Equality Comparer Tests\Side Equality Comparer Tests\SideComparerEqualsTests.cs" />
     <Compile Include="Inner Piece Tests\InnerPieceCalculateDistanceTests.cs" />
     <Compile Include="Inner Piece Tests\InnerPieceConstructorTests.cs" />
     <Compile Include="Inner Piece Tests\InnerPieceCopyConstructorTests.cs" />
@@ -88,7 +91,10 @@
       <Name>Rubix Cube</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Equality Comparer Tests\Cube Pieces Equality Comparer Tests\" />
+    <Folder Include="Equality Comparer Tests\Piece Full Equality Comparer Tests\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

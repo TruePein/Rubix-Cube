@@ -6,22 +6,22 @@ namespace Rubix_Cube.Pieces
 {
     public interface IPiece
     {
-        Tuple<int, int, int> Coordinates { get; set; }
-
-        PieceTypes.PieceType Type { get; }
-
+        Tuple<int, int, int> Coordinates { get; }
+        
+        PieceTypeEnum TypeEnum { get; }
+        
         List<Side> Sides { get; }
-
+        
         int CalculateDistance(TargetPiece target);
-
-        void Move(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
-
-        void MoveToNextCoordinates(Axes.Axis axis, Directions.Direction direction, int sizeOfCube);
-
-        void TurnPiece(Axes.Axis axis, Directions.Direction direction);
-
-        Side GetSideByColor(Colors.Color color);
-
-        Side GetSideByPosition(SidePositions.Position position);
+        
+        void Move(AxisEnum axisEnum, DirectionEnum directionEnum, int sizeOfCube);
+        
+        void MoveToNextCoordinates(AxisEnum axisEnum, DirectionEnum directionEnum, int sizeOfCube);
+        
+        void TurnPiece(AxisEnum axisEnum, DirectionEnum directionEnum);
+        
+        Side GetSideByColor(ColorEnum colorEnum);
+        
+        Side GetSideByPosition(SidePositionEnum sidePositionEnum);
     }
 }

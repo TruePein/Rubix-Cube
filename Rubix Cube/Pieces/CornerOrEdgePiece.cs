@@ -14,8 +14,8 @@
 
             foreach (var targetSide in target.Sides)
             {
-                var targetColor = targetSide.Color;
-                var actualPosition = GetSideByColor(targetColor).Position;
+                var targetColor = targetSide.ColorEnum;
+                var actualPosition = GetSideByColor(targetColor).SidePositionEnum;
 
                 var subDistance = targetSide.GetDistanceFrom(actualPosition);
                 if (subDistance == 0)
