@@ -4,7 +4,7 @@
 	
 	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\JetBrains\ContinuousTesting\ac54a9d3-b450-4001-b197-93ae28cfdbdc</s:String>
 	<s:String x:Key="/Default/Environment/ContinuousTesting/ScopeCriterion/@EntryValue">+SNpzQIAAAD1vSchAgAAAIlsuiHXrZUS9b0nIQIAAADRDtxcHwAAAEMAbwBuAHQAaQBuAHUAbwB1AHMAVABlAHMAdABpAG4AZwBIAG8AcwB0AFAAcgBvAHYAaQBkAGUAcgBJAGQAz+IxaBEAAAA8AFIAdQBiAGkAeAAgAEMAdQBiAGUAIABUAGUAcwB0AD4AQwAAAEMAOgBcAFUAcwBlAHIAcwBcAHMAdABvAG4AZQBcAE8AbgBlAEQAcgBpAHYAZQBcAEQAbwBjAHUAbQBlAG4AdABzAFwARwBpAHQASAB1AGIAXABSAHUAYgBpAHgALQBDAHUAYgBlAFwAUgB1AGIAaQB4ACAAQwB1AGIAZQAgAFQAZQBzAHQA0Q7cXB8AAABDAG8AbgB0AGkAbgB1AG8AdQBzAFQAZQBzAHQAaQBuAGcASABvAHMAdABQAHIAbwB2AGkAZABlAHIASQBkAA==</s:String>
-	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\ssm.Zegaxuk.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\stone\AppData\Local\Temp\ssm.Rizuvoq.tmp</s:String>
 	
 	<s:String x:Key="/Default/Environment/ContinuousTesting/Strategy/@EntryValue">RunTests</s:String>
 	<s:String x:Key="/Default/Environment/ContinuousTesting/TriggerMode/@EntryValue">OnBuild</s:String>

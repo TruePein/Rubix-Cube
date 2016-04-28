@@ -12,7 +12,7 @@ namespace Rubix_Cube.IEqualityComparers
         public bool Equals(IPiece x, IPiece y)
         {
             if (x == y)
-                throw new ArgumentException($"The two objects both point to the same {x.GetType()} object.");
+                throw new ArgumentException($"The two objects both point to the same {x.TypeEnum} object.");
             if (x.Coordinates.Item1 != y.Coordinates.Item1)
                 throw new ArgumentException("The two pieces aren't in the same place.");
             if (x.Coordinates.Item2 != y.Coordinates.Item2)
@@ -20,7 +20,7 @@ namespace Rubix_Cube.IEqualityComparers
             if (x.Coordinates.Item3 != y.Coordinates.Item3)
                 throw new ArgumentException("The two pieces aren't in the same place.");
             if (x.TypeEnum != y.TypeEnum)
-                return false;
+                throw new ArgumentException($"{x.TypeEnum} is not the same type as {y.TypeEnum}.");
 
             switch (x.TypeEnum)
             {
