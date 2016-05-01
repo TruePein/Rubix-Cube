@@ -104,8 +104,9 @@ namespace Rubix_Cube
         
         public int GetDistanceFromSolved()
         {
-            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
             if (Size == 1) return 0;
+            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
+            return distance;
             return distance / (int)(Math.Pow(Size, 2) - Math.Pow(Size - 2, 2));
         }
         #endregion
@@ -115,7 +116,7 @@ namespace Rubix_Cube
         {
             if (layer >= Size || layer < 0)
                 throw new IndexOutOfRangeException($"Expected range to be between 0 and {Size - 1}.");
-            if (layer % 2 == 1 && (layer == 0 || layer == Size / 2))
+            if (Size % 2 == 1 && (layer == 0 || layer == Size / 2))
             {
                 Target.TurnPiece(axisEnum, directionEnum);
             }

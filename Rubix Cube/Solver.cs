@@ -88,11 +88,15 @@ namespace Rubix_Cube
             {
                 if (!comparer.Equals(cube, waitingCube)) continue;
 
-                if (cube.Score >= waitingCube.Score) return;
+                if (cube.Score >= waitingCube.Score)
+                {
+                    Console.WriteLine($"Ignored cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                    return;
+                }
 
                 _cubes.Remove(waitingCube);
                 _cubes.Add(cube);
-                Console.WriteLine($"Added cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                Console.WriteLine($"Replaced cube with a score of {waitingCube.Score}, {waitingCube.MovesMade} moves, and a distance of {waitingCube.GetDistanceFromSolved()} with a cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
                 return;
             }
             _cubes.Add(cube);
