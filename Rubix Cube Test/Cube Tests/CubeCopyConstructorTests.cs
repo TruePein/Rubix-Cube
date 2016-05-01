@@ -26,7 +26,7 @@ namespace Rubix_Cube_Test.Cube_Tests
         [TestMethod]
         public void CopyAndOriginalAreIdentical()
         {
-            var cubeComparer = new CubeFullEqualityComparer();
+            var cubeComparer = new CubePiecesEqualityComparer();
             Assert.IsTrue(cubeComparer.Equals(_original, _copy));
         }
     }

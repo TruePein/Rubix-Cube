@@ -19,7 +19,8 @@ namespace Rubix_Cube
         public int Score => GetScore();
         
         public readonly TargetPiece Target;
-        
+
+#region constructors
         public Cube(int size = 3)
         {
             Size = size;
@@ -47,7 +48,9 @@ namespace Rubix_Cube
             }
             Target = PieceFactory.GetPiece(c.Target) as TargetPiece;
         }
-        
+#endregion
+
+#region creating rubix cube
         private void CreateRubixCube()
         {
             var numberOfPieces = GetNumberOfPieces();
@@ -91,26 +94,27 @@ namespace Rubix_Cube
         {
             return (int)Math.Pow(Size, 3);
         }
-        
-        private int GetDistanceFromSolved()
-        {
-            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
+        #endregion
 
-            return distance / 8;
-        }
-
+#region scoring
         private int GetScore()
         {
             return MovesMade + GetDistanceFromSolved();
         }
         
+        public int GetDistanceFromSolved()
+        {
+            var distance = Pieces.Sum(piece => piece.Value.CalculateDistance(Target));
+            if (Size == 1) return 0;
+            return distance / (int)(Math.Pow(Size, 2) - Math.Pow(Size - 2, 2));
+        }
+        #endregion
+
+#region movemont
         public void MakeMove(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
         {
             if (layer >= Size || layer < 0)
                 throw new IndexOutOfRangeException($"Expected range to be between 0 and {Size - 1}.");
-            LastMove.AxisEnum = axisEnum;
-            LastMove.Layer = layer;
-            LastMove.DirectionEnum = directionEnum;
             if (layer % 2 == 1 && (layer == 0 || layer == Size / 2))
             {
                 Target.TurnPiece(axisEnum, directionEnum);
@@ -139,38 +143,6 @@ namespace Rubix_Cube
         {
             var step = new Step(axisEnum, layer, directionEnum);
             Path.Add(step);
-        }
-        
-        public void UndoLastMove()
-        {
-            var axis = LastMove.AxisEnum;
-            var layer = LastMove.Layer;
-            var direction = LastMove.DirectionEnum == DirectionEnum.Clockwise
-                ? DirectionEnum.CounterClockwise
-                : DirectionEnum.Clockwise;
-
-            if (layer % 2 == 1 && (layer == 0 || layer == Size / 2))
-            {
-                Target.TurnPiece(axis, direction);
-            }
-
-            if (layer == 0)
-            {
-                direction = direction == DirectionEnum.Clockwise
-                                ? DirectionEnum.CounterClockwise
-                                : DirectionEnum.Clockwise;
-                for (layer = 1; layer < Size; layer++)
-                {
-                    FindAndMovePieces(axis, layer, direction);
-                }
-
-                MovesMade++;
-                return;
-            }
-
-            FindAndMovePieces(axis, layer, direction);
-
-            MovesMade++;
         }
         
         private void FindAndMovePieces(AxisEnum axisEnum, int layer, DirectionEnum directionEnum)
@@ -215,7 +187,8 @@ namespace Rubix_Cube
             }
             throw new InvalidOperationException("Axis provided wasn't one of the ones available. Somehow.");
         }
-        
+#endregion
+
         public int CompareTo(Cube other)
         {
             if (other == null) return -1;
