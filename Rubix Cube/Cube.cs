@@ -214,6 +214,7 @@ namespace Rubix_Cube
             }
 
             MovesMade = 0;
+            Path.Clear();
         }
 
         public IPiece GetPieceByCoordinates(int x, int y, int z)

@@ -20,8 +20,8 @@ namespace Rubix_Cube
             _cubes = new List<Cube>();
             _processed = new ProccessedCubes();
             var seed = new Cube(size);
-            seed.Scramble();
-            Add(seed);
+            seed.Scramble(100);
+            Insert(seed);
             _foundSolution = false;
         }
 
@@ -48,11 +48,11 @@ namespace Rubix_Cube
                         {
                             var copy = new Cube(cube);
                             copy.MakeMove(axis, layer, direction);
-                            Add(copy);
+                            Insert(copy);
                         }
                     }
                 }
-                Sort();
+                //Sort();
             }
         }
 
@@ -64,43 +64,74 @@ namespace Rubix_Cube
             var cube = _cubes[0];
             _cubes.RemoveAt(0);
             _processed.Add(cube);
-            Console.WriteLine($"Removed cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+            Console.WriteLine($"D. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
             return cube;
         }
 
-        private void Add(Cube cube)
+        private void Insert(Cube cube)
         {
-            var comparer = new CubePiecesEqualityComparer();
             if (HasBeenProccessed(cube))
             {
-                Console.WriteLine($"Ignored cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                Console.WriteLine($"I. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
                 return;
             }
 
             if (_cubes.Count == 0)
             {
                 _cubes.Add(cube);
-                Console.WriteLine($"Added cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                Console.WriteLine($"A. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
                 return;
             }
 
+            var comparer = new CubePiecesEqualityComparer();
             foreach (var waitingCube in _cubes)
             {
                 if (!comparer.Equals(cube, waitingCube)) continue;
 
                 if (cube.Score >= waitingCube.Score)
                 {
-                    Console.WriteLine($"Ignored cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                    Console.WriteLine($"I. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
                     return;
                 }
 
                 _cubes.Remove(waitingCube);
                 _cubes.Add(cube);
-                Console.WriteLine($"Replaced cube with a score of {waitingCube.Score}, {waitingCube.MovesMade} moves, and a distance of {waitingCube.GetDistanceFromSolved()} with a cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+                Console.WriteLine($"R. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
                 return;
             }
-            _cubes.Add(cube);
-            Console.WriteLine($"Added cube with a score of {cube.Score}, {cube.MovesMade} moves, and a distance of {cube.GetDistanceFromSolved()}.");
+
+            BinaryInsert(cube, 0, _cubes.Count - 1);
+            Console.WriteLine($"A. Score {cube.Score}. Moves {cube.MovesMade}. Distance {cube.GetDistanceFromSolved()}.");
+        }
+
+        private void BinaryInsert(Cube cube, int start, int end)
+        {
+            if (end < start || (end == start && cube.CompareTo(_cubes[start]) < 1))
+            {
+                _cubes.Insert(start, cube);
+                return;
+            }
+
+            if (end == start)
+            {
+                _cubes.Insert(start+1, cube);
+                return;
+            }
+
+            var mid = (start + end)/2;
+            var midCube = _cubes[mid];
+            if (cube.CompareTo(midCube) == 0)
+            {
+                _cubes.Insert(mid, cube);
+                return;
+            }
+
+            if (cube.CompareTo(midCube) == -1)
+            {
+                BinaryInsert(cube, start, mid-1);
+                return;
+            }
+            BinaryInsert(cube, mid + 1, end);
         }
 
         private bool HasBeenProccessed(Cube cube)

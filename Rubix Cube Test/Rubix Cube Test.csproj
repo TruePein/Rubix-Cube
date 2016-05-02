@@ -58,7 +58,6 @@
     <Compile Include="Cube Tests\CubeConstructorTests.cs" />
     <Compile Include="Cube Tests\CubeCopyConstructorTests.cs" />
     <Compile Include="Cube Tests\CubeMakeMoveTests.cs" />
-    <Compile Include="Cube Tests\ScrambleTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceCalculateDistanceTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceConstructorTests.cs" />
     <Compile Include="Edge Piece Tests\EdgePieceCopyConstructorTests.cs" />
